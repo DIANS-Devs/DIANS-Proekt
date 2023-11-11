@@ -1,13 +1,13 @@
 import requests
 import csv
 
-#Replace with your Google Maps API key
+# Google api key
 api_key = "api_key"
 
-# Define the API endpoint for the Google Places API
+# API endpoint for the Google Places API
 api_url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
 
-#center point, radius
+# Center point, radius
 circles = [[1, "41.962504,21.030960", 24000], #tetovo
            [2, "42.072164,21.611656", 25000], #skopje-kumanovo
            [3, "42.096070,22.123778", 33500], #kratovo
@@ -25,7 +25,7 @@ circles = [[1, "41.962504,21.030960", 24000], #tetovo
 
 
 for (id, center_point, distance) in circles:
-    # Define the parameters for the request
+    # Parameters for the request
     params = {
         'location': center_point,  # Latitude and longitude for Macedonia
         'radius': distance,  # Radius in meters (adjust as needed)
@@ -33,7 +33,7 @@ for (id, center_point, distance) in circles:
         'key': api_key
     }
 
-    # Make the API request
+    # API request
     response = requests.get(api_url, params=params)
 
     if response.status_code == 200:

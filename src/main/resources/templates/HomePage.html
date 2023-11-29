@@ -66,7 +66,7 @@
 <body>
 <div class="topnav">
     <h5>Wineverse</h5>
-    <a href="/favourites">Favourites</a>
+    <a href="/favorites">Favourites</a>
     <a href="/about-us">About Us</a>
     <a class="active" href="/">Home</a>
 </div>
@@ -111,14 +111,16 @@
 </form>
 
 <script th:inline="javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        // Check if the 'favourites' cookie exists
-        var favouritesCookie = getCookie('favourites');
-        if (!favouritesCookie) {
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if the 'favorites' cookie exists
+        var favoritesCookie = getCookie('favorites');
+        if (!favoritesCookie) {
             // If the cookie doesn't exist, show an alert and create a new cookie with an empty array
             var acceptCookies = confirm('This site uses cookies. Do you accept?');
             if (acceptCookies) {
-                setCookie('favourites', '[]', 365); // 365 days expiration
+                // Set a cookie with SameSite=None and Secure
+                setCookie('favorites', '[]', 365, '/', true, 'None');
+                //sendCookieToServer(getCookie('favorites'));
             }
         }
     });
@@ -134,17 +136,38 @@
         }
         return null;
     }
+    function sendCookieToServer(cookieValue) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/favorites", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(cookieValue));
+
+        // After the request is complete, reload the page
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                window.location.reload();
+            }
+        };
+    }
 
     // Function to set a new cookie
-    function setCookie(name, value, days) {
+    function setCookie(name, value, days, path, secure, sameSite) {
         var expires = '';
         if (days) {
             var date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
             expires = '; expires=' + date.toUTCString();
         }
-        document.cookie = name + '=' + value + expires + '; path=/';
+        var cookieString = name + '=' + value + expires + '; path=' + (path || '/');
+        if (secure) {
+            cookieString += '; Secure';
+        }
+        if (sameSite) {
+            cookieString += '; SameSite=' + sameSite;
+        }
+        document.cookie = cookieString;
     }
+
 </script>
 
 </body>

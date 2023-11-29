@@ -71,6 +71,19 @@ public class WineryServiceimpl implements WineryService {
 
     @Override
     public Winery getWineryById(Long id) {
-        return wineryRepository.get_all_wineries().stream().filter(w -> w.getID() == id).findFirst().orElse(null);
+        return wineryRepository.get_all_wineries().stream().filter(w -> w.getId() == id).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Winery> getWineriesByIds(List<String> favoriteWineryIds) {
+        List<Winery> return_wineries = new ArrayList<>();
+        for(Winery w: wineryRepository.get_all_wineries()){
+            for(String ids : favoriteWineryIds){
+                Long id = Long.parseLong(ids);
+                if(id == w.getId())
+                    return_wineries.add(w);
+            }
+        }
+        return return_wineries;
     }
 }

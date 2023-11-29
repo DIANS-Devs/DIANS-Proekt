@@ -12,4 +12,5 @@ public interface WineryService {
     public List<Winery> find_wineries_bycity(City city);
     public Winery getWineryById(Long id);
 
+    List<Winery> getWineriesByIds(List<String> favoriteWineryIds);
 }

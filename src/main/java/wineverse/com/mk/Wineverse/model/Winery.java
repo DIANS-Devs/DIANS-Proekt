@@ -26,7 +26,7 @@ public class Winery {
     private float Longitude;
 
 
-    public long getID() {
+    public long getId() {
         return ID;
     }
 

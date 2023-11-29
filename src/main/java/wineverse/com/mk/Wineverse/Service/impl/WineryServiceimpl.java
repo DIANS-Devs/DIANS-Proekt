@@ -26,14 +26,28 @@ public class WineryServiceimpl implements WineryService {
 
     @Override
     public List<Winery> filtered_wineries(String name, int rating, float distance, City city) {
-        if(!name.equals("")){
-            List<Winery> return_wineries = new ArrayList<Winery>();
-            List<Winery> wineries = find_winery_byname(name);
-            return return_wineries;
-        }
-        return wineryRepository.get_all_wineries();
+        if(!name.equals("") && city!=null && (!city.getName().equals("Цела Македонија"))){
+            List<Winery> wineries_by_name =  find_winery_byname(name);
+            List<Winery> wineries_by_city = find_wineries_bycity(city);
+            List<Winery> matching_wineries = new ArrayList<>();
+            for(Winery w: wineries_by_name){
+                for(Winery w1: wineries_by_city){
+                    if(w == w1)
+                        matching_wineries.add(w);
+                }
+            }
+            return matching_wineries;
 
-        //TODO
+        } else if (!name.equals("")) {
+            return find_winery_byname(name);
+        } else if (city != null && !city.getName().equals("Цела Македонија")) {
+            return find_wineries_bycity(city);
+        }
+
+//        if(city != null) {
+//            return find_wineries_bycity(city);
+//        }
+        return wineryRepository.get_all_wineries();
     }
 
     @Override
@@ -41,17 +55,22 @@ public class WineryServiceimpl implements WineryService {
         name = name.toLowerCase();
         List<Winery> wineries = wineryRepository.get_all_wineries();
         List<Winery> matchingWineries = new ArrayList<>();
-
         for (Winery w : wineries) {
             String wineryName = w.getName().toLowerCase();
-
             if (wineryName.contains(name)) {
                 matchingWineries.add(w);
             }
         }
-
         return matchingWineries;
+    }
 
-        //TODO
+    @Override
+    public List<Winery> find_wineries_bycity(City city) {
+        return city.getCity_wineries();
+    }
+
+    @Override
+    public Winery getWineryById(Long id) {
+        return wineryRepository.get_all_wineries().stream().filter(w -> w.getID() == id).findFirst().orElse(null);
     }
 }

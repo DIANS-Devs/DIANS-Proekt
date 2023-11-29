@@ -5,7 +5,7 @@ import java.util.List;
 
 public class City {
     private final String name;
-    private List<Winery> city_wineries;
+    private final List<Winery> city_wineries;
 
     public City(String name) {
         this.name = name;

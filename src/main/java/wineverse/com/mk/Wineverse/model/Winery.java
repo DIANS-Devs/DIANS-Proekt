@@ -26,9 +26,13 @@ public class Winery {
     private float Longitude;
 
 
+    public long getID() {
+        return ID;
+    }
+
     public Winery(String name, String address, String work_time, City city,
                   String winary_url, String google_maps_id, String phone_number, String international_phone_number
-            ,  float Latitude, float Longitude) {
+            , float Latitude, float Longitude) {
         ID = (long) (Math.random() * 1000);
         this.name = name;
         this.address = address;

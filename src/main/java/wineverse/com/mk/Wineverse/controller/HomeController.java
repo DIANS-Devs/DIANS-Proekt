@@ -17,7 +17,7 @@ public class HomeController {
     @GetMapping("/")
     public String getHomeMapping(Model m){
         m.addAttribute("cities", cityService.all_Cities());
-        return "HomePage";
+        return "Index";
     }
     @GetMapping("/about-us")
     public String getAboutUs() {

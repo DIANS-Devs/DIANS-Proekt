@@ -63,7 +63,7 @@ public class   WineryController {
     @GetMapping("/favorites-show")
     public String getFavoritesShow(@RequestParam(name = "stringIds", required = false) List<String> stringIds, Model model) {
         model.addAttribute("favoriteWineries", wineryService.getWineriesByIds(stringIds));
-        return "favorites-show";
+        return "MyFavourites";
     }
     @GetMapping("/favorites")
     public String getFavorites() {

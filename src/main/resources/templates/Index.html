@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title='Home')">
 <body th:fragment="content">
-<form th:action="@{/wineries}" method="post">
-    <div class="search-engine">
-
-        <div class="top-div">
-            <span>Пребарај</span>
+<form th:action="@{/wineries}" method="post" class="container bg-body-secondary mt-5 pt-5 pb-5 col-md-7">
+    <div class="form-row d-flex justify-content-center mb-3">
+        <p class="h3 mb-3">Пребарај винарии</p>
+    </div>
+    <div class="form-row d-flex justify-content-around mb-3 mt-3">
+        <div class="col-md-2 mb-3">
+            <label for="name">Име</label>
+            <input type="text" class="form-control" id="name" name="name">
         </div>
-        <div class="middle-div">
-            <span>
-                <label for="name">Име</label>
-                <input type="text" id="name" name="name">
-            </span>
-
-            <span>
-                <label for="rating">Рејтинг</label>
-                <input type="number" id="rating" name="rating" min="0" max="10" value="0">
-            </span>
-
-            <span>
-                <label for="distance">Оддалеченост</label>
-                <input type="text" id="distance" name="distance" pattern="[0-9]+" title="Please enter a number" value="300">
-            </span>
-
-
-            <span>
-                <label for="location">Локација</label>
-                <select id="location" name="location">
-                    <option value="entireMacedonia" selected>Цела Македонија</option>
-                    <!-- Use Thymeleaf for loop to generate options -->
-                    <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
-                </select>
-            </span>
+        <div class="col-md-1 mb-3">
+            <label for="rating">Рејтинг</label>
+            <input type="text" class="form-control" id="rating" name="rating" min="0" max="10" value="0">
         </div>
-
-        <div class="bottom-div">
-            <button type="submit">Барај</button>
+        <div class="col-md-2 mb-3">
+            <label for="distance">Оддалеченост</label>
+            <input type="text" class="form-control" id="distance" name="distance" pattern="[0-9]+" title="Please enter a number" value="300">
         </div>
-
+        <div class="col-md-2 mb-3">
+            <label for="location">Локација</label>
+            <select class="form-select" id="location" name="location">
+                <option value="entireMacedonia" selected>Цела Македонија</option>
+                <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row d-flex justify-content-center mt-3">
+        <button class="btn btn-secondary col-md-2" type="submit">Пребарај &nbsp; <svg xmlns="http://www.w3.org/2000/svg"
+        width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0
+        1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg></button>
     </div>
 </form>
-
+<p class="lead pt-3 d-flex justify-content-center">
+    <strong>Wineverse.mk</strong> - Твојот вински универзум
+</p>
 <script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function () {
         // Check if the 'favorites' cookie exists
@@ -100,60 +95,5 @@
     }
 
 </script>
-<style>
-    .search-engine {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #808080;
-        width: 750px;
-        height: 280px;
-    }
-    span {
-        display: inline-block;
-        margin-right: 15px; /* Adjust as needed to provide space between labels */
-        margin-bottom: 10px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    input {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .middle-div
-    {
-        text-align: center;
-        position: relative;
-        top: 50px;
-        color: white;
-    }
-    .bottom-div
-    {
-        position: relative;
-        top: 100px;
-    }
-    button {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .top-div
-    {
-        margin-top: 10px;
-    }
-    .top-div span
-    {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        color: white;
-    }
-</style>
 </body>
 </html>

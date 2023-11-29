@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Layout :: base(title='Home')">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Layout :: base(title='Favourites')">
 <head>
-    <title>Home</title>
+    <title>Favourites</title>
 </head>
 <body th:fragment="content">
 <form th:action="@{/wineries}" method="post">
     <div class="search-engine">
-
-        <div class="top-div">
-            <span>Пребарај</span>
-        </div>
         <div class="middle-div">
             <span>
                 <label for="name">Име</label>
@@ -31,35 +27,32 @@
                 <label for="location">Локација</label>
                 <select id="location" name="location">
                     <option value="entireMacedonia" selected>Цела Македонија</option>
-                    <!-- Use Thymeleaf for loop to generate options -->
                     <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
                 </select>
             </span>
+            <span>
+                 <button type="submit">Барај</button>
+            </span>
         </div>
+    </div>
 
-        <div class="bottom-div">
-            <button type="submit">Барај</button>
-        </div>
-
+    <div class="result-div">
+        <ul>
+            <li th:each="winery : ${favoriteWineries}">
+                <a th:href="@{'/wineries/' + ${winery.getId()}}">
+                    <h3 th:text="${winery.getName()}" class="result-item"></h3>
+                    <span>Адреса: <span th:text="${winery.getAddress()}"></span></span><br>
+                    <span>Град: <span th:text="${winery.getCity().getName()}"></span></span><br>
+                    <span>Работно време: <span th:text="${winery.getWork_time()}"></span></span><br>
+                </a>
+        </ul>
     </div>
 </form>
-
 <script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function () {
-        // Check if the 'favorites' cookie exists
-        var favoritesCookie = getCookie('favorites');
-        if (!favoritesCookie) {
-            // If the cookie doesn't exist, show an alert and create a new cookie with an empty array
-            var acceptCookies = confirm('This site uses cookies. Do you accept?');
-            if (acceptCookies) {
-                // Set a cookie with SameSite=None and Secure
-                setCookie('favorites', '[]', 365, '/', true, 'None');
-                //sendCookieToServer(getCookie('favorites'));
-            }
-        }
+        var currentCookieValue = getCookie('favorites');
+        sendCookieToServer(currentCookieValue);
     });
-
-    // Function to get the value of a cookie by name
     function getCookie(name) {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
@@ -72,19 +65,21 @@
     }
     function sendCookieToServer(cookieValue) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/favorites", true);
+        xhr.open("POST", "/favorites-show", true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify(cookieValue));
 
-        // After the request is complete, reload the page
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                window.location.reload();
-            }
-        };
+        // Check if the cookie value has changed
+        if (cookieValue !== null && cookieValue !== "") {
+            xhr.send(JSON.stringify(cookieValue));
+
+            // After the request is complete, reload the page
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    window.location.reload();
+                }
+            };
+        }
     }
-
-    // Function to set a new cookie
     function setCookie(name, value, days, path, secure, sameSite) {
         var expires = '';
         if (days) {
@@ -105,17 +100,21 @@
 </script>
 <style>
     .search-engine {
+        display: inline-block;
         position: absolute;
-        top: 50%;
+        top: 20%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -20%);
         background: #808080;
-        width: 750px;
-        height: 280px;
+        width: 950px;
+        height: 70px;
+        border-radius: 15px;
+        margin-bottom: 30px; /* Add margin-bottom for space below */
     }
+
     span {
         display: inline-block;
-        margin-right: 15px; /* Adjust as needed to provide space between labels */
+        margin-right: 5px; /* Adjust as needed to provide space between labels */
         margin-bottom: 10px;
     }
 
@@ -131,31 +130,37 @@
     }
     .middle-div
     {
-        text-align: center;
         position: relative;
-        top: 50px;
+        top: 10px;
         color: white;
-    }
-    .bottom-div
-    {
-        position: relative;
-        top: 100px;
     }
     button {
         position: relative;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 40px;
+        /*<!--transform: translateX(-100%); -->*/
     }
-    .top-div
-    {
-        margin-top: 10px;
-    }
-    .top-div span
-    {
-        position: relative;
+
+    .result-div {
+        display: inline-block;
+        position: absolute;
+        top: 70%; /* Adjust the top value */
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
+        background: #808080;
+        width: 80%;
+        max-width: 950px;
+        height: 500px;
+        border-radius: 15px;
         color: white;
+    }
+
+    .result-item {
+        background-color: #d9d9d9; /* Set the default background color for list items */
+    }
+
+    /* Apply styles to every odd .result-item */
+    .result-item:nth-child(odd) {
+        background-color: #cccccc; /* Set the background color for odd list items */
     }
 </style>
 </body>

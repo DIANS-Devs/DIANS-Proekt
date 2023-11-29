@@ -1,91 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Layout :: base(title=${winery.getName()})">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/styles.css">
     <title th:text="${winery.getName()}"></title>
-    <style>
-        .search-engine {
-            display: inline-block;
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -20%);
-            background: #808080;
-            width: 950px;
-            height: 70px;
-            border-radius: 15px;
-            margin-bottom: 30px; /* Add margin-bottom for space below */
-        }
-
-        span {
-            display: inline-block;
-            margin-right: 5px; /* Adjust as needed to provide space between labels */
-            margin-bottom: 10px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input {
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .middle-div
-        {
-            position: relative;
-            top: 10px;
-            color: white;
-        }
-        button {
-            position: relative;
-            left: 40px;
-            /*<!--transform: translateX(-100%); -->*/
-        }
-
-        .result-div {
-            display: inline-block;
-            position: absolute;
-            top: 70%; /* Adjust the top value */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #808080;
-            width: 80%;
-            max-width: 950px;
-            height: 500px;
-            border-radius: 15px;
-            color: white;
-        }
-        .heart-button {
-            font-size: 16px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            outline: none;
-            transition: color 0.3s;
-        }
-
-        .heart-button:hover {
-            color: red; /* Change the color on hover as desired */
-        }
-        .heart-button.red {
-            color: red; /* Set the color to red */
-        }
-
-    </style>
 </head>
-<body>
-<div class="topnav">
-    <h5>Wineverse</h5>
-    <a href="/favorites">Favourites</a>
-    <a href="/about-us">About Us</a>
-    <a class="active" href="/">Home</a>
-</div>
+<body th:fragment="content">
 <form th:action="@{/wineries}" method="post">
     <div class="search-engine">
         <div class="middle-div">
@@ -202,6 +120,76 @@
         }
     });
 </script>
+<style>
+    .search-engine {
+        display: inline-block;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -20%);
+        background: #808080;
+        width: 950px;
+        height: 70px;
+        border-radius: 15px;
+        margin-bottom: 30px; /* Add margin-bottom for space below */
+    }
 
+    span {
+        display: inline-block;
+        margin-right: 5px; /* Adjust as needed to provide space between labels */
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .middle-div
+    {
+        position: relative;
+        top: 10px;
+        color: white;
+    }
+    button {
+        position: relative;
+        left: 40px;
+        /*<!--transform: translateX(-100%); -->*/
+    }
+
+    .result-div {
+        display: inline-block;
+        position: absolute;
+        top: 70%; /* Adjust the top value */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #808080;
+        width: 80%;
+        max-width: 950px;
+        height: 500px;
+        border-radius: 15px;
+        color: white;
+    }
+    .heart-button {
+        font-size: 16px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        transition: color 0.3s;
+    }
+
+    .heart-button:hover {
+        color: red; /* Change the color on hover as desired */
+    }
+    .heart-button.red {
+        color: red; /* Set the color to red */
+    }
+</style>
 </body>
 </html>

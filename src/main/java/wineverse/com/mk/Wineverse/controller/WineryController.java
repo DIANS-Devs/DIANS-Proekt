@@ -18,9 +18,9 @@ import java.util.List;
 
 @Controller
 public class   WineryController {
-    private CityService cityService;
-    private WineryService wineryService;
-    private StringManipulation stringManipulation = new StringManipulation();
+    private final CityService cityService;
+    private final WineryService wineryService;
+    private final StringManipulation stringManipulation = new StringManipulation();
 
     public WineryController(CityService cityService, WineryService wineryService) {
         this.cityService = cityService;

@@ -1,5 +1,6 @@
 package wineverse.com.mk.Wineverse.Repository;
 
+import lombok.Getter;
 import org.springframework.stereotype.Repository;
 import wineverse.com.mk.Wineverse.model.City;
 
@@ -16,6 +17,7 @@ public class CityRepository {
             "Македонски Брод", "Македонска Каменица", "Неготино", "Охрид", "Пехчево",
             "Прилеп", "Пробиштип", "Радовиш", "Ресен", "Свети Николе", "Скопје",
             "Струга", "Струмица", "Тетaово", "Штип");
+    @Getter
     List<City> cities = new ArrayList<>();
 
     public CityRepository() {
@@ -24,9 +26,6 @@ public class CityRepository {
         }
     }
 
-    public List<City> getCities() {
-        return cities;
-    }
     public City find_city(String name)
     {
        return cities.stream().filter(city->city.getName().equals(name)).findFirst().orElse(null);

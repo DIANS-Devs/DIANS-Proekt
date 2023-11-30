@@ -1,19 +1,25 @@
 package wineverse.com.mk.Wineverse.model;
 
 import lombok.Data;
+import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class Winery {
 
     private long ID;
+    @Getter
     private String name;
+    @Getter
     private String address;
+    @Getter
     private String work_time;
+    @Getter
     private int distance;
+    @Getter
     private City city;
+    @Getter
     private Reviews winary_reviews;
     private String winary_url;
     private String google_maps_id;
@@ -58,29 +64,7 @@ public class Winery {
     {
         return winary_reviews.getReviews();
     }
-    public String getName() {
-        return name;
-    }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public String getWork_time() {
-        return work_time;
-    }
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public Reviews getWinary_reviews() {
-        return winary_reviews;
-    }
     public float getWinary_rating(){
         return rating.calculate_rating();
     }

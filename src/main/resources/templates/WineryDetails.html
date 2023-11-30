@@ -1,70 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title=${winery.getName()})">
 <body th:fragment="content">
-<div class="result-div">
-        <li>
-            <h3 th:text="${winery.getName()}" class="result-item"></h3>
-            <span>Адреса: <span th:text="${winery.getAddress()}"></span></span><br>
-            <span>Град: <span th:text="${winery.getCity().getName()}"></span></span><br>
-            <span>Работно време: <span th:text="${winery.getWork_time()}"></span></span><br>
-            <span>Омилено: </span>
-            <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)" class="heart-button">&#10084;</button>
-        </li>
+<div class="container bg-body-secondary mb-3 p-4">
+    <h3 th:text="${winery.getName()}"></h3>
+    <br>
+    <span class="p-4">
+        <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+        <strong>Град:</strong> <span th:text="${winery.getCity().getName()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+        <strong>Работно време:</strong> <span th:text="${winery.getWork_time()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+        <strong>Омилено: </strong>
+        <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)"
+        class="border-0 bg-transparent">&#10084;</button>
+    </span>
 </div>
-
-<style>
-    span {
-        display: inline-block;
-        margin-right: 5px; /* Adjust as needed to provide space between labels */
-        margin-bottom: 10px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    input {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    button {
-        position: relative;
-        left: 40px;
-        /*<!--transform: translateX(-100%); -->*/
-    }
-
-    .result-div {
-        display: inline-block;
-        position: absolute;
-        top: 70%; /* Adjust the top value */
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #808080;
-        width: 80%;
-        max-width: 950px;
-        height: 500px;
-        border-radius: 15px;
-        color: white;
-    }
-    .heart-button {
-        font-size: 16px;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        outline: none;
-        transition: color 0.3s;
-    }
-
-    .heart-button:hover {
-        color: red; /* Change the color on hover as desired */
-    }
-    .heart-button.red {
-        color: red; /* Set the color to red */
-    }
-</style>
 <script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
-
 </body>
 </html>

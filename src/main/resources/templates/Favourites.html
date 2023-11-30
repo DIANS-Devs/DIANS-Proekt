@@ -1,67 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title='Favourites')">
+
+<!--        <script th:src="@{/js/favoriteButton.js}" defer="defer"></script>-->
+
 <body th:fragment="content">
 <div class="result-div">
     <ul>
-        <li th:each="winery : ${favoriteWineries}">
+        <li th:each="winery : ${wineries}">
             <a th:href="@{'/wineries/' + ${winery.getId()}}">
                 <h3 th:text="${winery.getName()}" class="result-item"></h3>
                 <span>Адреса: <span th:text="${winery.getAddress()}"></span></span><br>
                 <span>Град: <span th:text="${winery.getCity().getName()}"></span></span><br>
                 <span>Работно време: <span th:text="${winery.getWork_time()}"></span></span><br>
             </a>
+            <span>
+                <span>Омилено: </span>
+            <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this);refreshPage();" class="heart-button">&#10084;</button>
+        </span>
     </ul>
 </div>
-<script th:inline="javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        var currentCookieValue = getCookie('favorites');
-        sendCookieToServer(currentCookieValue);
-    });
-    function getCookie(name) {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            if (cookie.indexOf(name + '=') === 0) {
-                return cookie.substring((name + '=').length, cookie.length);
-            }
-        }
-        return null;
-    }
-    function sendCookieToServer(cookieValue) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/favorites-show", true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-        // Check if the cookie value has changed
-        if (cookieValue !== null && cookieValue !== "") {
-            xhr.send(JSON.stringify(cookieValue));
-
-            // After the request is complete, reload the page
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    window.location.reload();
-                }
-            };
-        }
-    }
-    function setCookie(name, value, days, path, secure, sameSite) {
-        var expires = '';
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = '; expires=' + date.toUTCString();
-        }
-        var cookieString = name + '=' + value + expires + '; path=' + (path || '/');
-        if (secure) {
-            cookieString += '; Secure';
-        }
-        if (sameSite) {
-            cookieString += '; SameSite=' + sameSite;
-        }
-        document.cookie = cookieString;
-    }
-
-</script>
 <style>
     span {
         display: inline-block;
@@ -108,5 +65,6 @@
         background-color: #cccccc; /* Set the background color for odd list items */
     }
 </style>
+<script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
 </body>
 </html>

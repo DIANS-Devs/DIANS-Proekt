@@ -1,21 +1,26 @@
 package wineverse.com.mk.Wineverse.controller;
 
+import jakarta.servlet.http.HttpSession;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import wineverse.com.mk.Wineverse.HelpServices.StringManipulation;
 import wineverse.com.mk.Wineverse.Service.CityService;
 import wineverse.com.mk.Wineverse.Service.WineryService;
 import wineverse.com.mk.Wineverse.model.City;
 import wineverse.com.mk.Wineverse.model.Winery;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 @Controller
 public class   WineryController {
     private CityService cityService;
     private WineryService wineryService;
+    private StringManipulation stringManipulation = new StringManipulation();
 
     public WineryController(CityService cityService, WineryService wineryService) {
         this.cityService = cityService;
@@ -49,25 +54,28 @@ public class   WineryController {
         return "WineryDetails";
     }
 
-    @PostMapping("/favorites-show")
-    public String setCookieFromClient(@RequestBody String  cookieValue, RedirectAttributes redirectAttributes) {
-        String cleanString = cookieValue.replace("[", "").replace("]", "").replace("\\\"", "");
-        if(cleanString.length() > 2){
-            cleanString = cleanString.substring(1, cleanString.length()-1);
-        }
-        String[] values = cleanString.split(",");
-        redirectAttributes.addAttribute("stringIds", Arrays.asList(values));
-        return "redirect:/favorites-show";
+    @PostMapping("/favorites-list")
+    @ResponseBody
+    public ResponseEntity<String> receiveFavoritesList(@RequestBody String favoritesList, HttpSession session) {
+        session.setAttribute("processedFavoritesList", favoritesList);
+        return ResponseEntity.ok("FavoritesList received successfully");
     }
 
-    @GetMapping("/favorites-show")
-    public String getFavoritesShow(@RequestParam(name = "stringIds", required = false) List<String> stringIds, Model model) {
-        model.addAttribute("favoriteWineries", wineryService.getWineriesByIds(stringIds));
-        return "MyFavourites";
-    }
+
     @GetMapping("/favorites")
-    public String getFavorites() {
+    public String getFavorites(Model model, HttpSession session) {
+        List<Winery> wineries = new ArrayList<>();
+        String processedFavoritesList = (String) session.getAttribute("processedFavoritesList");
+        if(processedFavoritesList != null) {
+            String[] values = stringManipulation.parse_JSON(processedFavoritesList);
+            if (values != null) {
+                wineries = wineryService.getWineriesByIds(Arrays.asList(values));
+            }
+        }
+        model.addAttribute("wineries", wineries);
         return "Favourites";
     }
+
+
 
 }

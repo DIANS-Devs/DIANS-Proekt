@@ -16,6 +16,11 @@
             Работно време: <span th:text="${winery.getWork_time()}"></span>
         </span>
     </a>
+    <span>
+            <span>Омилено: </span>
+            <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)" class="heart-button">&#10084;</button>
+        </span>
 </div>
+<script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
 </body>
 </html>

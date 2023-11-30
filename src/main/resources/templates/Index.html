@@ -36,64 +36,6 @@
 <p class="lead pt-3 d-flex justify-content-center">
     <strong>Wineverse.mk</strong> - Твојот вински универзум
 </p>
-<script th:inline="javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        // Check if the 'favorites' cookie exists
-        var favoritesCookie = getCookie('favorites');
-        if (!favoritesCookie) {
-            // If the cookie doesn't exist, show an alert and create a new cookie with an empty array
-            var acceptCookies = confirm('This site uses cookies. Do you accept?');
-            if (acceptCookies) {
-                // Set a cookie with SameSite=None and Secure
-                setCookie('favorites', '[]', 365, '/', true, 'None');
-                //sendCookieToServer(getCookie('favorites'));
-            }
-        }
-    });
-
-    // Function to get the value of a cookie by name
-    function getCookie(name) {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            if (cookie.indexOf(name + '=') === 0) {
-                return cookie.substring((name + '=').length, cookie.length);
-            }
-        }
-        return null;
-    }
-    function sendCookieToServer(cookieValue) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/favorites", true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify(cookieValue));
-
-        // After the request is complete, reload the page
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                window.location.reload();
-            }
-        };
-    }
-
-    // Function to set a new cookie
-    function setCookie(name, value, days, path, secure, sameSite) {
-        var expires = '';
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = '; expires=' + date.toUTCString();
-        }
-        var cookieString = name + '=' + value + expires + '; path=' + (path || '/');
-        if (secure) {
-            cookieString += '; Secure';
-        }
-        if (sameSite) {
-            cookieString += '; SameSite=' + sameSite;
-        }
-        document.cookie = cookieString;
-    }
-
-</script>
+<script th:src="@{/js/createCookie.js}" defer="defer"></script>
 </body>
 </html>

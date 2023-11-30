@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title='Home')">
 <body th:fragment="content">
-<form th:action="@{/wineries}" method="post" class="container bg-body-secondary mt-5 pt-5 pb-5 col-md-7">
+<form th:action="@{/wineries}" method="post" class="container bg-body-secondary mt-5 pt-5 pb-5 col-md-6">
     <div class="form-row d-flex justify-content-center mb-3">
         <p class="h3 mb-3">Пребарај винарии</p>
     </div>
     <div class="form-row d-flex justify-content-around mb-3 mt-3">
-        <div class="col-md-2 mb-3">
+        <div class="col-md-3 mb-3">
             <label for="name">Име</label>
             <input type="text" class="form-control" id="name" name="name">
         </div>
@@ -18,7 +18,7 @@
             <label for="distance">Оддалеченост</label>
             <input type="text" class="form-control" id="distance" name="distance" pattern="[0-9]+" title="Please enter a number" value="300">
         </div>
-        <div class="col-md-2 mb-3">
+        <div class="col-md-3 mb-3">
             <label for="location">Локација</label>
             <select class="form-select" id="location" name="location">
                 <option value="entireMacedonia" selected>Цела Македонија</option>

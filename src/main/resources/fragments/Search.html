@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="search">
-<form th:action="@{/wineries}" method="post" class="container bg-body-secondary mt-5 pt-2 col-md-10">
+<form th:action="@{/wineries}" method="post" class="container bg-body-secondary mb-5 mt-5 pt-2 col-md-10">
     <div class="form-row d-flex justify-content-around mb-3 mt-3">
         <div class="col-md-3 mb-3">
             <label for="name">Име</label>
@@ -22,7 +22,7 @@
                 <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
             </select>
         </div>
-        <div class="col-md-2 mb-3">
+        <div class="col-md-2 pt-4 mb-3">
             <label>&nbsp;</label>
             <button class="btn btn-secondary" type="submit">Пребарај &nbsp; <svg xmlns="http://www.w3.org/2000/svg"
             width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

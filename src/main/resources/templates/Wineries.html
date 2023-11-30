@@ -1,62 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title='Wineries')">
 <body th:fragment="content">
-<div class="result-div">
-    <ul>
-        <li th:each="winery : ${wineries}">
-            <a th:href="@{'/wineries/' + ${winery.getId()}}">
-                <h3 th:text="${winery.getName()}" class="result-item"></h3>
-                <span>Адреса: <span th:text="${winery.getAddress()}"></span></span><br>
-                <span>Град: <span th:text="${winery.getCity().getName()}"></span></span><br>
-                <span>Работно време: <span th:text="${winery.getWork_time()}"></span></span><br>
-            </a>
-    </ul>
+<div th:each="winery : ${wineries}" class="container col-md-5 bg-body-secondary mb-3 p-4">
+    <a th:href="@{'/wineries/' + ${winery.getId()}}" class="text-dark">
+        <h3 th:text="${winery.getName()}"></h3>
+        <span class="p-4">
+            Адреса: <span th:text="${winery.getAddress()}"></span>
+        </span>
+        <br>
+        <span class="p-4">
+            Град: <span th:text="${winery.getCity().getName()}"></span>
+        </span>
+        <br>
+        <span class="p-4">
+            Работно време: <span th:text="${winery.getWork_time()}"></span>
+        </span>
+    </a>
 </div>
-<!--    <p th:text="${city.getName()}"></p>-->
-<style>
-    span {
-        display: inline-block;
-        margin-right: 5px;
-        margin-bottom: 10px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    input {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    button {
-        position: relative;
-        left: 40px;
-    }
-
-    .result-div {
-        display: inline-block;
-        position: absolute;
-        top: 70%; /* Adjust the top value */
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #808080;
-        width: 80%;
-        max-width: 950px;
-        height: 500px;
-        border-radius: 15px;
-        color: white;
-    }
-
-    .result-item {
-        background-color: #d9d9d9; /* Set the default background color for list items */
-    }
-
-    /* Apply styles to every odd .result-item */
-    .result-item:nth-child(odd) {
-        background-color: #cccccc; /* Set the background color for odd list items */
-    }
-</style>
 </body>
 </html>

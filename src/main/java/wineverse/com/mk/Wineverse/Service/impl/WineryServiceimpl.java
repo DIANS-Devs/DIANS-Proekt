@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class WineryServiceimpl implements WineryService {
-    private WineryRepository wineryRepository;
+    private final WineryRepository wineryRepository;
 
     @Autowired
     public WineryServiceimpl(WineryRepository wineryRepository) {
@@ -26,7 +26,7 @@ public class WineryServiceimpl implements WineryService {
 
     @Override
     public List<Winery> filtered_wineries(String name, int rating, float distance, City city) {
-        if(!name.equals("") && city!=null && (!city.getName().equals("Цела Македонија"))){
+        if(!name.isEmpty() && city!=null && (!city.getName().equals("Цела Македонија"))){
             List<Winery> wineries_by_name =  find_winery_byname(name);
             List<Winery> wineries_by_city = find_wineries_bycity(city);
             List<Winery> matching_wineries = new ArrayList<>();
@@ -38,7 +38,7 @@ public class WineryServiceimpl implements WineryService {
             }
             return matching_wineries;
 
-        } else if (!name.equals("")) {
+        } else if (!name.isEmpty()) {
             return find_winery_byname(name);
         } else if (city != null && !city.getName().equals("Цела Македонија")) {
             return find_wineries_bycity(city);
@@ -79,7 +79,7 @@ public class WineryServiceimpl implements WineryService {
         List<Winery> return_wineries = new ArrayList<>();
         for(Winery w: wineryRepository.get_all_wineries()){
             for(String ids : favoriteWineryIds){
-                Long id = Long.parseLong(ids);
+                long id = Long.parseLong(ids);
                 if(id == w.getId())
                     return_wineries.add(w);
             }

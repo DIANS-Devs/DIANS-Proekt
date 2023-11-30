@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class CityServiceimpl implements CityService {
 
-    private CityRepository cityRepository;
+    private final CityRepository cityRepository;
 
     @Autowired
     public CityServiceimpl(CityRepository cityRepository) {

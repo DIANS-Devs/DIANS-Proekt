@@ -5,7 +5,7 @@
     <span class="float-end">
         <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)" class="heart-button">&#10084;</button>
     </span>
-    <a th:href="@{'/wineries/' + ${winery.getId()}}" th:text="${winery.getName()}"class="text-dark h3 d-inline-block mb-3"></a>
+    <a th:href="@{'/wineries/' + ${winery.getId()}}" th:text="${winery.getName()}" class="text-dark h3 d-inline-block mb-3"></a>
     <br>
     <span class="p-4">
           <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>

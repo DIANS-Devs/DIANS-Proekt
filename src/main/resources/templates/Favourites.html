@@ -1,70 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title='Favourites')">
-
-<!--        <script th:src="@{/js/favoriteButton.js}" defer="defer"></script>-->
-
 <body th:fragment="content">
-<div class="result-div">
-    <ul>
-        <li th:each="winery : ${wineries}">
-            <a th:href="@{'/wineries/' + ${winery.getId()}}">
-                <h3 th:text="${winery.getName()}" class="result-item"></h3>
-                <span>Адреса: <span th:text="${winery.getAddress()}"></span></span><br>
-                <span>Град: <span th:text="${winery.getCity().getName()}"></span></span><br>
-                <span>Работно време: <span th:text="${winery.getWork_time()}"></span></span><br>
-            </a>
-            <span>
-                <span>Омилено: </span>
-            <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this);refreshPage();" class="heart-button">&#10084;</button>
-        </span>
-    </ul>
+<h4 class="container p-0">Омилени</h4>
+<div th:each="winery : ${wineries}" class="container bg-body-secondary mb-3 p-4">
+    <span class="float-end">
+        <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)"
+        class="border-0 bg-transparent">&#10084;</button>
+    </span>
+    <a th:href="@{'/wineries/' + ${winery.getId()}}" th:text="${winery.getName()}" class="text-dark h3 d-inline-block mb-3"></a>
+    <br>
+    <span class="p-4">
+          <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+            <strong>Град:</strong> <span th:text="${winery.getCity().getName()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+            <strong>Работно време:</strong> <span th:text="${winery.getWork_time()}"></span>
+    </span>
 </div>
-<style>
-    span {
-        display: inline-block;
-        margin-right: 5px; /* Adjust as needed to provide space between labels */
-        margin-bottom: 10px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    input {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    button {
-        position: relative;
-        left: 40px;
-        /*<!--transform: translateX(-100%); -->*/
-    }
-
-    .result-div {
-        display: inline-block;
-        position: absolute;
-        top: 70%; /* Adjust the top value */
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #808080;
-        width: 80%;
-        max-width: 950px;
-        height: 500px;
-        border-radius: 15px;
-        color: white;
-    }
-
-    .result-item {
-        background-color: #d9d9d9; /* Set the default background color for list items */
-    }
-
-    /* Apply styles to every odd .result-item */
-    .result-item:nth-child(odd) {
-        background-color: #cccccc; /* Set the background color for odd list items */
-    }
-</style>
 <script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
 </body>
 </html>

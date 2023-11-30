@@ -2,24 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title='Wineries')">
 <body th:fragment="content">
 <div th:each="winery : ${wineries}" class="container col-md-5 bg-body-secondary mb-3 p-4">
-    <a th:href="@{'/wineries/' + ${winery.getId()}}" class="text-dark">
-        <h3 th:text="${winery.getName()}"></h3>
-        <span class="p-4">
-            Адреса: <span th:text="${winery.getAddress()}"></span>
-        </span>
-        <br>
-        <span class="p-4">
-            Град: <span th:text="${winery.getCity().getName()}"></span>
-        </span>
-        <br>
-        <span class="p-4">
-            Работно време: <span th:text="${winery.getWork_time()}"></span>
-        </span>
-    </a>
-    <span>
-            <span>Омилено: </span>
-            <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)" class="heart-button">&#10084;</button>
-        </span>
+    <span class="float-end">
+        <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)" class="heart-button">&#10084;</button>
+    </span>
+    <a th:href="@{'/wineries/' + ${winery.getId()}}" th:text="${winery.getName()}"class="text-dark h3 d-inline-block mb-3"></a>
+    <br>
+    <span class="p-4">
+          <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+            <strong>Град:</strong> <span th:text="${winery.getCity().getName()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+            <strong>Работно време:</strong> <span th:text="${winery.getWork_time()}"></span>
+    </span>
 </div>
 <script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
 </body>

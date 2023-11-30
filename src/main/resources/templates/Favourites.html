@@ -1,50 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title='Favourites')">
 <body th:fragment="content">
-<form th:action="@{/wineries}" method="post">
-    <div class="search-engine">
-        <div class="middle-div">
-            <span>
-                <label for="name">Име</label>
-                <input type="text" id="name" name="name">
-            </span>
-
-            <span>
-                <label for="rating">Рејтинг</label>
-                <input type="number" id="rating" name="rating" min="0" max="10" value="0">
-            </span>
-
-            <span>
-                <label for="distance">Оддалеченост</label>
-                <input type="text" id="distance" name="distance" pattern="[0-9]+" title="Please enter a number" value="300">
-            </span>
-
-
-            <span>
-                <label for="location">Локација</label>
-                <select id="location" name="location">
-                    <option value="entireMacedonia" selected>Цела Македонија</option>
-                    <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
-                </select>
-            </span>
-            <span>
-                 <button type="submit">Барај</button>
-            </span>
-        </div>
-    </div>
-
-    <div class="result-div">
-        <ul>
-            <li th:each="winery : ${favoriteWineries}">
-                <a th:href="@{'/wineries/' + ${winery.getId()}}">
-                    <h3 th:text="${winery.getName()}" class="result-item"></h3>
-                    <span>Адреса: <span th:text="${winery.getAddress()}"></span></span><br>
-                    <span>Град: <span th:text="${winery.getCity().getName()}"></span></span><br>
-                    <span>Работно време: <span th:text="${winery.getWork_time()}"></span></span><br>
-                </a>
-        </ul>
-    </div>
-</form>
+<div class="result-div">
+    <ul>
+        <li th:each="winery : ${favoriteWineries}">
+            <a th:href="@{'/wineries/' + ${winery.getId()}}">
+                <h3 th:text="${winery.getName()}" class="result-item"></h3>
+                <span>Адреса: <span th:text="${winery.getAddress()}"></span></span><br>
+                <span>Град: <span th:text="${winery.getCity().getName()}"></span></span><br>
+                <span>Работно време: <span th:text="${winery.getWork_time()}"></span></span><br>
+            </a>
+    </ul>
+</div>
 <script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function () {
         var currentCookieValue = getCookie('favorites');
@@ -96,19 +63,6 @@
 
 </script>
 <style>
-    .search-engine {
-        display: inline-block;
-        position: absolute;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -20%);
-        background: #808080;
-        width: 950px;
-        height: 70px;
-        border-radius: 15px;
-        margin-bottom: 30px; /* Add margin-bottom for space below */
-    }
-
     span {
         display: inline-block;
         margin-right: 5px; /* Adjust as needed to provide space between labels */
@@ -124,12 +78,6 @@
         display: block;
         width: 100%;
         box-sizing: border-box;
-    }
-    .middle-div
-    {
-        position: relative;
-        top: 10px;
-        color: white;
     }
     button {
         position: relative;

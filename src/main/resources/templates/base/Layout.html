@@ -8,15 +8,15 @@
     <title th:text="${title}"></title>
 </head>
 <body>
-    <div th:insert="~{../fragments/Header :: header}"></div>
+    <div th:insert="~{fragments/Header :: header}"></div>
 
     <div th:unless="${title == 'About Us' or title == 'Home'}">
-        <div th:insert="~{../fragments/Search :: search}"></div>
+        <div th:insert="~{fragments/Search :: search}"></div>
     </div>
 
     <div th:insert="~{::content}"></div>
 
-    <div th:insert="~{../fragments/Footer :: footer}"></div>
+    <div th:insert="~{fragments/Footer :: footer}"></div>
 </body>
 <style>
 

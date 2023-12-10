@@ -1,8 +1,8 @@
-package mk.com.wineverse.Repository;
+package wineverse.com.mk.Wineverse.Repository;
 
 import org.springframework.stereotype.Repository;
-import mk.com.wineverse.Data.InMemoryDataHolder;
-import mk.com.wineverse.Model.City;
+import wineverse.com.mk.Wineverse.Data.InMemoryDataHolder;
+import wineverse.com.mk.Wineverse.Model.City;
 
 import java.util.List;
 

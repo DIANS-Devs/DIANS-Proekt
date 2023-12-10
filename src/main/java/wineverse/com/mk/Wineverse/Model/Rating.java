@@ -1,4 +1,4 @@
-package mk.com.wineverse.Model;
+package wineverse.com.mk.Wineverse.Model;
 
 import lombok.Data;
 

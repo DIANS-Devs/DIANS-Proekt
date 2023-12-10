@@ -1,15 +1,15 @@
-package mk.com.wineverse.Controller;
+package wineverse.com.mk.Wineverse.Controller;
 
 import jakarta.servlet.http.HttpSession;
-import mk.com.wineverse.HelpServices.StringManipulation;
+import wineverse.com.mk.Wineverse.HelpServices.StringManipulation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import mk.com.wineverse.Service.CityService;
-import mk.com.wineverse.Service.WineryService;
-import mk.com.wineverse.Model.City;
-import mk.com.wineverse.Model.Winery;
+import wineverse.com.mk.Wineverse.Service.CityService;
+import wineverse.com.mk.Wineverse.Service.WineryService;
+import wineverse.com.mk.Wineverse.Model.City;
+import wineverse.com.mk.Wineverse.Model.Winery;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @Controller
-public class   WineryController {
+public class WineryController {
     private final CityService cityService;
     private final WineryService wineryService;
     private final StringManipulation stringManipulation = new StringManipulation();

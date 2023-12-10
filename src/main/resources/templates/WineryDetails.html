@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title=${winery.getName()})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{../base/Layout :: base(title=${winery.getName()})}">
 <body th:fragment="content">
 <div class="container bg-body-secondary mb-3 p-4">
     <h3 th:text="${winery.getName()}"></h3>
@@ -13,7 +13,7 @@
     </span>
     <br>
     <span class="p-4">
-        <strong>Работно време:</strong> <span th:text="${winery.getWork_time()}"></span>
+        <strong>Работно време:</strong> <span th:text="${winery.getWorkTime()}"></span>
     </span>
     <br>
     <span class="p-4">

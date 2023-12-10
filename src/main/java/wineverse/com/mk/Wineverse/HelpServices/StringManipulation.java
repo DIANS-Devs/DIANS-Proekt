@@ -1,4 +1,4 @@
-package mk.com.wineverse.HelpServices;
+package wineverse.com.mk.Wineverse.HelpServices;
 
 public class StringManipulation {
     public String[] parse_JSON(String entryString) {

@@ -1,10 +1,10 @@
-package mk.com.wineverse.Controller;
+package wineverse.com.mk.Wineverse.Controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import mk.com.wineverse.Service.CityService;
+import wineverse.com.mk.Wineverse.Service.CityService;
 
 @Controller
 @AllArgsConstructor

@@ -1,10 +1,10 @@
-package mk.com.wineverse.Service.impl;
+package wineverse.com.mk.Wineverse.Service.impl;
 
 import lombok.AllArgsConstructor;
-import mk.com.wineverse.Repository.CityRepository;
+import wineverse.com.mk.Wineverse.Repository.CityRepository;
 import org.springframework.stereotype.Service;
-import mk.com.wineverse.Service.CityService;
-import mk.com.wineverse.Model.City;
+import wineverse.com.mk.Wineverse.Service.CityService;
+import wineverse.com.mk.Wineverse.Model.City;
 
 import java.util.List;
 

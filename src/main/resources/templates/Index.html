@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="../base/Layout :: base(title='Home')">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{../base/Layout :: base(title='Home')}">
 <body th:fragment="content">
 <form th:action="@{/wineries}" method="post" class="container bg-body-secondary mt-5 pt-5 pb-5 col-md-6">
     <div class="form-row d-flex justify-content-center mb-3">

@@ -1,7 +1,7 @@
-package mk.com.wineverse.Service;
+package wineverse.com.mk.Wineverse.Service;
 
-import mk.com.wineverse.Model.City;
-import mk.com.wineverse.Model.Winery;
+import wineverse.com.mk.Wineverse.Model.City;
+import wineverse.com.mk.Wineverse.Model.Winery;
 
 import java.util.List;
 

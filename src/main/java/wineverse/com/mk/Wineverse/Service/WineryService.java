@@ -11,6 +11,6 @@ public interface WineryService {
     List<Winery> findWineriesByName(String name);
     List<Winery> findWineriesByCity(City city);
     Winery getWineryById(Long id);
-
     List<Winery> getWineriesByIds(List<String> favoriteWineryIds);
+    List<String> getFavouriteWineriesAsString();
 }

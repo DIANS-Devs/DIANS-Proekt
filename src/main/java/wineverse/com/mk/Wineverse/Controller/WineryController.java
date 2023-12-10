@@ -1,6 +1,7 @@
 package wineverse.com.mk.Wineverse.Controller;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import wineverse.com.mk.Wineverse.HelpServices.StringManipulation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,15 +18,10 @@ import java.util.List;
 
 
 @Controller
+@AllArgsConstructor
 public class WineryController {
     private final CityService cityService;
     private final WineryService wineryService;
-    private final StringManipulation stringManipulation = new StringManipulation();
-
-    public WineryController(CityService cityService, WineryService wineryService) {
-        this.cityService = cityService;
-        this.wineryService = wineryService;
-    }
 
     @GetMapping("/wineries")
     public String getResultsMapping(Model model)
@@ -56,29 +52,4 @@ public class WineryController {
         model.addAttribute("winery", winery);
         return "WineryDetails";
     }
-
-    @PostMapping("/favorites-list")
-    @ResponseBody
-    public ResponseEntity<String> receiveFavoritesList(@RequestBody String favoritesList, HttpSession session) {
-        session.setAttribute("processedFavoritesList", favoritesList);
-        return ResponseEntity.ok("FavoritesList received successfully");
-    }
-
-
-    @GetMapping("/favorites")
-    public String getFavorites(Model model, HttpSession session) {
-        List<Winery> wineries = new ArrayList<>();
-        String processedFavoritesList = (String) session.getAttribute("processedFavoritesList");
-        if(processedFavoritesList != null) {
-            String[] values = stringManipulation.parse_JSON(processedFavoritesList);
-            if (values != null) {
-                wineries = wineryService.getWineriesByIds(Arrays.asList(values));
-            }
-        }
-        model.addAttribute("wineries", wineries);
-        return "Favourites";
-    }
-
-
-
 }

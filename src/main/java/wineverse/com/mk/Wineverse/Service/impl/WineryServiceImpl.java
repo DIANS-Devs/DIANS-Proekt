@@ -9,6 +9,7 @@ import wineverse.com.mk.Wineverse.Model.Winery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -81,5 +82,13 @@ public class WineryServiceImpl implements WineryService {
             }
         }
         return return_wineries;
+    }
+
+    @Override
+    public List<String> getFavouriteWineriesAsString() {
+        List<Winery> wineries = wineryRepository.getAllWineries();
+        return wineries.stream()
+                .map(winery -> String.format("%s|%s|%s", winery.getLatitude(), winery.getLongitude(), winery.getName()))
+                .collect(Collectors.toList());
     }
 }

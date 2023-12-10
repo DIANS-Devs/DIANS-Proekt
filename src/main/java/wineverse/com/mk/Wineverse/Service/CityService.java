@@ -1,10 +1,10 @@
-package wineverse.com.mk.Wineverse.Service;
+package mk.com.wineverse.Service;
 
-import wineverse.com.mk.Wineverse.model.City;
+import mk.com.wineverse.Model.City;
 
 import java.util.List;
 
 public interface CityService {
-    List<City> all_Cities();
-    City find_city(String name);
+    List<City> getAllCities();
+    City findCity(String name);
 }

@@ -1,30 +1,25 @@
-package wineverse.com.mk.Wineverse.Service.impl;
+package mk.com.wineverse.Service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import mk.com.wineverse.Repository.CityRepository;
 import org.springframework.stereotype.Service;
-import wineverse.com.mk.Wineverse.Repository.CityRepository;
-import wineverse.com.mk.Wineverse.Service.CityService;
-import wineverse.com.mk.Wineverse.model.City;
+import mk.com.wineverse.Service.CityService;
+import mk.com.wineverse.Model.City;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class CityServiceimpl implements CityService {
-
     private final CityRepository cityRepository;
 
-    @Autowired
-    public CityServiceimpl(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
+    @Override
+    public List<City> getAllCities() {
+        return cityRepository.getAllCities();
     }
 
     @Override
-    public List<City> all_Cities() {
-        return cityRepository.getCities();
-    }
-
-    @Override
-    public City find_city(String name) {
-        return cityRepository.find_city(name);
+    public City findCity(String name) {
+        return cityRepository.findCity(name);
     }
 }

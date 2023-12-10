@@ -1,17 +1,17 @@
-package wineverse.com.mk.Wineverse.model;
+package mk.com.wineverse.Model;
 
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Reviews {
     private Winery winery;
-    @Getter
-    private List<String> reviews = new ArrayList<>();
-
+    private List<String> reviews;
     public Reviews(Winery winery) {
         this.winery = winery;
+        this.reviews = new ArrayList<>();
     }
     public void addReview(String review)
     {

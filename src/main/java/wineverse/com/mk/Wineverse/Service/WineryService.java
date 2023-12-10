@@ -1,15 +1,15 @@
-package wineverse.com.mk.Wineverse.Service;
+package mk.com.wineverse.Service;
 
-import wineverse.com.mk.Wineverse.model.City;
-import wineverse.com.mk.Wineverse.model.Winery;
+import mk.com.wineverse.Model.City;
+import mk.com.wineverse.Model.Winery;
 
 import java.util.List;
 
 public interface WineryService {
-    List<Winery> all_wineries();
-    List<Winery> filtered_wineries(String name, int rating, float distance, City city);
-    List<Winery> find_winery_byname(String name);
-    List<Winery> find_wineries_bycity(City city);
+    List<Winery> getAllWineries();
+    List<Winery> filteredWineries(String name, int rating, float distance, City city);
+    List<Winery> findWineriesByName(String name);
+    List<Winery> findWineriesByCity(City city);
     Winery getWineryById(Long id);
 
     List<Winery> getWineriesByIds(List<String> favoriteWineryIds);

@@ -10,7 +10,7 @@
     <a th:href="@{'/wineries/' + ${winery.getId()}}" th:text="${winery.getName()}" class="text-dark h3 d-inline-block mb-3"></a>
     <br>
     <span class="p-4">
-          <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>
+          <strong>Адреса:</strong> <span th:text="${winery.getAddress()()}"></span>
     </span>
     <br>
     <span class="p-4">
@@ -18,7 +18,7 @@
     </span>
     <br>
     <span class="p-4">
-            <strong>Работно време:</strong> <span th:text="${winery.getWorkTime()}"></span>
+            <strong>Работно време:</strong> <span th:text="${winery.getWorkingTime()}"></span>
     </span>
 </div>
 <script th:src="@{/js/favoriteButton.js}" defer="defer"></script>

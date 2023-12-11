@@ -1,4 +1,4 @@
-package wineverse.com.mk.Wineverse.Model.Modelv1;
+package wineverse.com.mk.Wineverse.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

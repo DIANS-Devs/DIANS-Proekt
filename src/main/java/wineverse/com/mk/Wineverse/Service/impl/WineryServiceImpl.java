@@ -63,12 +63,12 @@ public class WineryServiceImpl implements WineryService {
 
     @Override
     public List<Winery> findWineriesByCity(City city) {
-        return city.getCityWineries();
+        return city.getWineriesInCity();
     }
 
     @Override
     public Winery getWineryById(Long id) {
-        return wineryRepository.getAllWineries().stream().filter(w -> w.getId() == id).findFirst().orElse(null);
+        return wineryRepository.getAllWineries().stream().filter(w -> w.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override

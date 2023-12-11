@@ -1,5 +1,3 @@
-console.log("TEST TEST TEST")
-
 document.addEventListener("DOMContentLoaded", function () {
 // Initializes map
     const map = L.map("map");
@@ -16,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function createPopup(name) {
         const popupContent = `
     <b>${name}</b></br>
-    <button onclick="showDetails('${name}')">Details</button>
+    <a href="/"><button onclick="showDetails('${name}')">Details</button></a>
     `;
         return L.popup().setContent(popupContent);
     }

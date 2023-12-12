@@ -1,10 +1,11 @@
 package wineverse.com.mk.Wineverse.Model;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Data;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class Winery {
     private Float rating;
     private Integer totalReviews;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Review> reviews;
 
     private boolean wheelchairAccessible;
@@ -57,16 +58,21 @@ public class Winery {
         this.website = website;
         this.operationalStatus = operationalStatus;
         //TODO can be changed
-        this.reviews = new ArrayList<Review>();
+        this.reviews = new ArrayList<>();
         this.rating = (float)0.0;
         this.totalReviews = 0;
         this.wheelchairAccessible = wheelchairAccessible;
         this.latitude = latitude;
         this.longitude = longitude;
     }
+//    @Transactional
 //    public Review addReview(User user, Float rating, String content, LocalDate date){
-//        Review review = new Review(user, rating, content, date)
+//        Review review = new Review(user, rating, content, date);
 //        this.reviews.add(review);
 //        return review;
 //    }
+    @Transactional
+    public void addReview(Review review){
+        this.reviews.add(review);
+    }
 }

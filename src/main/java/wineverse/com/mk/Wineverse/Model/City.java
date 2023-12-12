@@ -23,8 +23,4 @@ public class City {
         this.name = name;
         this.wineriesInCity = new ArrayList<Winery>();
     }
-
-    public void addWineryInCity(Winery winery){
-        this.wineriesInCity.add(winery);
-    }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Winery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String name;
-    @OneToMany
+    @ManyToMany
     List<Type> types;
     private String address;
     @ManyToOne
@@ -63,4 +64,9 @@ public class Winery {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+//    public Review addReview(User user, Float rating, String content, LocalDate date){
+//        Review review = new Review(user, rating, content, date)
+//        this.reviews.add(review);
+//        return review;
+//    }
 }

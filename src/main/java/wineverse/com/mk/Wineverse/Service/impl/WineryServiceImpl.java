@@ -18,7 +18,7 @@ public class WineryServiceImpl implements WineryService {
 
     @Override
     public List<Winery> getAllWineries() {
-        return wineryRepository.getAllWineries();
+        return wineryRepository.findAll();
     }
 
     @Override
@@ -44,13 +44,13 @@ public class WineryServiceImpl implements WineryService {
 //        if(city != null) {
 //            return find_wineries_bycity(city);
 //        }
-        return wineryRepository.getAllWineries();
+        return wineryRepository.findAll();
     }
 
     @Override
     public List<Winery> findWineriesByName(String name) {
         name = name.toLowerCase();
-        List<Winery> wineries = wineryRepository.getAllWineries();
+        List<Winery> wineries = wineryRepository.findAll();
         List<Winery> matchingWineries = new ArrayList<>();
         for (Winery w : wineries) {
             String wineryName = w.getName().toLowerCase();
@@ -68,13 +68,13 @@ public class WineryServiceImpl implements WineryService {
 
     @Override
     public Winery getWineryById(Long id) {
-        return wineryRepository.getAllWineries().stream().filter(w -> w.getId().equals(id)).findFirst().orElse(null);
+        return wineryRepository.findAll().stream().filter(w -> w.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
     public List<Winery> getWineriesByIds(List<String> favoriteWineryIds) {
         List<Winery> return_wineries = new ArrayList<>();
-        for(Winery w: wineryRepository.getAllWineries()){
+        for(Winery w: wineryRepository.findAll()){
             for(String ids : favoriteWineryIds){
                 long id = Long.parseLong(ids);
                 if(id == w.getId())
@@ -86,7 +86,7 @@ public class WineryServiceImpl implements WineryService {
 
     @Override
     public List<String> getFavouriteWineriesAsString() {
-        List<Winery> wineries = wineryRepository.getAllWineries();
+        List<Winery> wineries = wineryRepository.findAll();
         return wineries.stream()
                 .map(winery -> String.format("%s|%s|%s", winery.getLatitude(), winery.getLongitude(), winery.getName()))
                 .collect(Collectors.toList());

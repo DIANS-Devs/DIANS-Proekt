@@ -20,11 +20,18 @@
         <div th:insert="~{fragments/Search :: search}"></div>
     </div>
 
-    <div th:insert="~{::content}"></div>
+    <div th:insert="~{::content}" class="main"></div>
 
     <div th:insert="~{fragments/Footer :: footer}"></div>
 </body>
 <style>
-
+    :root{
+        --navbar-height: 56px;
+        --footer-height: 56px;
+    }
+    .main{
+        min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
+        padding: 5em;
+    }
 </style>
 </html>

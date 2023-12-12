@@ -2,11 +2,8 @@ package wineverse.com.mk.Wineverse.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import wineverse.com.mk.Wineverse.Model.City;
-
-import java.util.List;
+import wineverse.com.mk.Wineverse.Model.User;
 
 @Repository
-public interface CityRepository extends JpaRepository<City, Long> {
-    City findByName(String name);
+public interface UserRepository extends JpaRepository<User, String> {
 }

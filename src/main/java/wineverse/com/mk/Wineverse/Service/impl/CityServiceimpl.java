@@ -15,11 +15,11 @@ public class CityServiceimpl implements CityService {
 
     @Override
     public List<City> getAllCities() {
-        return cityRepository.getAllCities();
+        return cityRepository.findAll();
     }
 
     @Override
     public City findCity(String name) {
-        return cityRepository.findCity(name);
+        return cityRepository.findByName(name);
     }
 }

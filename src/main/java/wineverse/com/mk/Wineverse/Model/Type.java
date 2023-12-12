@@ -13,7 +13,6 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String type;
-
     public Type() {
     }
 

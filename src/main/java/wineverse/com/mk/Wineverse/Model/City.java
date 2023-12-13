@@ -23,4 +23,9 @@ public class City {
         this.name = name;
         this.wineriesInCity = new ArrayList<Winery>();
     }
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }

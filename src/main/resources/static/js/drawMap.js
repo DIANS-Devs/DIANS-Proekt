@@ -11,10 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
         attribution: '© OpenStreetMap'
     }).addTo(map);
 
-    function createPopup(name) {
+    function createPopup(id, name) {
         const popupContent = `
     <b>${name}</b></br>
-    <a href="/"><button onclick="showDetails('${name}')">Details</button></a>
+    <a href="/wineries/${id}"><button onclick="showDetails('${name}')">Details</button></a>
     `;
         return L.popup().setContent(popupContent);
     }
@@ -33,18 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         wineriesList.forEach(winery => {
             let parts = winery.split("|");
-            let lat = parseFloat(parts[0]);
-            let lng = parseFloat(parts[1]);
-            let name = parts[2];
-            console.log(lat)
-            console.log(lng)
-            console.log(name)
+            let id = parseInt(parts[0]);
+            let lat = parseFloat(parts[1]);
+            let lng = parseFloat(parts[2]);
+            let name = parts[3];
 
             marker_helper = L.marker([lat, lng]).addTo(map);
             circle_helper = L.circle([lat, lng], { radius: accuracy }).addTo(map);
 
-            marker_helper.bindPopup(createPopup(name)).openPopup();
-            circle_helper.bindPopup(createPopup(name)).openPopup();
+            marker_helper.bindPopup(createPopup(id, name)).openPopup();
+            circle_helper.bindPopup(createPopup(id, name)).openPopup();
         })
     }
 

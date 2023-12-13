@@ -17,8 +17,6 @@ public class Type {
     }
 
     public Type(String type) {
-        //TODO For testing uncomment this
-//        Id = (long) (Math.random() * 1000);
         this.type = type;
     }
     

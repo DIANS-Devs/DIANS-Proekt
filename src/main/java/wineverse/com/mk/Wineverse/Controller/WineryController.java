@@ -20,24 +20,23 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/wineries")
 public class WineryController {
     private final CityService cityService;
     private final WineryService wineryService;
 
-    @GetMapping("/wineries")
-    public String getResultsMapping(Model model)
-    {
+    @GetMapping()
+    public String getResultsMapping(Model model) {
         model.addAttribute("cities", cityService.getAllCities());
         model.addAttribute("wineries", wineryService.getAllWineries());
         return "Wineries";
     }
-    @PostMapping("/wineries")
-     public String postResultsMapping(@RequestParam(name="name") String winery_name,
+    @PostMapping()
+    public String postResultsMapping(@RequestParam(name="name") String winery_name,
                                         @RequestParam(name = "rating") int rating,
                                         @RequestParam(name = "distance") float distance,
                                         @RequestParam(name = "location") String city_name,
-                                        Model model)
-    {
+                                        Model model) {
         City city = cityService.findCity(city_name);
         List<Winery> filtered_wineries = wineryService.filteredWineries(winery_name, rating, distance, city);
         //model.addAttribute("city", city);
@@ -46,7 +45,7 @@ public class WineryController {
         return "Wineries";
     }
 
-    @GetMapping("/wineries/{id}")
+    @GetMapping("/{id}")
     public String getWineryById(@PathVariable Long id, Model model) {
         Winery winery = wineryService.getWineryById(id);
         model.addAttribute("cities", cityService.getAllCities());
@@ -56,5 +55,12 @@ public class WineryController {
         model.addAttribute("reviews", reviews);
         model.addAttribute("winery_types", winery.getWineryTypesAsString());
         return "WineryDetails";
+    }
+
+    @GetMapping("/map")
+    public String showWineriesMap(Model model){
+        List<String> wineries = wineryService.getWineriesAsString();
+        model.addAttribute("wineriesList", wineries);
+        return "WineriesMap";
     }
 }

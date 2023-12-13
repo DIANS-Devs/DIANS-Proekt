@@ -8,6 +8,7 @@ import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -74,5 +75,12 @@ public class Winery {
     @Transactional
     public void addReview(Review review){
         this.reviews.add(review);
+    }
+    public String getWineryTypesAsString(){
+        if (types != null && !types.isEmpty()) {
+            return types.stream().map(Type::getType).collect(Collectors.joining(", "));
+        } else {
+            return "No types available";
+        }
     }
 }

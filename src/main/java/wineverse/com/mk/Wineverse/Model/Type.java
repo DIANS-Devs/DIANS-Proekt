@@ -21,4 +21,5 @@ public class Type {
 //        Id = (long) (Math.random() * 1000);
         this.type = type;
     }
+    
 }

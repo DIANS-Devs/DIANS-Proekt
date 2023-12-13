@@ -54,6 +54,7 @@ public class WineryController {
 
         List<Review> reviews = winery.getReviews();
         model.addAttribute("reviews", reviews);
+        model.addAttribute("winery_types", winery.getWineryTypesAsString());
         return "WineryDetails";
     }
 }

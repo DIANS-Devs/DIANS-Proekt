@@ -2,27 +2,67 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title=${winery.getName()})}">
 <body th:fragment="content">
 
-<!--Details-->
+<!-- Details -->
 <div class="container bg-body-secondary mb-3 p-4">
     <h3 th:text="${winery.getName()}"></h3>
     <br>
-    <span class="p-4">
-        <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>
-    </span>
-    <br>
-    <span class="p-4">
-        <strong>Град:</strong> <span th:text="${winery.getCity().getName()}"></span>
-    </span>
-    <br>
-    <span class="p-4">
-        <strong>Работно време:</strong> <span th:text="${winery.getWorkingTime()}"></span>
-    </span>
-    <br>
-    <span class="p-4">
-        <strong>Омилено: </strong>
-        <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)"
-        class="border-0 bg-transparent">&#10084;</button>
-    </span>
+    <div class="row">
+        <!-- Left box -->
+        <div class="col-md-6">
+                <span class="p-4">
+                    <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>
+                </span>
+            <br>
+            <span class="p-4">
+                    <strong>Град:</strong> <span th:text="${winery.getCity().getName()}"></span>
+                </span>
+            <br>
+            <span class="p-4">
+                    <strong>Оддалеченост:</strong>
+                    <span id="distance_winery">'Calculating...'</span>
+                </span>
+
+                <script th:src="@{/js/geolocation.js}" defer="defer"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var distanceElement = document.getElementById("distance_winery");
+                        updateDistance(distanceElement, [[${winery.getLatitude()}]], [[${winery.getLongitude()}]]);
+                    });
+                </script>
+            <br>
+            <span class="p-4">
+                    <strong>Работно време:</strong> <span th:text="${winery.getWorkingTime()}"></span>
+                </span>
+            <br>
+            <span class="p-4">
+                    <strong>Дејности:</strong> <span th:text="${winery_types}"></span>
+                </span>
+            <br>
+            <span class="p-4">
+                    <strong>Веб страница:</strong> <span th:text="${winery.getWebsite()}"></span>
+                </span>
+            <br>
+        </div>
+
+        <!-- Right box -->
+        <div class="col-md-6">
+                <span class="p-4">
+                    <strong>Телефон:</strong>
+                    <i class="fas fa-phone-alt"></i> <!-- FontAwesome phone icon -->
+                    <span th:text="${winery.getPhoneNumber()}"></span>
+                </span>
+            <br>
+            <span class="p-4">
+                    <strong>Интернационален телефон:</strong> <span th:text="${winery.getInternationalPhoneNumber()}"></span>
+                </span>
+            <br>
+            <span class="p-4">
+                    <strong>Омилено: </strong>
+                    <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)"
+                            class="border-0 bg-transparent">&#10084;</button>
+                </span>
+        </div>
+    </div>
 </div>
 <script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
 <!-- -->
@@ -37,8 +77,8 @@
             <div th:replace="~{fragments/StarRating :: rating(${review.getRating()})}"></div>
             <span th:text="${review.getDate()}"></span><br>
             <span th:text="${review.getContent()}"></span><br>
-    </section>
-</div>
+        </section>
+    </div>
 </div>
 <!---->
 </body>

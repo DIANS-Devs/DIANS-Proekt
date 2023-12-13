@@ -14,14 +14,15 @@ public class Review {
     // author == user
     @ManyToOne
     private User author;
-    private Float rating;
+    private Integer rating;
     private String content;
     private LocalDate date;
 
     public Review() {
     }
 
-    public Review(User author, Float rating, String content, LocalDate date) {
+
+    public Review(User author, Integer rating, String content, LocalDate date) {
         this.author = author;
         this.rating = rating;
         this.content = content;

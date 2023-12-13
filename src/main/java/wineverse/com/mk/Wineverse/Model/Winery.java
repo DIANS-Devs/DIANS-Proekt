@@ -63,15 +63,12 @@ public class Winery {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-//    @Transactional
-//    public Review addReview(User user, Float rating, String content, LocalDate date){
-//        Review review = new Review(user, rating, content, date);
-//        this.reviews.add(review);
-//        return review;
-//    }
+
     @Transactional
     public void addReview(Review review){
         this.reviews.add(review);
+        this.rating = (float) reviews.stream().mapToInt(Review::getRating).average().orElse(0.0);
+        this.totalReviews = reviews.size();
     }
 
     public String getReviewsAsString(){

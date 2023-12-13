@@ -19,9 +19,15 @@
 }
 .wineriesListed .winery{
     padding: 1em 2.5em;
-    border-radius: 0.5rem;
+    /*border-radius: 0.5rem;*/
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+.wineriesListed .winery:first-child{
+    border-radius: 0.5em 0.5em 0 0;
+}
+.wineriesListed .winery:last-child{
+    border-radius: 0 0 0.5em 0.5em;
 }
 .wineriesListed .winery:nth-child(odd){
     background-color: var(--lighter-color);

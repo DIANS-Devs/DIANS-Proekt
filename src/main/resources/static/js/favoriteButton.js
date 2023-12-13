@@ -25,19 +25,24 @@ function setFavoritesCookie(favorites) {
     setCookie('favorites', JSON.stringify(favorites), 365);
 }
 
-function addToFavorites(button) {
+function addToFavorites(element) {
     //TODO modify here later...
-    var wineryId = button.getAttribute('data-winery-id');
+    var wineryId = element.getAttribute('data-winery-id');
+    let child = element.querySelector('i');
     if (wineryId.trim() !== '') {
         var favorites = getFavoritesFromCookie();
         var index = favorites.indexOf(wineryId);
         if (index === -1) {
             favorites.push(wineryId);
-            button.classList.add('red');
+            // element.classList.add('red');
+            child.classList.remove("far");
+            child.classList.add("fas");
             alert('Winery added to Favorites!');
         } else {
             favorites.splice(index, 1);
-            button.classList.remove('red');
+            child.classList.remove("fas");
+            child.classList.add("far");
+            // element.classList.remove('red');
             alert('Winery removed from Favorites!');
         }
         setFavoritesCookie(favorites);
@@ -46,6 +51,19 @@ function addToFavorites(button) {
         favoriteButton(favorites);
     }
 }
+function checkFavorite(element){
+    var wineryId = element.getAttribute('data-winery-id');
+    let child = element.querySelector('i');
+    if (wineryId.trim() !== '') {
+        let favorites = getFavoritesFromCookie();
+        let index = favorites.indexOf(wineryId);
+        if (index > -1) {
+            child.classList.remove("far");
+            child.classList.add("fas");
+        }
+    }
+}
+
 function favoriteButton(favoritesList) {
     var xhr = new XMLHttpRequest();
     console.log('Creates new XMLHttpRequest');
@@ -68,3 +86,10 @@ heartButtons.forEach(function(button) {
         button.classList.add('red');
     }
 });
+
+window.onload = function() {
+    let element = document.querySelectorAll('#favourite_container');
+    if (element.length > 0) {
+        element.forEach(el => checkFavorite(el))
+    }
+};

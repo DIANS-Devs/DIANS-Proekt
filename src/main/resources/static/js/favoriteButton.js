@@ -26,6 +26,7 @@ function setFavoritesCookie(favorites) {
 }
 
 function addToFavorites(button) {
+    //TODO modify here later...
     var wineryId = button.getAttribute('data-winery-id');
     if (wineryId.trim() !== '') {
         var favorites = getFavoritesFromCookie();
@@ -58,8 +59,6 @@ function favoriteButton(favoritesList) {
 function refreshPage() {
     location.reload(true);
 }
-
-
 
 var favorites = getFavoritesFromCookie();
 var heartButtons = document.querySelectorAll('.heart-button');

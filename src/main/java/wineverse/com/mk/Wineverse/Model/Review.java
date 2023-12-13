@@ -21,9 +21,8 @@ public class Review {
     public Review() {
     }
 
+
     public Review(User author, Integer rating, String content, LocalDate date) {
-        //TODO for testing uncomment this
-//        Id = (long) (Math.random() * 1000);
         this.author = author;
         this.rating = rating;
         this.content = content;

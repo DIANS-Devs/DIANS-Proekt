@@ -85,10 +85,19 @@ public class WineryServiceImpl implements WineryService {
     }
 
     @Override
-    public List<String> getFavouriteWineriesAsString() {
+    public List<String> getWineriesAsString(){
         List<Winery> wineries = wineryRepository.findAll();
         return wineries.stream()
-                .map(winery -> String.format("%s|%s|%s", winery.getLatitude(), winery.getLongitude(), winery.getName()))
+                .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getFavouriteWineriesAsString() {
+        //TODO NOT THIS CODE, CHANGE IT
+        List<Winery> wineries = wineryRepository.findAll();
+        return wineries.stream()
+                .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
                 .collect(Collectors.toList());
     }
 }

@@ -46,8 +46,6 @@ public class Winery {
                   String phoneNumber, String internationalPhoneNumber, String workingTime,
                   String website, OperationalStatus operationalStatus,
                   boolean wheelchairAccessible, Float latitude, Float longitude) {
-        //TODO For testing uncomment this
-//        Id = (long) (Math.random() * 1000);
         this.name = name;
         this.types = types;
         this.address = address;
@@ -74,5 +72,9 @@ public class Winery {
     @Transactional
     public void addReview(Review review){
         this.reviews.add(review);
+    }
+
+    public String getReviewsAsString(){
+        return String.format("%.2f(%d reviews)",rating, totalReviews);
     }
 }

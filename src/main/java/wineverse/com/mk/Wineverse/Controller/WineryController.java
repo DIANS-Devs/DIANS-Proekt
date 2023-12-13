@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import wineverse.com.mk.Wineverse.Model.Review;
 import wineverse.com.mk.Wineverse.Service.CityService;
 import wineverse.com.mk.Wineverse.Service.WineryService;
 import wineverse.com.mk.Wineverse.Model.City;
@@ -50,6 +51,9 @@ public class WineryController {
         Winery winery = wineryService.getWineryById(id);
         model.addAttribute("cities", cityService.getAllCities());
         model.addAttribute("winery", winery);
+
+        List<Review> reviews = winery.getReviews();
+        model.addAttribute("reviews", reviews);
         return "WineryDetails";
     }
 }

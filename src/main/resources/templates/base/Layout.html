@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/8a8cfedc22.js" crossorigin="anonymous"></script>   <!-- questionable if gonna work -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- START LEAFLET library -->
@@ -32,6 +33,15 @@
     .main{
         min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
         padding: 5em;
+    }
+    .review-section{
+        border-radius: 1em;
+    }
+    .review-section:nth-child(even){
+        background-color: #c0c0c0;
+    }
+    .review-section:nth-child(odd){
+        background-color: #d9d9d9;
     }
 </style>
 </html>

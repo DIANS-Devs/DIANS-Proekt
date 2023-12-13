@@ -1,9 +1,6 @@
 package wineverse.com.mk.Wineverse.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -20,8 +17,12 @@ public class User {
     private String surname;
     private String phoneNumber;
 
+    @ElementCollection
+    private List<String> roles;
+
     @OneToMany
     List<Winery> favorites;
+
 
     public User() {
     }
@@ -33,5 +34,7 @@ public class User {
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         favorites = new ArrayList<Winery>();
+        roles = new ArrayList<>();
+        roles.add("USER");
     }
 }

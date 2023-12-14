@@ -5,10 +5,12 @@
 <main class="wineriesListed" th:fragment="content">
     <div></div>
     <div class="resultButtons">
-        <p>Пребарувањето врати 5 резултати</p>
+        <p>Пребарувањето врати <span th:text="${wineries.size()}"></span> резултати</p>
         <div class="buttons">
-            <button>Винарии</button>
-            <button>Мапа<i class="fa-regular fa-map"></i></button>
+            <button class="listButton">Винарии</button>
+            <a href="/wineries/map">
+                <button class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>
+            </a>
         </div>
     </div>
     <div class="searchResults">

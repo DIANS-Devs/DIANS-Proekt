@@ -23,7 +23,7 @@ public class DataHolder {
     private final WineryRepository wineryRepository;
     private final UserRepository userRepository;
 
-
+    
     //    public DataHolder(CityRepository cityRepository, TypeRepository typeRepository, WineryRepository wineryRepository, UserRepository userRepository) {
 //        this.cityRepository = cityRepository;
 //        this.typeRepository = typeRepository;

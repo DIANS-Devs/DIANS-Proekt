@@ -30,10 +30,10 @@
     border-radius: 0 0 0.5em 0.5em;
 }
 .wineriesListed .winery:nth-child(odd){
-    background-color: var(--lighter-color);
+    background-color: var(--darker-color);
 }
 .wineriesListed .winery:nth-child(even){
-    background-color: var(--darker-color);
+    background-color: var(--lighter-color);
 }
 .wineriesListed .right_part{
     justify-self: end;
@@ -75,12 +75,6 @@
     position: absolute;
     right: 0.1em;
 }
-.wineriesListed .winery:nth-child(even) .empty-heart{
-    opacity: 0;
-}
-.wineriesListed .winery:nth-child(odd) .full-heart{
-    opacity: 0;
-}
 .wineriesListed .fa-star{
     color: yellow;
 }
@@ -120,10 +114,10 @@
 .wineriesListed button > i{
     margin-left: 0.5em;
 }
-.wineriesListed button:nth-child(1){
+.wineriesListed .listButton{
     background-color: var(--darker-color);
 }
-.wineriesListed button:nth-child(1){
+.wineriesListed .mapButton{
     background-color: var(--lighter-color);
 }
 /* we can add class fas or far depending if the winery is in favorites */

@@ -8,6 +8,7 @@ import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -69,6 +70,14 @@ public class Winery {
         this.reviews.add(review);
         this.rating = (float) reviews.stream().mapToInt(Review::getRating).average().orElse(0.0);
         this.totalReviews = reviews.size();
+    }
+
+    public String getWineryTypesAsString(){
+        if (types != null && !types.isEmpty()) {
+            return types.stream().map(Type::getType).collect(Collectors.joining(", "));
+        } else {
+            return "No types available";
+        }
     }
 
     public String getReviewsAsString(){

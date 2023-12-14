@@ -1,7 +1,0 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title='Wineries Map')}">
-<body th:fragment="content">
-<div id="map" th:wineriesList="${wineriesList}"></div>
-<script th:src="@{/js/drawMap.js}" defer="defer"></script>
-</body>
-</html>

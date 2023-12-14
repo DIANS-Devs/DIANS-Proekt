@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title=${winery.getName()})}">
+<body th:fragment="content">
+
+<!--Details-->
+<div class="container bg-body-secondary mb-3 p-4">
+    <h3 th:text="${winery.getName()}"></h3>
+    <br>
+    <span class="p-4">
+        <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+        <strong>Град:</strong> <span th:text="${winery.getCity().getName()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+        <strong>Работно време:</strong> <span th:text="${winery.getWorkingTime()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+        <strong>Омилено: </strong>
+        <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)"
+        class="border-0 bg-transparent">&#10084;</button>
+    </span>
+</div>
+<script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
+<!-- -->
+
+<!-- Reviews -->
+<div class="container bg-body-secondary mb-3 p-4">
+    <h3 th:text="${'Резиме на рецензии'}"></h3>
+    <div class="container bg-body-primary mb-3 p-4 review-section" th:each="review, rowStat : ${reviews}">
+        <!-- Add a class to the div to apply a slightly darker background color -->
+        <section>
+            <span th:text="${review.getAuthor().getName() + ' ' + review.getAuthor().getSurname()}"></span><br>
+            <div th:replace="~{fragments/StarRating :: rating(${review.getRating()})}"></div>
+            <span th:text="${review.getDate()}"></span><br>
+            <span th:text="${review.getContent()}"></span><br>
+    </section>
+</div>
+</div>
+<!---->
+</body>
+</html>

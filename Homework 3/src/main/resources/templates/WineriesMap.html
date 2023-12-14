@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title='Wineries Map')}">
+<body th:fragment="content">
+    <p>Пребарувањето врати <span th:text="${wineriesList.size()}"></span> резултати</p>
+    <div class="buttons">
+        <a href="/wineries">
+            <button>Винарии</button>
+        </a>
+        <button>Мапа<i class="fa-regular fa-map"></i></button>
+    </div>
+    <div id="map" th:wineriesList="${wineriesList}"></div>
+    <script th:src="@{/js/drawMap.js}" defer="defer"></script>
+</body>
+</html>

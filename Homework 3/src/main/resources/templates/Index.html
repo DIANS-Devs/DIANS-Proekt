@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title='Home')}">
+<body th:fragment="content">
+<form th:action="@{/wineries}" method="post" class="container bg-body-secondary mt-5 pt-5 pb-5 col-md-6">
+    <div class="form-row d-flex justify-content-center mb-3">
+        <p class="h3 mb-3">Пребарај винарии</p>
+    </div>
+    <div class="form-row d-flex justify-content-around mb-3 mt-3">
+        <div class="col-md-3 mb-3">
+            <label for="name">Име</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="col-md-1 mb-3">
+            <label for="rating">Рејтинг</label>
+            <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" value="0">
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="distance">Оддалеченост</label>
+            <input type="text" class="form-control" id="distance" name="distance" pattern="[0-9]+" title="Please enter a number" value="300">
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="location">Локација</label>
+            <select class="form-select" id="location" name="location">
+                <option value="entireMacedonia" selected>Цела Македонија</option>
+
+<!--                TODO CHANGE HERE TH:VALUE city.getId() SHOULD SEARCH BY IDD!!!!!!!!-->
+
+                <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row d-flex justify-content-center mt-3">
+        <button class="btn btn-secondary col-md-2" type="submit">Пребарај &nbsp; <svg xmlns="http://www.w3.org/2000/svg"
+        width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0
+        1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg></button>
+    </div>
+</form>
+<p class="lead pt-3 d-flex justify-content-center">
+    <strong>Wineverse.mk</strong> &nbsp; - &nbsp; Твојот вински универзум
+</p>
+<script th:src="@{/js/createCookie.js}" defer="defer"></script>
+</body>
+</html>

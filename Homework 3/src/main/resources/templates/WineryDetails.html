@@ -19,16 +19,9 @@
             <br>
             <span class="p-4">
                     <strong>Оддалеченост:</strong>
-                    <span id="distance_winery">'Calculating...'</span>
-                </span>
+                    <span class="distance_winery" th:data-winery="${winery}">'Не може да се пресмета'</span>
+             </span>
 
-            <script th:src="@{/js/geolocation.js}" defer="defer"></script>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    var distanceElement = document.getElementById("distance_winery");
-                    updateDistance(distanceElement, [[${winery.getLatitude()}]], [[${winery.getLongitude()}]]);
-                });
-            </script>
             <br>
             <span class="p-4">
                     <strong>Работно време:</strong> <span th:text="${winery.getWorkingTime()}"></span>
@@ -53,7 +46,8 @@
                 </span>
             <br>
             <span class="p-4">
-                    <strong>Интернационален телефон:</strong> <span th:text="${winery.getInternationalPhoneNumber()}"></span>
+                    <strong>Интернационален телефон:</strong> <span
+                    th:text="${winery.getInternationalPhoneNumber()}"></span>
                 </span>
             <br>
             <span class="p-4">
@@ -64,8 +58,6 @@
         </div>
     </div>
 </div>
-<script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
-<!-- -->
 
 <!-- Reviews -->
 <div class="container bg-body-secondary mb-3 p-4">
@@ -81,5 +73,7 @@
     </div>
 </div>
 <!---->
+<script th:src="@{/js/geolocation.js}" defer="defer"></script>
+<script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
 </body>
 </html>

@@ -19,11 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return L.popup().setContent(popupContent);
     }
 
-    function showDetails(name) {
-        // Logic to show details based on the name
-        console.log(`Details for ${name}`);
-    }
-
     let marker_helper, circle_helper;
 
     function drawLocations(wineriesList){

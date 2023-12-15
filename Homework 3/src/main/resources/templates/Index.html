@@ -12,19 +12,16 @@
         </div>
         <div class="col-md-1 mb-3">
             <label for="rating">Рејтинг</label>
-            <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" value="0">
+            <input type="number" class="form-control" id="rating" name="rating" min="0" max="5" value="0" step="0.1">
         </div>
         <div class="col-md-2 mb-3">
             <label for="distance">Оддалеченост</label>
-            <input type="text" class="form-control" id="distance" name="distance" pattern="[0-9]+" title="Please enter a number" value="300">
+            <input type="text" class="form-control" id="distance" name="distance" pattern="[0-9]+" title="Please enter a number" value="300" onclick="getCurrentLocation()">
         </div>
         <div class="col-md-3 mb-3">
             <label for="location">Локација</label>
             <select class="form-select" id="location" name="location">
-                <option value="entireMacedonia" selected>Цела Македонија</option>
-
 <!--                TODO CHANGE HERE TH:VALUE city.getId() SHOULD SEARCH BY IDD!!!!!!!!-->
-
                 <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
             </select>
         </div>
@@ -39,6 +36,7 @@
 <p class="lead pt-3 d-flex justify-content-center">
     <strong>Wineverse.mk</strong> &nbsp; - &nbsp; Твојот вински универзум
 </p>
+<script th:src="@{/js/geolocation.js}"></script>
 <script th:src="@{/js/createCookie.js}" defer="defer"></script>
 </body>
 </html>

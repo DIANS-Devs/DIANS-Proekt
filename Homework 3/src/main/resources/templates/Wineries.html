@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title='Wineries')}">
-<link rel="stylesheet" href="../static/css/wineriesListed.css">
 <body>
-<main class="wineriesListed" th:fragment="content">
+<main class="wineriesListed wineriesNoPadding" th:fragment="content">
     <div></div>
     <div class="resultButtons">
         <p>Пребарувањето врати <span th:text="${wineries.size()}"></span> резултати</p>
         <div class="buttons">
             <button class="listButton">Винарии</button>
-            <a href="/wineries/map">
+            <form th:action="@{'/wineries/map'}" method="post" style="display: inline-block">
+                <input type="hidden" name="wineryList" th:value="${wineries}" th:if="${wineries != null}">
                 <button class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>
-            </a>
+            </form>
         </div>
     </div>
     <div class="searchResults">
         <div class="searchFilter">
-            <div class="title">Пребарување по името</div>
-            <p>Било кое</p>
+            <div class="title">Винарии со името</div>
+            <p th:text="${searchName != null && !searchName.isEmpty()? searchName: 'Било кое'}"></p>
+        </div>
+        <div class="searchFilter" th:if="${searchRating != null && searchRating != 0}">
+            <div class="title">Винарии со рејтинг над</div>
+            <p th:text="${searchRating}"></p>
+        </div>
+        <div class="searchFilter" th:if="${searchDistance != null}">
+            <div class="title">Винарии на оддалеченост до</div>
+            <p th:text="${searchDistance}"></p>
+        </div>
+        <div class="searchFilter" th:if="${searchCity != null}">
+            <div class="title">Винарии во</div>
+            <p th:text="${searchCity}"></p>
         </div>
         <div class="searchFilter">
             <div class="title">Подредено според</div>
@@ -60,6 +72,9 @@
                 </label>
             </div>
         </div>
+        <div>
+            <button>Најди</button>
+        </div>
     </div>
     <div class="wineries">
         <div class="winery" th:each="winery: ${wineries}">
@@ -73,7 +88,9 @@
                 <p><b>Адреса:</b><span th:text="${winery.getAddress()}"></span></p>
                 <p><b>Град:</b><span th:text="${winery.getCity().getName()}"></span></p>
                 <!--                    getDistance metod sega za sega fiksno-->
-                <p><b>Оддалеченост:</b> 59км</p>
+                <p><b>Оддалеченост:</b>
+                    <span class="distance_winery" th:data-winery="${winery}">Не може да се пресмета</span>
+                </p>
                 <p><b>Работно време:</b><span th:text="${winery.getWorkingTime()}"></span></p>
             </div>
             <div class="right_part">
@@ -87,7 +104,8 @@
             </div>
         </div>
     </div>
-<script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
+    <script th:src="@{/js/geolocation.js}" defer></script>
+    <script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
 </main>
 </body>
 </html>

@@ -31,3 +31,29 @@ function updateDistance(element, lat2, lon2) {
 function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }
+
+function getCurrentLocation(){
+    navigator.geolocation.getCurrentPosition(locationAllowed, locationNotAllowed);
+}
+function locationAllowed(){
+    let el = document.querySelector("#distance");
+    el.readOnly = false;
+}
+function locationNotAllowed(err){
+    let el = document.querySelector("#distance");
+    el.readOnly = true;
+    if (err.code === 1) {
+        alert("Ве молиме дозволете користење на локација, за користење на филтерот: Оддалеченост");
+    } else {
+        alert("Не може да се пристапи локацијата");
+    }
+}
+document.addEventListener("DOMContentLoaded", function () {
+    let elements= document.querySelectorAll(".distance_winery");
+    elements.forEach(el => {
+        let winery = el.getAttribute('data-winery');
+        let latitude = parseFloat(winery.match(/latitude=(-?\d+\.\d+)/)[1]);
+        let longitude = parseFloat(winery.match(  /longitude=(-?\d+\.\d+)/)[1]);
+        updateDistance(el, latitude, longitude);
+    })
+});

@@ -15,6 +15,7 @@
 
     <title th:text="${title}"></title>
     <link th:href="@{/css/wineriesListed.css}" rel="stylesheet"/>
+    <link th:href="@{/css/wineriesMap.css}" rel="stylesheet"/>
 </head>
 <body>
     <div th:insert="~{fragments/Header :: header}"></div>
@@ -35,7 +36,7 @@
     .main{
         min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
     }
-    .main:not(:has(>.wineriesListed)){
+    .main:not(:has(>.wineriesNoPadding)){
         padding: 5em;
     }
     .review-section{
@@ -46,11 +47,6 @@
     }
     .review-section:nth-child(odd){
         background-color: #d9d9d9;
-    }
-    #map{
-        margin: 0 auto;
-        height: 80vh;
-        width: 80%;
     }
 </style>
 </html>

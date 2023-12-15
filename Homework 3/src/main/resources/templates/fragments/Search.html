@@ -18,7 +18,7 @@
         <div class="col-md-3 mb-3">
             <label for="location">Локација</label>
             <select class="form-select" id="location" name="location">
-                <option value="entireMacedonia" selected>Цела Македонија</option>
+<!--                <option value="entireMacedonia" selected>Цела Македонија</option>-->
                 <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
             </select>
         </div>

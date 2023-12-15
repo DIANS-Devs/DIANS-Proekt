@@ -13,5 +13,4 @@ public interface WineryService {
     List<Winery> getWineriesByIds(List<String> favoriteWineryIds);
     List<String> getWineriesAsString();
     List<String> getFavouriteWineriesAsString();
-    List<Winery> findWineriesByIds(List<Long> Ids);
 }

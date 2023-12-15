@@ -25,6 +25,7 @@ public class WineryServiceImpl implements WineryService {
     @Override
     //Worst case: Name="", rating = 0, distance = 300, City = Цела Македонија
     public List<Winery> filteredWineries(String name, Float rating, Float distance, City city) {
+        //TODO implement distance filter
         List<Winery> name_wineries = wineryRepository.findByNameContaining(name);
         List<Winery> rating_wineries = wineryRepository.findByRatingGreaterThanEqual(rating);
         List<Winery> city_wineries;
@@ -72,12 +73,5 @@ public class WineryServiceImpl implements WineryService {
         return wineries.stream()
                 .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Winery> findWineriesByIds(List<Long> Ids){
-        List<Winery> wineries = new ArrayList<>();
-        Ids.forEach(id -> wineries.add(wineryRepository.findById(id).orElse(null)));
-        return wineries;
     }
 }

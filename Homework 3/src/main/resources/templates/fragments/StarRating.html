@@ -1,10 +1,8 @@
-<!-- templates/fragments/StarRating.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body th:fragment="rating(rating)">
-<!-- Star Rating Thymeleaf fragment -->
-<span th:each="star : ${#numbers.sequence(1, 5)}">
-        <i class="fa fa-star" th:classappend="${star le rating} ? 'text-warning' : 'text-secondary'"></i>
+<div th:fragment="rating(rating, size)">
+    <span th:each="i : ${#numbers.sequence(1, 5)}">
+        <img th:src="${rating >= i ? '/images/full-star.png' : (rating + 0.5 >= i ? '/images/half-star.png' : '/images/empty-star.png')}" alt="Star" th:style="'width: ' + ${size} + '; height: ' + ${size}" />
     </span>
-</body>
+</div>
 </html>

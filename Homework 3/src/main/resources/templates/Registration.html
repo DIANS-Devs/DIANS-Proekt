@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>User Registration</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .registration-container {
+      max-width: 400px;
+      margin: 0 auto;
+      margin-top: 50px;
+    }
+
+    .registration-form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .btn-submit {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .login-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+<div class="container registration-container">
+  <h1 th:text="${'Enter your information:'}">User Registration</h1>
+  <form th:action="@{/user/registration}" th:object="${user}" method="post" enctype="utf8" onsubmit="return validatePassword()" class="registration-form">
+    <div class="form-group">
+      <label th:text="${'First Name'}">First Name:</label>
+      <input th:field="*{name}" class="form-control" required/>
+      <p th:each="error: ${#fields.errors('name')}" th:text="${error}" class="text-danger">Validation error</p>
+    </div>
+    <div class="form-group">
+      <label th:text="${'Last Name'}">Last Name:</label>
+      <input th:field="*{lastname}" class="form-control" required/>
+      <p th:each="error : ${#fields.errors('lastname')}" th:text="${error}" class="text-danger">Validation error</p>
+    </div>
+    <div class="form-group">
+      <label th:text="${'Username'}">username</label>
+      <input th:field="*{username}" class="form-control" required/>
+      <p th:each="error : ${#fields.errors('username')}" th:text="${error}" class="text-danger">Validation error</p>
+    </div>
+    <div class="form-group">
+      <label th:text="${'Email'}">email</label>
+      <input type="email" th:field="*{email}" class="form-control" required/>
+      <p th:each="error : ${#fields.errors('email')}" th:text="${error}" class="text-danger">Validation error</p>
+    </div>
+    <div class="form-group">
+      <label th:text="${'Phone number'}">phone</label>
+      <input type="text" th:field="*{phonenumber}" class="form-control" required/>
+    </div>
+    <div class="form-group">
+      <label th:text="${'Password'}">password</label>
+      <input id="password" type="password" th:field="*{password}" class="form-control" required/>
+      <p th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</p>
+    </div>
+    <div class="form-group">
+      <label th:text="${'Confirm password'}">confirm</label>
+      <input id="matchingPassword" type="password" th:field="*{matchingPassword}" class="form-control" required/>
+      <p th:each="error : ${#fields.errors('matchingPassword')}" th:text="${error}">Validation error</p>
+    </div>
+
+    <button type="submit" th:text="${'Submit'}" class="btn btn-submit">Submit</button>
+  </form>
+
+  <a th:href="@{/login}" th:text="${'Already have an account? Log in'}" class="login-link">Login</a>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+  function validatePassword() {
+    var password = document.getElementById("password").value;
+    var matchingPassword = document.getElementById("matchingPassword").value;
+
+    if (password !== matchingPassword) {
+      alert("Passwords do not match");
+      return false;
+    }
+    return true;
+  }
+</script>
+</body>
+</html>
+

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.Data;
-import org.apache.tomcat.util.json.JSONParser;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 
 

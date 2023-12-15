@@ -8,7 +8,7 @@
         <div class="buttons">
             <button class="listButton">Винарии</button>
             <form th:action="@{'/wineries/map'}" method="post" style="display: inline-block">
-                <input type="hidden" name="wineryList" th:value="${wineries}" th:if="${wineries != null}">
+<!--                <input type="hidden" name="wineryList" th:value="${wineries}" th:if="${wineries != null}">-->
                 <button class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>
             </form>
         </div>
@@ -30,23 +30,24 @@
             <div class="title">Винарии во</div>
             <p th:text="${searchCity}"></p>
         </div>
+        <form action="/wineries" method="post">
         <div class="searchFilter">
             <div class="title">Подредено според</div>
             <div>
-                <label for="distance">
-                    <input type="radio" name="sort" id="distance">
+                <label for="radio_distance">
+                    <input type="radio" name="sort" id="radio_distance">
                     Оддалеченост
                 </label>
-                <label for="open">
-                    <input type="radio" name="sort" id="open">
+                <label for="radio_open">
+                    <input type="radio" name="sort" id="radio_open">
                     Отворено
                 </label>
-                <label for="rating">
-                    <input type="radio" name="sort" id="rating">
+                <label for="radio_rating">
+                    <input type="radio" name="sort" id="radio_rating">
                     Рејтинг
                 </label>
-                <label for="popularity">
-                    <input type="radio" name="sort" id="popularity">
+                <label for="radio_popularity">
+                    <input type="radio" name="sort" id="radio_popularity">
                     Популарност
                 </label>
             </div>
@@ -73,8 +74,9 @@
             </div>
         </div>
         <div>
-            <button>Најди</button>
+            <button type="submit">Најди</button>
         </div>
+        </form>
     </div>
     <div class="wineries">
         <div class="winery" th:each="winery: ${wineries}">

@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import wineverse.com.mk.Wineverse.Model.Review;
+import wineverse.com.mk.Wineverse.Model.SearchQuery;
 import wineverse.com.mk.Wineverse.Service.CityService;
 import wineverse.com.mk.Wineverse.Service.WineryService;
 import wineverse.com.mk.Wineverse.Model.City;
 import wineverse.com.mk.Wineverse.Model.Winery;
+import wineverse.com.mk.Wineverse.Service.WinerySorting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +26,34 @@ import java.util.stream.Collectors;
 public class WineryController {
     private final CityService cityService;
     private final WineryService wineryService;
+//    private final WinerySorting winerySorting;
+
+    private void setCitiesAttribute(Model model){
+        model.addAttribute("cities", cityService.getAllCities());
+    }
+
+    private void setSearchAttributes(Model model, SearchQuery searchQuery) {
+        model.addAttribute("searchName", searchQuery.getName());
+        model.addAttribute("searchRating", searchQuery.getRating());
+        model.addAttribute("searchDistance", searchQuery.getDistance());
+        model.addAttribute("searchCity", searchQuery.getCity().getName());
+        model.addAttribute("wineries", searchQuery.getWineries());
+    }
+
+    private void addSearchQueryAttribute(HttpSession session, SearchQuery searchQuery){
+        session.setAttribute("searchQuery", searchQuery);
+    }
+
+    private void removeSearchQueryAttribute(HttpSession session){
+        session.removeAttribute("searchQuery");
+    };
 
     @GetMapping()
     public String getResultsMapping(Model model, HttpSession session) {
-        model.addAttribute("cities", cityService.getAllCities());
+        setCitiesAttribute(model);
         model.addAttribute("wineries", wineryService.getAllWineries());
-        session.removeAttribute("wineryList");
+        removeSearchQueryAttribute(session);
+//        session.removeAttribute("wineryList");
         return "Wineries";
     }
     @PostMapping()
@@ -39,23 +63,21 @@ public class WineryController {
                                         @RequestParam(name = "location", required = false) String wineryCityName,
                                         Model model, HttpSession session) {
         //TODO SHOULD BE MODIFIED TO ID, NOT BY NAME
-        City city = cityService.findCity(wineryCityName);
-        model.addAttribute("cities", cityService.getAllCities());
-
-        List<Winery> wineryList = (List<Winery>) session.getAttribute("wineryList");
-        if(wineryList != null && wineryName == null){
-            model.addAttribute("wineries", wineryList);
+        setCitiesAttribute(model);
+        SearchQuery retrievedQuery = (SearchQuery) session.getAttribute("searchQuery");
+//        List<Winery> wineryList = (List<Winery>) session.getAttribute("wineryList");
+        if(retrievedQuery != null && wineryName == null){
+//            retrievedQuery.setWineries(winerySorting.sortWineriesByStatus(retrievedQuery.getWineries()));
+            setSearchAttributes(model, retrievedQuery);
             return "Wineries";
         }
 
-        List<Winery> filtered_wineries = wineryService.filteredWineries(wineryName, wineryRating, wineryDistance, city);
-        model.addAttribute("searchName", wineryName);
-        model.addAttribute("searchRating", wineryRating);
-        model.addAttribute("searchDistance", wineryDistance);
-        model.addAttribute("searchCity", city.getName());
-        model.addAttribute("wineries", filtered_wineries);
+        City wineryCity = cityService.findCity(wineryCityName);
+        List<Winery> filtered_wineries = wineryService.filteredWineries(wineryName, wineryRating, wineryDistance, wineryCity);
 
-        session.setAttribute("wineryList", filtered_wineries);
+        SearchQuery searchQuery = new SearchQuery(wineryName, wineryRating, wineryDistance, wineryCity, filtered_wineries);
+        setSearchAttributes(model, searchQuery);
+        addSearchQueryAttribute(session, searchQuery);
 
         return "Wineries";
     }
@@ -64,7 +86,7 @@ public class WineryController {
     public String getWineryById(@PathVariable Long id, Model model) {
         //TODO ADD ERROR
         Winery winery = wineryService.getWineryById(id).get();
-        model.addAttribute("cities", cityService.getAllCities());
+        setCitiesAttribute(model);
         model.addAttribute("winery", winery);
 
         List<Review> reviews = winery.getReviews();
@@ -76,35 +98,29 @@ public class WineryController {
     public String showWineriesMap(Model model, HttpSession session){
         List<String> wineries = wineryService.getWineriesAsString();
         model.addAttribute("wineriesList", wineries);
-        model.addAttribute("cities", cityService.getAllCities());
+        setCitiesAttribute(model);
+
         session.removeAttribute("wineryList");
+
+        removeSearchQueryAttribute(session);
+
         return "WineriesMap";
     }
 
     @PostMapping("/map")
     public String showFilteredWineriesMap(HttpSession session, Model model){
-        List<Winery> wineryList = (List<Winery>) session.getAttribute("wineryList");
-        model.addAttribute("cities", cityService.getAllCities());
+//        List<Winery> wineryList = (List<Winery>) session.getAttribute("wineryList");
+        SearchQuery retrievedQuery = (SearchQuery) session.getAttribute("searchQuery");
+        setCitiesAttribute(model);
 
-        if(wineryList == null){
+        if(retrievedQuery == null){
             List<String> wineries = wineryService.getWineriesAsString();
             model.addAttribute("wineriesList", wineries);
         }
         else{
-          /*  //TODO SHOULD BE FIXED, NOT GOOD
-            Pattern pattern = Pattern.compile("Winery\\(Id=(\\d+),");
-            Matcher matcher = pattern.matcher(wineryList);
-
-            List<Long> wineryIds = new ArrayList<>();
-
-            while (matcher.find()) {
-                Long wineryId = Long.parseLong(matcher.group(1));
-                wineryIds.add(wineryId);
-            }*/
-
-            model.addAttribute("wineriesList",
-//                    wineryService.findWineriesByIds(wineryIds)
-                    wineryList
+            //TODO SHOULD BE FIXED, NOT GOOD
+            model.addAttribute("wineriesList", retrievedQuery
+                    .getWineries()
                     .stream()
                     .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
                     .collect(Collectors.toList()));

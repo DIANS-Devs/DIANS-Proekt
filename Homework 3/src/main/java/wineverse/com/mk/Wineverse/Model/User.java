@@ -21,17 +21,18 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    private String phone_number;
+
+    @Column(name = "phone_number")
+    private String phonenumber;
 
     @OneToMany
     List<Winery> favorites;
-
     public User(String username, String password, String name, String surname,String email, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.phone_number = phoneNumber;
+        this.phonenumber = phoneNumber;
         this.email = email;
         favorites = new ArrayList<Winery>();
     }

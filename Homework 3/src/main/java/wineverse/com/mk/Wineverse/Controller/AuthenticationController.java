@@ -48,6 +48,7 @@ public class AuthenticationController {
         }
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
+        model.addAttribute("registeredUsers", userService.findAll());
         return "Registration";
     }
 
@@ -55,10 +56,21 @@ public class AuthenticationController {
     public String registerUserAccount(
             @ModelAttribute("user") @Valid UserDto userDto,
             HttpServletRequest request,
-            Errors errors) {
+            Errors errors, Model model) {
 
         try {
             User registered = userService.registerNewUserAccount(userDto);
+            if(registered == null){
+                model.addAttribute("emailExists", true);
+                return "Registration"; }
+            else if(registered.getUsername() == null){
+                model.addAttribute("usernameExists", true);
+                return "Registration";
+            }
+            else if(registered.getPhonenumber().equals("exists")){
+                model.addAttribute("phoneExists", true);
+                return "Registration";
+            }
         } catch (UserAlreadyExistException uaeEx) {
 //            ModelAndView mav = new ModelAndView();
 //            mav.addObject("message", "An account for that username/email already exists.");

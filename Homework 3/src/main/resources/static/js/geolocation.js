@@ -54,7 +54,7 @@ function locationNotAllowed(err){
 document.addEventListener("DOMContentLoaded", function () {
     let elements= document.querySelectorAll(".distance_winery");
     elements.forEach(el => {
-        console.log(`Code runs for ${el}`)
+        // console.log(`Code runs for ${el}`)
         // let winery = el.getAttribute('data-winery');
         // let latitude = parseFloat(winery.match(/latitude=(-?\d+\.\d+)/)[1]);
         // let longitude = parseFloat(winery.match(  /longitude=(-?\d+\.\d+)/)[1]);

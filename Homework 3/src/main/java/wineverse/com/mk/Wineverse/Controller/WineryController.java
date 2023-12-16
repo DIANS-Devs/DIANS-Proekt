@@ -2,21 +2,22 @@ package wineverse.com.mk.Wineverse.Controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import wineverse.com.mk.Wineverse.Model.Review;
-import wineverse.com.mk.Wineverse.Model.SearchQuery;
+import wineverse.com.mk.Wineverse.Config.LogIn.UserInfoUserDetails;
+import wineverse.com.mk.Wineverse.Config.LogIn.UserInfoUserDetailsService;
+import wineverse.com.mk.Wineverse.Form.ReviewForm;
+import wineverse.com.mk.Wineverse.Model.*;
 import wineverse.com.mk.Wineverse.Service.CityService;
+import wineverse.com.mk.Wineverse.Service.UserService;
 import wineverse.com.mk.Wineverse.Service.WineryService;
-import wineverse.com.mk.Wineverse.Model.City;
-import wineverse.com.mk.Wineverse.Model.Winery;
-import wineverse.com.mk.Wineverse.Service.WinerySorting;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 public class WineryController {
     private final CityService cityService;
     private final WineryService wineryService;
+    private final UserService userService;
 //    private final WinerySorting winerySorting;
 
     private void setCitiesAttribute(Model model){
@@ -140,4 +142,32 @@ public class WineryController {
         }
         return "WineriesMap";
     }
+    @PostMapping("/submitReview")
+    public String submitReview(@ModelAttribute ReviewForm reviewForm, Model model, HttpSession session) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
+            Object principal = authentication.getPrincipal();
+
+            if (principal instanceof UserInfoUserDetails) {
+                UserInfoUserDetails userDetails = (UserInfoUserDetails) principal;
+
+                String userName = userDetails.getUsername();
+                User user = userService.getUserByUsername(userName).stream().findFirst().get();
+
+                Long wineryId = reviewForm.getWineryId();
+                Integer rating = reviewForm.getRating();
+                String content = reviewForm.getComment();
+                Review review = new Review(user,rating,content, LocalDate.now());
+                wineryService.setNewReview(wineryId,review);
+
+                return "redirect:/wineries/"+wineryId;
+            } else {
+                return "redirect:/error";
+            }
+        } else {
+            return "LogIn";
+        }
+    }
+
 }

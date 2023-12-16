@@ -30,7 +30,7 @@
             <div class="title">Винарии во</div>
             <p th:text="${searchCity}"></p>
         </div>
-        <form action="/wineries" method="post">
+        <form th:action="@{/wineries}" th:method="post">
         <div class="searchFilter">
             <div class="title">Подредено според</div>
             <div>
@@ -56,19 +56,19 @@
             <div class="title">Пребарување по град</div>
             <div>
                 <label for="1">
-                    <input type="radio" name="city" id="1">
+                    <input type="radio" name="location" id="1" value="Штип">
                     Штип
                 </label>
                 <label for="2">
-                    <input type="radio" name="city" id="2">
+                    <input type="radio" name="location" id="2" value="Скопје">
                     Скопје
                 </label>
                 <label for="3">
-                    <input type="radio" name="city" id="3">
+                    <input type="radio" name="location" id="3" value="Велес">
                     Велес
                 </label>
                 <label for="4">
-                    <input type="radio" name="city" id="4">
+                    <input type="radio" name="location" id="4" value="Свети Николе">
                     Свети Николе
                 </label>
             </div>
@@ -91,7 +91,8 @@
                 <p><b>Град:</b><span th:text="${winery.getCity().getName()}"></span></p>
                 <!--                    getDistance metod sega za sega fiksno-->
                 <p><b>Оддалеченост:</b>
-                    <span class="distance_winery" th:data-winery="${winery}">Не може да се пресмета</span>
+<!--                    <span class="distance_winery" th:data-winery="${winery}">Не може да се пресмета</span>-->
+                     <span class="distance_winery" th:data-winery-lat="${winery.getLatitude()}" th:data-winery-lng="${winery.getLongitude()}">Не може да се пресмета</span>
                 </p>
                 <p><b>Работно време:</b><span th:text="${winery.getWorkingTime()}"></span></p>
             </div>

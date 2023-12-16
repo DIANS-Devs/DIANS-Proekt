@@ -74,6 +74,7 @@
     color: red;
     position: absolute;
     right: 0.1em;
+    cursor: pointer;
 }
 .wineriesListed .fa-star{
     color: yellow;

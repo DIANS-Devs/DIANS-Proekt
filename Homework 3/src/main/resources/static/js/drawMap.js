@@ -14,14 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function createPopup(id, name) {
         const popupContent = `
     <b>${name}</b></br>
-    <a href="/wineries/${id}"><button onclick="showDetails('${name}')">Details</button></a>
+    <a href="/wineries/${id}">
+        <button>Details</button>
+    </a>
     `;
         return L.popup().setContent(popupContent);
-    }
-
-    function showDetails(name) {
-        // Logic to show details based on the name
-        console.log(`Details for ${name}`);
     }
 
     let marker_helper, circle_helper;
@@ -32,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const accuracy= 200;
 
         wineriesList.forEach(winery => {
+            // id|lat|lng|name
+            // 1|42.00|21.00|Bord winery
             let parts = winery.split("|");
             let id = parseInt(parts[0]);
             let lat = parseFloat(parts[1]);

@@ -27,7 +27,7 @@ function setFavoritesCookie(favorites) {
 
 function addToFavorites(element) {
     //TODO modify here later...
-    var wineryId = element.getAttribute('data-winery-id');
+    let wineryId = element.getAttribute('data-winery-id');
     let child = element.querySelector('i');
     if (wineryId.trim() !== '') {
         var favorites = getFavoritesFromCookie();

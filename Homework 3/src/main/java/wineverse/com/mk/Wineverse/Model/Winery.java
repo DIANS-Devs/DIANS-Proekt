@@ -1,18 +1,21 @@
 package wineverse.com.mk.Wineverse.Model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.Data;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 @Entity
-public class Winery {
+public class Winery implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -92,4 +95,5 @@ public class Winery {
     public String getReviewsAsString(){
         return String.format("%.2f(%d reviews)",rating, totalReviews);
     }
+
 }

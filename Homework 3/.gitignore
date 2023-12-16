@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### No need for this file ###
+application-test.properties

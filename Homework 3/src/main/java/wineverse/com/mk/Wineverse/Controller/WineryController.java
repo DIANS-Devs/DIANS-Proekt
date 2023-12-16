@@ -66,16 +66,22 @@ public class WineryController {
         setCitiesAttribute(model);
         SearchQuery retrievedQuery = (SearchQuery) session.getAttribute("searchQuery");
 //        List<Winery> wineryList = (List<Winery>) session.getAttribute("wineryList");
-        if(retrievedQuery != null && wineryName == null){
+        if(retrievedQuery != null && wineryName == null && wineryCityName == null && wineryRating == null && wineryDistance == null){
 //            retrievedQuery.setWineries(winerySorting.sortWineriesByStatus(retrievedQuery.getWineries()));
             setSearchAttributes(model, retrievedQuery);
             return "Wineries";
         }
         // if everything is null, set to default values
-        if(wineryName == null){
+        if(wineryName == null) {
             wineryName = "";
+        }
+        if(wineryRating == null){
             wineryRating = (float)0.0;
+        }
+        if(wineryDistance == null){
             wineryDistance = (float)300;
+        }
+        if(wineryCityName == null){
             wineryCityName = "Цела Македонија";
         }
 

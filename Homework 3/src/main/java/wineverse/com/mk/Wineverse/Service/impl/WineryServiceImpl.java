@@ -83,4 +83,9 @@ public class WineryServiceImpl implements WineryService {
                 .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void saveWinery(Winery winery) {
+        wineryRepository.save(winery);
+    }
 }

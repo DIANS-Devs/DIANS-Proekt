@@ -15,4 +15,5 @@ public interface WineryService {
     List<String> getWineriesAsString();
     List<String> getFavouriteWineriesAsString();
     public void setNewReview(Long wineryId, Review review);
+    void saveWinery(Winery winery);
 }

@@ -1,12 +1,13 @@
-<!-- fragments/ReviewForm.html -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <div id="reviewModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="reviewModalLabel">Add Review</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true" id="closeReviewModalBtn">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -30,13 +31,18 @@
 </div>
 
 <script>
-    // Add this script to enable closing the modal with the "X" button
     document.addEventListener('DOMContentLoaded', function () {
-        let closeButton = document.querySelector('#reviewModal .close');
+        var closeButton = document.getElementById('closeReviewModalBtn');
         closeButton.addEventListener('click', function () {
-            let modal = document.getElementById('reviewModal');
-            modal.classList.remove('show');
-            modal.style.display = 'none';
+            closeReviewModal();
         });
     });
+
+    function closeReviewModal() {
+        var modal = new bootstrap.Modal(document.getElementById('reviewModal'));
+        console.log("inside closeReviewModal()");
+        console.log(modal);
+        modal.hide();
+        modal._hideModal();
+    }
 </script>

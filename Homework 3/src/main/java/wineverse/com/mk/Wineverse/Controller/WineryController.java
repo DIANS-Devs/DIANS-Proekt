@@ -71,6 +71,13 @@ public class WineryController {
             setSearchAttributes(model, retrievedQuery);
             return "Wineries";
         }
+        // if everything is null, set to default values
+        if(wineryName == null){
+            wineryName = "";
+            wineryRating = (float)0.0;
+            wineryDistance = (float)300;
+            wineryCityName = "Цела Македонија";
+        }
 
         City wineryCity = cityService.findCity(wineryCityName);
         List<Winery> filtered_wineries = wineryService.filteredWineries(wineryName, wineryRating, wineryDistance, wineryCity);

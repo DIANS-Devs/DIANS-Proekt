@@ -22,7 +22,7 @@
             <div class="title">Винарии со рејтинг над</div>
             <p th:text="${searchRating}"></p>
         </div>
-        <div class="searchFilter" th:if="${searchDistance != null}">
+        <div class="searchFilter" th:if="${searchDistance != null && searchDistance != 300}">
             <div class="title">Винарии на оддалеченост до</div>
             <p th:text="${searchDistance}"></p>
         </div>

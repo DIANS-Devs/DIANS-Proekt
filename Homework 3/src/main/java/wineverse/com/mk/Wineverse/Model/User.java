@@ -13,8 +13,6 @@ import java.util.List;
 @Table(name = "wineverse_user")
 @NoArgsConstructor
 public class User {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +22,6 @@ public class User {
     private String surname;
     private String email;
     private String phone_number;
-
 
     @OneToMany
     List<Winery> favorites;

@@ -14,6 +14,7 @@ public class Review {
     // author == user
     @ManyToOne
     private User author;
+
     private Integer rating;
     private String content;
     private LocalDate date;

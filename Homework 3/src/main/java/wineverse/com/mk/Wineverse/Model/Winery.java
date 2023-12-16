@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.Data;
-import org.apache.tomcat.util.json.JSONParser;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 
 
@@ -82,6 +81,18 @@ public class Winery implements Serializable {
         } else {
             return "No types available";
         }
+    }
+    public double getRating(int rating){
+        if (reviews == null || reviews.isEmpty()) {
+            return 0.0; // No reviews available, return 0
+        }
+
+        long count = reviews.stream().filter(item -> item.getRating().equals(rating)).count();
+
+        return (double) count / reviews.size() * 100;
+    }
+    public double getRating(){
+        return Math.round(rating * 10.0) / 10.0;
     }
 
     public String getReviewsAsString(){

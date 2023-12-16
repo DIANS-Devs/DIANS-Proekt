@@ -121,4 +121,14 @@
 .wineriesListed .mapButton{
     background-color: var(--lighter-color);
 }
+.add-winery-button button:hover {
+    background-color: var(--lighter-color);
+    color: black;
+}
+.add-winery-button button {
+    padding: 1em 2.5em;
+    border: none;
+    border-radius: 0.5em;
+    background-color: var(--darker-color);
+}
 /* we can add class fas or far depending if the winery is in favorites */

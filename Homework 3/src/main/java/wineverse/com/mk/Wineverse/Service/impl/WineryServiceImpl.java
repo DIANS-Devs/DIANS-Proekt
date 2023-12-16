@@ -1,6 +1,8 @@
 package wineverse.com.mk.Wineverse.Service.impl;
 
 import lombok.AllArgsConstructor;
+import wineverse.com.mk.Wineverse.Model.Review;
+import wineverse.com.mk.Wineverse.Repository.ReviewRepository;
 import wineverse.com.mk.Wineverse.Repository.WineryRepository;
 import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.Service.WineryService;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class WineryServiceImpl implements WineryService {
     private final WineryRepository wineryRepository;
+    private final ReviewRepository reviewRepository;
 
     @Override
     public List<Winery> getAllWineries() {
@@ -23,8 +26,15 @@ public class WineryServiceImpl implements WineryService {
     }
 
     @Override
+    public void setNewReview(Long wineryId, Review review) {
+        wineryRepository.findById(wineryId).get().addReview(review);
+        reviewRepository.save(review);
+    }
+
+    @Override
     //Worst case: Name="", rating = 0, distance = 300, City = Цела Македонија
     public List<Winery> filteredWineries(String name, Float rating, Float distance, City city) {
+        //TODO implement distance filter
         List<Winery> name_wineries = wineryRepository.findByNameContaining(name);
         List<Winery> rating_wineries = wineryRepository.findByRatingGreaterThanEqual(rating);
         List<Winery> city_wineries;
@@ -75,9 +85,7 @@ public class WineryServiceImpl implements WineryService {
     }
 
     @Override
-    public List<Winery> findWineriesByIds(List<Long> Ids){
-        List<Winery> wineries = new ArrayList<>();
-        Ids.forEach(id -> wineries.add(wineryRepository.findById(id).orElse(null)));
-        return wineries;
+    public void saveWinery(Winery winery) {
+        wineryRepository.save(winery);
     }
 }

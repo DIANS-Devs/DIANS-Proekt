@@ -82,6 +82,15 @@ public class Winery implements Serializable {
             return "No types available";
         }
     }
+    public double getRating(int rating){
+        if (reviews == null || reviews.isEmpty()) {
+            return 0.0; // No reviews available, return 0
+        }
+
+        long count = reviews.stream().filter(item -> item.getRating().equals(rating)).count();
+
+        return (double) count / reviews.size() * 100;
+    }
 
     public String getReviewsAsString(){
         return String.format("%.2f(%d reviews)",rating, totalReviews);

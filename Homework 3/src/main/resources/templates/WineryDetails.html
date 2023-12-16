@@ -9,7 +9,7 @@
     <div class="row">
         <!-- Left box -->
         <div class="col-md-6">
-                <span class="p-4">
+            <span class="p-4">
                     <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>
                 </span>
             <br>
@@ -63,11 +63,40 @@
 <!-- Reviews -->
 <div class="container bg-body-secondary mb-3 p-4">
     <h3 th:text="${'Резиме на рецензии'}"></h3>
+    <div class="container bg-body-primary mb-3 p-4">
+        <div class="row">
+
+            <!--        Ratings Summary-->
+            <div class="col-md-6">
+                <table>
+                    <tr th:each="rating : ${#numbers.sequence(5, 1, -1)}">
+                        <td th:text="${rating}" style="padding-right: 5px;"></td>
+                        <td>
+                            <!-- Calculate the percentage of reviews with this rating -->
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" th:style="'width: ' + ${winery.getRating(rating)} + '%; background-color: orange;'">
+                                    <div style="width: 20em; background-color: grey;"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!--        Average Rating-->
+            <div class="col-md-6">
+                <h4 th:text="${winery.getRating().toString().replace('.',',')}" style="font-size: 2.3em"></h4>
+                <div th:replace="~{fragments/StarRating :: rating(${winery.getRating()}, '1.2em')}"></div>
+                <div th:text="${winery.getTotalReviews()} + ' рецензии'"></div>
+            </div>
+
+        </div>
+    </div>
     <div class="container bg-body-primary mb-3 p-4 review-section" th:each="review, rowStat : ${reviews}">
         <!-- Add a class to the div to apply a slightly darker background color -->
         <section>
             <span th:text="${review.getAuthor().getName() + ' ' + review.getAuthor().getSurname()}"></span><br>
-            <div th:replace="~{fragments/StarRating :: rating(${review.getRating()})}"></div>
+            <div th:replace="~{fragments/StarRating :: rating(${review.getRating()}, '1em')}"></div>
             <span th:text="${review.getDate()}"></span><br>
             <span th:text="${review.getContent()}"></span><br>
         </section>

@@ -30,19 +30,3 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var closeButton = document.getElementById('closeReviewModalBtn');
-        closeButton.addEventListener('click', function () {
-            closeReviewModal();
-        });
-    });
-
-    function closeReviewModal() {
-        var modal = new bootstrap.Modal(document.getElementById('reviewModal'));
-        console.log("inside closeReviewModal()");
-        console.log(modal);
-        modal.hide();
-        modal._hideModal();
-    }
-</script>

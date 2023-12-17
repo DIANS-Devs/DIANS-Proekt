@@ -178,8 +178,7 @@ public class WineryController {
         if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
             Object principal = authentication.getPrincipal();
 
-            if (principal instanceof UserInfoUserDetails) {
-                UserInfoUserDetails userDetails = (UserInfoUserDetails) principal;
+            if (principal instanceof UserInfoUserDetails userDetails) {
 
                 String userName = userDetails.getUsername();
                 User user = userService.getUserByUsername(userName).stream().findFirst().get();

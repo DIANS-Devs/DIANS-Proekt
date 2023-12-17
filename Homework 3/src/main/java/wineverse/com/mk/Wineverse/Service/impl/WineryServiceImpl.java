@@ -1,7 +1,9 @@
 package wineverse.com.mk.Wineverse.Service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import wineverse.com.mk.Wineverse.Model.Review;
+import wineverse.com.mk.Wineverse.Model.User;
 import wineverse.com.mk.Wineverse.Repository.ReviewRepository;
 import wineverse.com.mk.Wineverse.Repository.WineryRepository;
 import org.springframework.stereotype.Service;
@@ -21,14 +23,48 @@ public class WineryServiceImpl implements WineryService {
     private final ReviewRepository reviewRepository;
 
     @Override
+    public Review getUserReviewForWinery(Long wineryId, User user) {
+        Optional<Review> userReview = wineryRepository.findById(wineryId).get().getReviews()
+                .stream()
+                .filter(review -> review.getAuthor().equals(user))
+                .findFirst();
+
+        if (userReview.isPresent()) {
+            return userReview.get();
+        } else {
+            // Handle the case when the review is not present, e.g., throw an exception or return a default value
+            throw new EntityNotFoundException("Review not found for Winery ID: " + wineryId + " and User ID: " + user.getId());
+        }
+    }
+
+    @Override
     public List<Winery> getAllWineries() {
         return wineryRepository.findAll();
     }
 
     @Override
     public void setNewReview(Long wineryId, Review review) {
-        wineryRepository.findById(wineryId).get().addReview(review);
-        reviewRepository.save(review);
+        Winery winery = wineryRepository.findById(wineryId).orElseThrow();
+
+        // Check if the review already exists
+        boolean reviewExists = winery.getReviews().stream()
+                .anyMatch(item -> item.getAuthor().equals(review.getAuthor()));
+
+        if (reviewExists) {
+            // If the review exists, update its properties
+            winery.getReviews().stream()
+                    .filter(item -> item.getAuthor().equals(review.getAuthor()))
+                    .findFirst()
+                    .ifPresent(existingReview -> {
+                        existingReview.setRating(review.getRating());
+                        existingReview.setContent(review.getContent());
+                        reviewRepository.save(existingReview);
+                    });
+        } else {
+            // If the review doesn't exist, add it to the winery's reviews
+            winery.addReview(review);
+            reviewRepository.save(review);
+        }
     }
 
     @Override

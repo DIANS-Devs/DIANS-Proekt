@@ -1,6 +1,8 @@
 package wineverse.com.mk.Wineverse.Service.impl;
 
 import lombok.AllArgsConstructor;
+import wineverse.com.mk.Wineverse.Model.Review;
+import wineverse.com.mk.Wineverse.Repository.ReviewRepository;
 import wineverse.com.mk.Wineverse.Repository.WineryRepository;
 import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.Service.WineryService;
@@ -16,10 +18,17 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class WineryServiceImpl implements WineryService {
     private final WineryRepository wineryRepository;
+    private final ReviewRepository reviewRepository;
 
     @Override
     public List<Winery> getAllWineries() {
         return wineryRepository.findAll();
+    }
+
+    @Override
+    public void setNewReview(Long wineryId, Review review) {
+        wineryRepository.findById(wineryId).get().addReview(review);
+        reviewRepository.save(review);
     }
 
     @Override
@@ -73,5 +82,10 @@ public class WineryServiceImpl implements WineryService {
         return wineries.stream()
                 .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void saveWinery(Winery winery) {
+        wineryRepository.save(winery);
     }
 }

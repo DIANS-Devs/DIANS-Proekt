@@ -19,8 +19,9 @@
             <br>
             <span class="p-4">
                     <strong>Оддалеченост:</strong>
-                    <span class="distance_winery" th:data-winery="${winery}">'Не може да се пресмета'</span>
-             </span>
+                    <!-- <span class="distance_winery" th:data-winery="${winery}">Не може да се пресмета</span> -->
+                    <span class="distance_winery" th:data-winery-lat="${winery.getLatitude()}" th:data-winery-lng="${winery.getLongitude()}">Не може да се пресмета</span>
+                </span>
 
             <br>
             <span class="p-4">
@@ -28,7 +29,7 @@
                 </span>
             <br>
             <span class="p-4">
-                    <strong>Дејности:</strong> <span th:text="${winery_types}"></span>
+                    <strong>Дејности:</strong> <span th:text="${winery.getWineryTypesAsString()}"></span>
                 </span>
             <br>
             <span class="p-4">
@@ -56,6 +57,18 @@
                         <i class="far fa-heart" style="color: red"></i>
                     </span>
             </span>
+
+<!--            Add review rating form button should be right here-->
+            <button class="btn btn-primary" onclick="openReviewForm()">Add Review</button>
+            <div th:replace="~{fragments/ReviewForm :: #reviewModal(wineryId=${winery.getId()})}"></div>
+            <script defer="defer">
+                function openReviewForm() {
+                    let modal = document.getElementById('reviewModal');
+                    modal.classList.add('show');
+                    modal.style.display = 'block';
+                }
+            </script>
+<!--            -->
         </div>
     </div>
 </div>

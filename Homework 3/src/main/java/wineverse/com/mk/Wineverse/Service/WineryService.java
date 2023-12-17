@@ -1,6 +1,7 @@
 package wineverse.com.mk.Wineverse.Service;
 
 import wineverse.com.mk.Wineverse.Model.City;
+import wineverse.com.mk.Wineverse.Model.Review;
 import wineverse.com.mk.Wineverse.Model.Winery;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface WineryService {
     List<Winery> getWineriesByIds(List<String> favoriteWineryIds);
     List<String> getWineriesAsString();
     List<String> getFavouriteWineriesAsString();
+    public void setNewReview(Long wineryId, Review review);
+    void saveWinery(Winery winery);
 }

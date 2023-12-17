@@ -3,6 +3,8 @@
 <head>
   <title>User Registration</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
   <style>
     body {
       background-color: #f8f9fa;
@@ -36,6 +38,21 @@
       margin-top: 20px;
       color: #007bff;
     }
+    .flag-dropdown {
+      display: flex;
+      align-items: center;
+    }
+
+    .flag-icon {
+      margin-right: 8px;
+    }
+
+    .fixed-abbreviation {
+      padding: 8px;
+      font-weight: bold;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
@@ -56,15 +73,26 @@
       <label th:text="${'Username'}">username</label>
       <input th:field="*{username}" class="form-control" required/>
       <p th:each="error : ${#fields.errors('username')}" th:text="${error}" class="text-danger">Validation error</p>
+      <p th:if="${usernameExists}" class="text-warning">Username already exists</p>
     </div>
     <div class="form-group">
       <label th:text="${'Email'}">email</label>
-      <input type="email" th:field="*{email}" class="form-control" required/>
+      <input type="email" th:field="*{email}" class="form-control" id="emailInput" th:attr="data-email=*{email}" required/>
       <p th:each="error : ${#fields.errors('email')}" th:text="${error}" class="text-danger">Validation error</p>
+      <p th:if="${emailExists}" class="text-warning">Email already exists</p>
     </div>
+    <!-- Phone number with fixed abbreviation and Macedonian flag -->
     <div class="form-group">
-      <label th:text="${'Phone number'}">phone</label>
-      <input type="text" th:field="*{phonenumber}" class="form-control" required/>
+      <label th:text="${'Phone number'}">Phone</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <span class="flag-icon flag-icon-mk"></span> +389
+          </div>
+        </div>
+        <input type="text" th:field="*{phonenumber}" class="form-control" pattern="\d{8}" title="Enter exactly 8 numbers" required/>
+      </div>
+      <p th:if="${phoneExists}" class="text-warning">Phone number already exists</p>
     </div>
     <div class="form-group">
       <label th:text="${'Password'}">password</label>
@@ -77,10 +105,10 @@
       <p th:each="error : ${#fields.errors('matchingPassword')}" th:text="${error}">Validation error</p>
     </div>
 
-    <button type="submit" th:text="${'Submit'}" class="btn btn-submit">Submit</button>
+    <button type="submit" th:text="${'Submit'}" class="btn btn-submit" id="submitButton">Submit</button>
   </form>
 
-  <a th:href="@{/login}" th:text="${'Already have an account? Log in'}" class="login-link">Login</a>
+  <a th:href="@{/login}" th:text="${'Already have an account? Log in'}" class="login-link" >Login</a>
 </div>
 
 
@@ -97,6 +125,14 @@
       alert("Passwords do not match");
       return false;
     }
+    var containsNumber = /\d/.test(password);
+    var containsLetter = /[a-zA-Z]/.test(password);
+
+    if (!containsNumber || !containsLetter || password.length < 6) {
+      alert("Password must contain at least one letter, one number, and be 6+ characters");
+      return false;
+    }
+
     return true;
   }
 </script>

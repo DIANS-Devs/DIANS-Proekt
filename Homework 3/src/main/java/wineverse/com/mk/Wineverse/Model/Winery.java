@@ -91,6 +91,9 @@ public class Winery implements Serializable {
 
         return (double) count / reviews.size() * 100;
     }
+    public double getRating(){
+        return Math.round(rating * 10.0) / 10.0;
+    }
 
     public String getReviewsAsString(){
         return String.format("%.2f(%d reviews)",rating, totalReviews);

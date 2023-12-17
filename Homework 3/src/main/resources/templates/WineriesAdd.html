@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a winery</title>
+</head>
+<body>
+<form th:action="@{'/wineries/addedWinery'}" th:method="post">
+     <label>Име: </label>
+    <input type="text" name="name" ><br>
+    <label>Видови: </label>
+
+<!--    <div th:each="type : ${types}">-->
+<!--        <input type="checkbox" th:value="${type.getId()}">-->
+<!--        <label th:text="${type.getType()}"></label>-->
+<!--    </div>-->
+    <div th:each="type : ${types}">
+        <input type="checkbox" name="types" th:value="${type.getId()}" th:id="'type_' + ${type.getId()}">
+        <label th:text="${type.getType()}" th:for="'type_' + ${type.getId()}"></label>
+    </div>
+
+    <label for="address">Адреса: </label>
+    <input type="text" id="address" name="address"><br>
+
+<!--    <label for="city">Град: </label>-->
+<!--    <input type="text" id="city" name="city"><br>-->
+    <label for="city">Град: </label>
+    <select id="city" name="city">
+        <!--                <option value="entireMacedonia" selected>Цела Македонија</option>-->
+        <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
+    </select>
+    <br>
+    <label for="phoneNumber">Teлефонски број: </label>
+    <input type="text" id="phoneNumber" name="phoneNumber"><br>
+
+    <label >Пристап за луѓе со посебни потреби: </label>
+    <div >
+        <input type="radio" id = "wheelchairAccessTrue" name="wheelchairAccess" value="1">
+        <label for="wheelchairAccessTrue">True</label>
+
+        <input type="radio" id = "wheelchairAccessFalse" name="wheelchairAccess" value="0">
+        <label for="wheelchairAccessFalse">False</label>
+    </div>
+
+    <label for="internationalPhoneNumber">Интернационален тел. број: </label>
+    <input type="text" id="internationalPhoneNumber" name="internationalPhoneNumber"><br>
+
+    <label for="website">Веб страна: </label>
+    <input type="text" id="website" name="website"><br>
+
+<!--    <label for="meeting-time">Choose a time for the meeting:</label>-->
+<!--    <input type="time" id="meeting-time" name="meeting-time" min="09:00" max="18:00" required>-->
+
+    <label for="workingTime">Работно време: </label>
+    <input type="text" id="workingTime" name="workingTime"><br>
+
+    <label for="latitude">Latitude: </label>
+    <input type="text" id="latitude" name="latitude"><br>
+
+    <label for="longitude">Longitude: </label>
+    <input type="text" id ="longitude" name="longitude"><br>
+    <button type="submit">Внеси винарија</button>
+</form>
+
+</body>
+</html>

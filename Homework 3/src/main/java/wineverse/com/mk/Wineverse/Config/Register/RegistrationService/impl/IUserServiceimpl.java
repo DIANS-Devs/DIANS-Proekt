@@ -10,6 +10,8 @@ import wineverse.com.mk.Wineverse.Config.Register.RegistrationService.IUserServi
 import wineverse.com.mk.Wineverse.Model.User;
 import wineverse.com.mk.Wineverse.Repository.UserRepository;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class IUserServiceimpl implements IUserService {
@@ -21,20 +23,35 @@ public class IUserServiceimpl implements IUserService {
 
     @Override
     public User registerNewUserAccount(UserDto userDto) throws UserAlreadyExistException {
-//        if (emailExists(userDto.getEmail())) {
-//            throw new UserAlreadyExistException("There is an account with that email address: "
-//                    + userDto.getEmail());
-//        }
-        User user = new User();
-        user.setName(userDto.getName());
-        user.setSurname(userDto.getLastname());
-        user.setUsername(userDto.getUsername());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setEmail(userDto.getEmail());
-        user.setPhone_number(userDto.getPhonenumber());
+        if (emailExists(userDto.getEmail())) {
+           return null; //return null if user with the certain email exists
+        }
+        if(usernameExists(userDto.getUsername())){
+            return new User(); // return user but with all parameters null if username exists
+        }
+        String phoneNumber = "+389" + userDto.getPhonenumber();
+        if(phoneNumberExists(phoneNumber)){
+            User user = new User();
+            user.setPhonenumber("exists");
+            user.setUsername("notnull");
+            return user;
+        }
+        User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), userDto.getName(), userDto.getLastname(),
+                userDto.getEmail(), phoneNumber);
         return repository.save(user);
     }
-    private boolean emailExists(String email) {
-        return repository.findByEmail(email) != null;
+    public boolean emailExists(String email) {
+        return repository.findByEmail(email).isPresent();
+    }
+    public boolean usernameExists(String username) {
+        return repository.findByUsername(username).isPresent();
+    }
+    public boolean phoneNumberExists(String phonenumber) {
+        return repository.findByPhonenumber(phonenumber).isPresent();
+    }
+
+    @Override
+    public List<User> findAll() {
+        return repository.findAll();
     }
 }

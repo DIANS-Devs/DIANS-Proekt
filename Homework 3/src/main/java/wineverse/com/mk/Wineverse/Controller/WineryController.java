@@ -8,20 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import wineverse.com.mk.Wineverse.Config.LogIn.UserInfoUserDetails;
-import wineverse.com.mk.Wineverse.Config.LogIn.UserInfoUserDetailsService;
 import wineverse.com.mk.Wineverse.Form.ReviewForm;
 import wineverse.com.mk.Wineverse.Model.*;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
-import wineverse.com.mk.Wineverse.Service.CityService;
-import wineverse.com.mk.Wineverse.Service.TypeService;
-import wineverse.com.mk.Wineverse.Service.UserService;
-import wineverse.com.mk.Wineverse.Service.WineryService;
+import wineverse.com.mk.Wineverse.Service.*;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 
 @Controller
 @AllArgsConstructor
@@ -31,8 +26,7 @@ public class WineryController {
     private final WineryService wineryService;
     private final UserService userService;
     private final TypeService typeService;
-
-//    private final WinerySorting winerySorting;
+    private final WinerySortingService winerySortingService;
 
     private void setCitiesAttribute(Model model){
         model.addAttribute("cities", cityService.getAllCities());
@@ -56,10 +50,6 @@ public class WineryController {
         addSearchQueryAttribute(session, searchQuery);
     }
 
-    private void removeSearchQueryAttribute(HttpSession session){
-        session.removeAttribute("searchQuery");
-    };
-
     @GetMapping()
     public String getResultsMapping(Model model, HttpSession session) {
         setCitiesAttribute(model);
@@ -75,14 +65,19 @@ public class WineryController {
                                         @RequestParam(name = "rating", required = false) Float wineryRating,
                                         @RequestParam(name = "distance", required = false) Float wineryDistance,
                                         @RequestParam(name = "location", required = false) String wineryCityName,
+                                        @RequestParam(name = "sort", required = false) String sortingMethod,
                                         Model model, HttpSession session) {
         //TODO SHOULD BE MODIFIED TO ID, NOT BY NAME
         setCitiesAttribute(model);
         SearchQuery retrievedQuery = (SearchQuery) session.getAttribute("searchQuery");
-//        List<Winery> wineryList = (List<Winery>) session.getAttribute("wineryList");
+
         if(retrievedQuery != null && wineryName == null && wineryCityName == null && wineryRating == null && wineryDistance == null){
 //            retrievedQuery.setWineries(winerySorting.sortWineriesByStatus(retrievedQuery.getWineries()));
+            if(sortingMethod != null) {
+                List<Winery> test = winerySortingService.sortWineries(sortingMethod, retrievedQuery);
+            }
             setSearchAttributes(model, retrievedQuery);
+
             return "Wineries";
         }
         // if everything is null, set to default values

@@ -44,6 +44,12 @@ public class WineryController {
         session.setAttribute("searchQuery", searchQuery);
     }
 
+    private void setDefaultSearchParameters(Model model, HttpSession session){
+        SearchQuery searchQuery = new SearchQuery("", (float)0, (float)300, cityService.findCity("Цела Македонија"), wineryService.getAllWineries());
+        setSearchAttributes(model, searchQuery);
+        addSearchQueryAttribute(session, searchQuery);
+    }
+
     private void removeSearchQueryAttribute(HttpSession session){
         session.removeAttribute("searchQuery");
     };
@@ -52,8 +58,10 @@ public class WineryController {
     public String getResultsMapping(Model model, HttpSession session) {
         setCitiesAttribute(model);
         model.addAttribute("wineries", wineryService.getAllWineries());
-        removeSearchQueryAttribute(session);
-//        session.removeAttribute("wineryList");
+
+        //set the default parameters
+        setDefaultSearchParameters(model, session);
+
         return "Wineries";
     }
     @PostMapping()
@@ -65,8 +73,7 @@ public class WineryController {
         //TODO SHOULD BE MODIFIED TO ID, NOT BY NAME
         setCitiesAttribute(model);
         SearchQuery retrievedQuery = (SearchQuery) session.getAttribute("searchQuery");
-//        List<Winery> wineryList = (List<Winery>) session.getAttribute("wineryList");
-        if(retrievedQuery != null && wineryName == null){
+        if(retrievedQuery != null && wineryName == null && wineryCityName == null && wineryRating == null && wineryDistance == null){
 //            retrievedQuery.setWineries(winerySorting.sortWineriesByStatus(retrievedQuery.getWineries()));
             setSearchAttributes(model, retrievedQuery);
             return "Wineries";
@@ -100,9 +107,7 @@ public class WineryController {
         model.addAttribute("wineriesList", wineries);
         setCitiesAttribute(model);
 
-        session.removeAttribute("wineryList");
-
-        removeSearchQueryAttribute(session);
+        setDefaultSearchParameters(model ,session);
 
         return "WineriesMap";
     }

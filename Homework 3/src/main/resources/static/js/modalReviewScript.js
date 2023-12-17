@@ -9,6 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check if the close button is available
     if (closeButton) {
-    closeButton.addEventListener('click', () => $('#reviewModal').modal('hide'));
+        closeButton.addEventListener('click', () => $('#reviewModal').modal('hide'));
     }
 });

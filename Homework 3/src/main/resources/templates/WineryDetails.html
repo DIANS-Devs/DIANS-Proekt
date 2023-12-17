@@ -62,7 +62,7 @@
 
             <!--Add review rating form button-->
             <button class="btn btn-primary" onclick="openReviewForm()">Add Review</button>
-            <div th:replace="~{fragments/ReviewForm :: #reviewModal(wineryId=${winery.getId()})}"></div>
+            <div th:replace="~{fragments/ReviewForm :: #reviewModal(wineryId=${winery.getId()}, userReview=${userReview})}"></div>
             <!--------------------------------->
 
         </div>

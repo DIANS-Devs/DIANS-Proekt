@@ -34,20 +34,15 @@ function addToFavorites(element) {
         var index = favorites.indexOf(wineryId);
         if (index === -1) {
             favorites.push(wineryId);
-            // element.classList.add('red');
             child.classList.remove("far");
             child.classList.add("fas");
-            alert('Winery added to Favorites!');
         } else {
             favorites.splice(index, 1);
             child.classList.remove("fas");
             child.classList.add("far");
-            // element.classList.remove('red');
-            alert('Winery removed from Favorites!');
         }
         setFavoritesCookie(favorites);
 
-        // Send the updated favorites to the server
         favoriteButton(favorites);
     }
 }
@@ -66,13 +61,9 @@ function checkFavorite(element){
 
 function favoriteButton(favoritesList) {
     var xhr = new XMLHttpRequest();
-    console.log('Creates new XMLHttpRequest');
     xhr.open("POST", "/favorites-list", true);
-    console.log('Opens post connections');
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(favoritesList));
-    console.log(JSON.stringify(favoritesList));
-    console.log('Sends');
 }
 function refreshPage() {
     location.reload(true);

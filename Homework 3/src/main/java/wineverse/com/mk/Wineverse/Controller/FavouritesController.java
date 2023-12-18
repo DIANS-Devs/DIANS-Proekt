@@ -22,7 +22,7 @@ public class FavouritesController {
         this.wineryService = wineryService;
     }
 
-    @GetMapping("/favourites/map")
+    @GetMapping("/favorites/map")
     public String showFavouritesMap(Model model){
         model.addAttribute("wineriesList", wineryService.getFavouriteWineriesAsString());
         return "FavouritesMap";
@@ -48,7 +48,4 @@ public class FavouritesController {
         session.setAttribute("processedFavoritesList", favoritesList);
         return ResponseEntity.ok("FavoritesList received successfully");
     }
-
-
-
 }

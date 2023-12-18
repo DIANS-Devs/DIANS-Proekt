@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title='Favourites')}">
 <body th:fragment="content">
-<h4 class="container p-0">Омилени</h4>
+<div class="resultButtons">
+    <h4>Омилени</h4>
+    <div class="buttons">
+        <button class="listButton">Винарии</button>
+        <form th:action="@{'/favorites/map'}" method="post" style="display: inline-block">
+            <button class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>
+        </form>
+    </div>
+</div>
 <div th:each="winery : ${wineries}" class="container bg-body-secondary mb-3 p-4">
     <span class="float-end">
         <button th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)"

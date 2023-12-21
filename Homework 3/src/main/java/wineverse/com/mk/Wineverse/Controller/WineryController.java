@@ -159,14 +159,15 @@ public class WineryController {
     @PostMapping("/addedWinery")
     public String saveWinery(@RequestParam String name, @RequestParam("types") List<Long> typeIds,
                              @RequestParam String address, @RequestParam String city,
-                             @RequestParam String phoneNumber, @RequestParam String internationalPhoneNumber,
-                             @RequestParam String workingTime, @RequestParam String website,@RequestParam Boolean wheelchairAccess,
+                             @RequestParam String phoneNumber,@RequestParam OperationalStatus operationalStatus, @RequestParam String internationalPhoneNumber,
+                             @RequestParam String startTime,@RequestParam String endTime, @RequestParam String website,@RequestParam Boolean wheelchairAccess,
                              @RequestParam Float latitude, @RequestParam Float longitude){
         List<Type> types = typeIds.stream()
                 .map(id -> typeService.findById(id).orElse(null))
                 .collect(Collectors.toList());
+        String workingTime = startTime + " - " + endTime;
         City city1 = cityService.findCity(city);
-        Winery winery = new Winery(name, types, address, city1, phoneNumber, internationalPhoneNumber, workingTime, website, OperationalStatus.OPEN, wheelchairAccess, latitude, longitude);
+        Winery winery = new Winery(name, types, address, city1, phoneNumber, internationalPhoneNumber, workingTime, website, operationalStatus, wheelchairAccess, latitude, longitude);
         wineryService.saveWinery(winery);
         return "redirect:/wineries";
     }

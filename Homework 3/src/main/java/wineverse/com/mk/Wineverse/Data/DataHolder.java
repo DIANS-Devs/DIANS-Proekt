@@ -3,6 +3,8 @@ package wineverse.com.mk.Wineverse.Data;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import wineverse.com.mk.Wineverse.Model.*;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
@@ -23,6 +25,9 @@ public class DataHolder {
     private final WineryRepository wineryRepository;
     private final UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     
     //    public DataHolder(CityRepository cityRepository, TypeRepository typeRepository, WineryRepository wineryRepository, UserRepository userRepository) {
 //        this.cityRepository = cityRepository;
@@ -34,9 +39,11 @@ public class DataHolder {
     @PostConstruct
     @Transactional
     public void init() {
-        User user = new User("admin", "admin", "admin", "admin", "074444244");
+        User user = new User("admin", passwordEncoder.encode( "admin"), "admin", "admin","admin@gmail.com", "074444244");
+        User user1 = new User("user", passwordEncoder.encode("user"), "user", "user", "user@gmail.com","12213112");
         if(userRepository.findAll().isEmpty()) {
             userRepository.save(user);
+            userRepository.save(user1);
         }
         List<String> all_cities = Arrays.asList(
                 "Цела Македонија", "Берово", "Битола", "Богданци", "Валандово", "Велес", "Виница", "Гевгелија",

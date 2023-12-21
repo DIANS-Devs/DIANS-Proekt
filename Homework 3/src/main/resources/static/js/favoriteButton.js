@@ -27,7 +27,7 @@ function setFavoritesCookie(favorites) {
 
 function addToFavorites(element) {
     //TODO modify here later...
-    var wineryId = element.getAttribute('data-winery-id');
+    let wineryId = element.getAttribute('data-winery-id');
     let child = element.querySelector('i');
     if (wineryId.trim() !== '') {
         var favorites = getFavoritesFromCookie();
@@ -77,15 +77,6 @@ function favoriteButton(favoritesList) {
 function refreshPage() {
     location.reload(true);
 }
-
-var favorites = getFavoritesFromCookie();
-var heartButtons = document.querySelectorAll('.heart-button');
-heartButtons.forEach(function(button) {
-    var wineryId = button.getAttribute('data-winery-id');
-    if (favorites.includes(wineryId)) {
-        button.classList.add('red');
-    }
-});
 
 window.onload = function() {
     let element = document.querySelectorAll('#favourite_container');

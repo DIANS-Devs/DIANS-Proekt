@@ -6,7 +6,6 @@
             <p>Пребарувањето врати <span th:text="${wineriesList.size()}"></span> резултати</p>
             <div class="buttons">
                 <form th:action="@{'/wineries'}" method="post" style="display: inline-block">
-                    <input type="hidden" name="wineryList" th:value="${wineriesList}" th:if="${wineriesList != null}">
                     <button class="listButton">Винарии</button>
                 </form>
                 <button class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>

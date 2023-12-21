@@ -3,6 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Add a winery</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 5px;
+            margin-top: 3px;
+            padding-top: 2px;
+            vertical-align: middle;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
 <form th:action="@{'/wineries/addedWinery'}" th:method="post">
@@ -50,9 +106,23 @@
 
 <!--    <label for="meeting-time">Choose a time for the meeting:</label>-->
 <!--    <input type="time" id="meeting-time" name="meeting-time" min="09:00" max="18:00" required>-->
+    <div class="time-range">
+        <label for="startTime">Работно време (Од): </label>
+        <input type="time" id="startTime" name="startTime" th:range="0-24">
+    </div>
 
-    <label for="workingTime">Работно време: </label>
-    <input type="text" id="workingTime" name="workingTime"><br>
+    <div class="time-range">
+        <label for="endTime">Работно време (До): </label>
+        <input type="time" id="endTime" name="endTime" th:range="0-24">
+    </div>
+<!--    <label for="workingTime">Работно време: </label>-->
+<!--    <input type="text" id="workingTime" name="workingTime"><br>-->
+    <label for="operationalStatus">Operational Status: </label>
+    <select id="operationalStatus" name="operationalStatus">
+        <option value="OPEN">Open</option>
+        <option value="CLOSED">Closed</option>
+        <option value="PRIMARILY_CLOSED">Primarily Closed</option>
+    </select>
 
     <label for="latitude">Latitude: </label>
     <input type="text" id="latitude" name="latitude"><br>

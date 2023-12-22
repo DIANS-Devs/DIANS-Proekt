@@ -114,6 +114,33 @@ public class WineryController {
 
         List<Review> reviews = winery.getReviews();
         model.addAttribute("reviews", reviews);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
+            Object principal = authentication.getPrincipal();
+
+            if (principal instanceof UserInfoUserDetails userDetails) {
+
+                User user = null;
+                String userName = userDetails.getUsername();
+                Optional<User> userOptional = userService.getUserByUsername(userName).stream().findFirst();
+
+                if (userOptional.isPresent())
+                    user = userOptional.get();
+
+                try {
+                    Review userReview = wineryService.getUserReviewForWinery(id, user);
+                    model.addAttribute("userReview", userReview);
+
+                } catch (Exception ignored){
+                    model.addAttribute("userReview", "error");
+                }
+
+            } else {
+                return "redirect:/error";
+            }
+        }
         return "WineryDetails";
     }
 
@@ -161,44 +188,57 @@ public class WineryController {
     @PostMapping("/addedWinery")
     public String saveWinery(@RequestParam String name, @RequestParam("types") List<Long> typeIds,
                              @RequestParam String address, @RequestParam String city,
-                             @RequestParam String phoneNumber, @RequestParam String internationalPhoneNumber,
-                             @RequestParam String workingTime, @RequestParam String website,@RequestParam Boolean wheelchairAccess,
+                             @RequestParam String phoneNumber,@RequestParam OperationalStatus operationalStatus, @RequestParam String internationalPhoneNumber,
+                             @RequestParam String startTime,@RequestParam String endTime, @RequestParam String website,@RequestParam Boolean wheelchairAccess,
                              @RequestParam Float latitude, @RequestParam Float longitude){
         List<Type> types = typeIds.stream()
                 .map(id -> typeService.findById(id).orElse(null))
                 .collect(Collectors.toList());
+        String workingTime = startTime + " - " + endTime;
         City city1 = cityService.findCity(city);
-        Winery winery = new Winery(name, types, address, city1, phoneNumber, internationalPhoneNumber, workingTime, website, OperationalStatus.OPEN, wheelchairAccess, latitude, longitude);
+        Winery winery = new Winery(name, types, address, city1, phoneNumber, internationalPhoneNumber, workingTime, website, operationalStatus, wheelchairAccess, latitude, longitude);
         wineryService.saveWinery(winery);
         return "redirect:/wineries";
     }
 
-    @PostMapping("/submitReview")
-    public String submitReview(@ModelAttribute ReviewForm reviewForm, Model model, HttpSession session) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        @PostMapping("/submitReview")
+        public String submitReview(@ModelAttribute ReviewForm reviewForm) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
-            Object principal = authentication.getPrincipal();
+            if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
+                Object principal = authentication.getPrincipal();
 
-            if (principal instanceof UserInfoUserDetails) {
-                UserInfoUserDetails userDetails = (UserInfoUserDetails) principal;
+                if (principal instanceof UserInfoUserDetails userDetails) {
 
-                String userName = userDetails.getUsername();
-                User user = userService.getUserByUsername(userName).stream().findFirst().get();
+                    User user = null;
+                    String userName = userDetails.getUsername();
+                    Optional<User> userOptional = userService.getUserByUsername(userName).stream().findFirst();
 
-                Long wineryId = reviewForm.getWineryId();
-                Integer rating = reviewForm.getRating();
-                String content = reviewForm.getComment();
-                Review review = new Review(user,rating,content, LocalDate.now());
-                wineryService.setNewReview(wineryId,review);
+                    if (userOptional.isPresent())
+                        user = userOptional.get();
 
-                return "redirect:/wineries/"+wineryId;
+                    Long wineryId = reviewForm.getWineryId();
+                    Integer rating = reviewForm.getRating();
+                    String content = reviewForm.getComment();
+
+                    Review review;
+
+                    try {
+                        review = wineryService.getUserReviewForWinery(wineryId,user);
+                        review.setRating(reviewForm.getRating());
+                        review.setContent(reviewForm.getComment());
+                    } catch (Exception e){
+                        review = new Review(user,rating,content, LocalDate.now());
+                    }
+                    wineryService.setNewReview(wineryId,review);
+
+                    return "redirect:/wineries/"+wineryId;
+                } else {
+                    return "redirect:/error";
+                }
             } else {
-                return "redirect:/error";
+                return "LogIn";
             }
-        } else {
-            return "LogIn";
         }
-    }
 
 }

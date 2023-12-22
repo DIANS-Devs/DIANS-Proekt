@@ -8,7 +8,6 @@
         <div class="buttons">
             <button class="listButton">Винарии</button>
             <form th:action="@{'/wineries/map'}" method="post" style="display: inline-block">
-<!--                <input type="hidden" name="wineryList" th:value="${wineries}" th:if="${wineries != null}">-->
                 <button class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>
             </form>
         </div>
@@ -38,10 +37,6 @@
                     <input type="radio" name="sort" id="radio_distance" value="distance">
                     Оддалеченост
                 </label>
-<!--                <label for="radio_open">-->
-<!--                    <input type="radio" name="sort" id="radio_open" value="open">-->
-<!--                    Отворено-->
-<!--                </label>-->
                 <label for="radio_rating">
                     <input type="radio" name="sort" id="radio_rating" value="rating">
                     Рејтинг

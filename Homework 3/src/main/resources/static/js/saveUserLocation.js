@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let value = lat1 + "," + lon1;
 
             // Send geolocation data to the server using fetch
-            fetch('/test', {
+            fetch('/save-user-position', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'text/plain',

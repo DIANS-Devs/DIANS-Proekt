@@ -118,6 +118,12 @@
 .wineriesListed .listButton{
     background-color: var(--darker-color);
 }
+.wineriesListed .searchResults button:hover {
+    background-color: var(--lighter-color);
+}
+.wineriesListed .searchResults button{
+    background-color: var(--darker-color);
+}
 .wineriesListed .mapButton{
     background-color: var(--lighter-color);
 }

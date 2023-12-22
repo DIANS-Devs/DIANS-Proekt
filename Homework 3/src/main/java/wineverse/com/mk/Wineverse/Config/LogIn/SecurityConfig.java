@@ -50,7 +50,7 @@ public class SecurityConfig {
                         })
                         .permitAll()
                 )
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/test")); // Disable CSRF for /test endpoint
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/save-user-position")); // Disable CSRF for /test endpoint
 
         return http.build();
     }

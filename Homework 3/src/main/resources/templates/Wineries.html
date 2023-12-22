@@ -8,7 +8,6 @@
         <div class="buttons">
             <button class="listButton">Винарии</button>
             <form th:action="@{'/wineries/map'}" method="post" style="display: inline-block">
-<!--                <input type="hidden" name="wineryList" th:value="${wineries}" th:if="${wineries != null}">-->
                 <button class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>
             </form>
         </div>
@@ -35,19 +34,15 @@
             <div class="title">Подредено според</div>
             <div>
                 <label for="radio_distance">
-                    <input type="radio" name="sort" id="radio_distance">
+                    <input type="radio" name="sort" id="radio_distance" value="distance">
                     Оддалеченост
                 </label>
-                <label for="radio_open">
-                    <input type="radio" name="sort" id="radio_open">
-                    Отворено
-                </label>
                 <label for="radio_rating">
-                    <input type="radio" name="sort" id="radio_rating">
+                    <input type="radio" name="sort" id="radio_rating" value="rating">
                     Рејтинг
                 </label>
                 <label for="radio_popularity">
-                    <input type="radio" name="sort" id="radio_popularity">
+                    <input type="radio" name="sort" id="radio_popularity" value="popularity">
                     Популарност
                 </label>
             </div>
@@ -92,7 +87,7 @@
                 <!--                    getDistance metod sega za sega fiksno-->
                 <p><b>Оддалеченост:</b>
 <!--                    <span class="distance_winery" th:data-winery="${winery}">Не може да се пресмета</span>-->
-                     <span class="distance_winery" th:data-winery-lat="${winery.getLatitude()}" th:data-winery-lng="${winery.getLongitude()}">Не може да се пресмета</span>
+                     <span class="distance_winery" th:data-winery-id="${winery.getId()}" th:data-winery-lat="${winery.getLatitude()}" th:data-winery-lng="${winery.getLongitude()}">Не може да се пресмета</span>
                 </p>
                 <p><b>Работно време:</b><span th:text="${winery.getWorkingTime()}"></span></p>
             </div>

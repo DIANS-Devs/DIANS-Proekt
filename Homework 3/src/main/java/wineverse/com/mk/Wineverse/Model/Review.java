@@ -22,7 +22,6 @@ public class Review {
     public Review() {
     }
 
-
     public Review(User author, Integer rating, String content, LocalDate date) {
         this.author = author;
         this.rating = rating;

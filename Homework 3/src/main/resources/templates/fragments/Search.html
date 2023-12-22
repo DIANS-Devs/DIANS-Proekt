@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="search">
 <form th:action="@{/wineries}" method="post" class="container bg-body-secondary mb-5 mt-5 pt-2 col-md-10">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <div class="form-row d-flex justify-content-around mb-3 mt-3">
         <div class="col-md-3 mb-3">
             <label for="name">Име</label>

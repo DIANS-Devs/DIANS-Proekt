@@ -6,5 +6,5 @@ import wineverse.com.mk.Wineverse.Model.Winery;
 import java.util.List;
 
 public interface WinerySortingService {
-    List<Winery> sortWineries(String sortingMethod, SearchQuery retrievedQuery);
+    List<Winery> sortWineries(String sortingMethod, SearchQuery retrievedQuery, String userLocation);
 }

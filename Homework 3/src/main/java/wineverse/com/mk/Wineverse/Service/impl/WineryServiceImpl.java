@@ -1,5 +1,8 @@
 package wineverse.com.mk.Wineverse.Service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import wineverse.com.mk.Wineverse.Model.Review;
 import wineverse.com.mk.Wineverse.Repository.ReviewRepository;
@@ -20,6 +23,22 @@ public class WineryServiceImpl implements WineryService {
     private final WineryRepository wineryRepository;
     private final ReviewRepository reviewRepository;
 
+    public static double getDistance(String userLocation, double wineryLat, double wineryLon){
+        if (userLocation == null) return 0;
+
+        double userLat = Double.parseDouble(userLocation.split(",")[0]);
+        double userLon = Double.parseDouble(userLocation.split(",")[1]);
+
+        double R = 6371; // Radius of the Earth in kilometers
+        double dLat = Math.toRadians(wineryLat - userLat);
+        double dLon = Math.toRadians(wineryLon - userLon);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(wineryLat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        System.out.println("The distance is "+ R*c);
+        return R * c; // Distance in kilometers
+    }
+
     @Override
     public List<Winery> getAllWineries() {
         return wineryRepository.findAll();
@@ -33,7 +52,7 @@ public class WineryServiceImpl implements WineryService {
 
     @Override
     //Worst case: Name="", rating = 0, distance = 300, City = Цела Македонија
-    public List<Winery> filteredWineries(String name, Float rating, Float distance, City city) {
+    public List<Winery> filteredWineries(String name, Float rating, Float distance, City city, String userLocation) {
         //TODO implement distance filter
         List<Winery> name_wineries = wineryRepository.findByNameContaining(name);
         List<Winery> rating_wineries = wineryRepository.findByRatingGreaterThanEqual(rating);
@@ -43,9 +62,16 @@ public class WineryServiceImpl implements WineryService {
         } else {
             city_wineries = wineryRepository.findAll();
         }
+        List<Winery> distance_wineries = wineryRepository
+                .findAll()
+                .stream()
+                .filter(winery -> distance >= getDistance(userLocation, winery.getLatitude(), winery.getLongitude()))
+                .toList();
+        
         List<Winery> interceptWineries = new ArrayList<>(name_wineries);
         interceptWineries.retainAll(rating_wineries);
         interceptWineries.retainAll(city_wineries);
+        interceptWineries.retainAll(distance_wineries);
         return interceptWineries;
     }
 

@@ -1,11 +1,11 @@
-function updateDistance(element, lat2, lon2) {
+let memory = [];
+
+function updateDistance(element, id, lat2, lon2) {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
                 var lat1 = position.coords.latitude;
                 var lon1 = position.coords.longitude;
-
-                // console.log("We have the position of the user")
 
                 var R = 6371; // Radius of the Earth in kilometers
                 var dLat = deg2rad(lat2 - lat1);
@@ -17,8 +17,7 @@ function updateDistance(element, lat2, lon2) {
                 var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
                 var distance = R * c; // Distance in kilometers
 
-                // console.log(`We have the distance ${distance}`)
-                element.innerText = distance.toFixed(2) + " km";
+                element.innerText = distance.toFixed(2)+ " km";
             },
             function(error) {
                 console.error("Error getting geolocation:", error);
@@ -54,12 +53,10 @@ function locationNotAllowed(err){
 document.addEventListener("DOMContentLoaded", function () {
     let elements= document.querySelectorAll(".distance_winery");
     elements.forEach(el => {
-        // console.log(`Code runs for ${el}`)
-        // let winery = el.getAttribute('data-winery');
-        // let latitude = parseFloat(winery.match(/latitude=(-?\d+\.\d+)/)[1]);
-        // let longitude = parseFloat(winery.match(  /longitude=(-?\d+\.\d+)/)[1]);
+        let id = parseFloat(el.getAttribute('data-winery-id'));
         let latitude = parseFloat(el.getAttribute('data-winery-lat'));
         let longitude = parseFloat(el.getAttribute('data-winery-lng'));
-        updateDistance(el, latitude, longitude);
+        updateDistance(el, id, latitude, longitude);
     })
+    // sendDistancesToServer();
 });

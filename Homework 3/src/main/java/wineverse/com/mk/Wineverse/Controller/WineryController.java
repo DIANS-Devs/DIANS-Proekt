@@ -71,10 +71,11 @@ public class WineryController {
         setCitiesAttribute(model);
         SearchQuery retrievedQuery = (SearchQuery) session.getAttribute("searchQuery");
 
+        String userLocation = (String) session.getAttribute("userGeolocation");
+
         if(retrievedQuery != null && wineryName == null && wineryCityName == null && wineryRating == null && wineryDistance == null){
-//            retrievedQuery.setWineries(winerySorting.sortWineriesByStatus(retrievedQuery.getWineries()));
             if(sortingMethod != null) {
-                List<Winery> test = winerySortingService.sortWineries(sortingMethod, retrievedQuery);
+                List<Winery> test = winerySortingService.sortWineries(sortingMethod, retrievedQuery, userLocation);
             }
             setSearchAttributes(model, retrievedQuery);
 
@@ -95,7 +96,7 @@ public class WineryController {
         }
 
         City wineryCity = cityService.findCity(wineryCityName);
-        List<Winery> filtered_wineries = wineryService.filteredWineries(wineryName, wineryRating, wineryDistance, wineryCity);
+        List<Winery> filtered_wineries = wineryService.filteredWineries(wineryName, wineryRating, wineryDistance, wineryCity, userLocation);
 
         SearchQuery searchQuery = new SearchQuery(wineryName, wineryRating, wineryDistance, wineryCity, filtered_wineries);
         setSearchAttributes(model, searchQuery);

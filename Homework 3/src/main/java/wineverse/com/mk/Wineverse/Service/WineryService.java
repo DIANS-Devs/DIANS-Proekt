@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface WineryService {
     List<Winery> getAllWineries();
-    List<Winery> filteredWineries(String name, Float rating, Float distance, City city);
+    List<Winery> filteredWineries(String name, Float rating, Float distance, City city, String userLocation);
     Optional<Winery> getWineryById(Long id);
     List<Winery> getWineriesByIds(List<String> favoriteWineryIds);
     List<String> getWineriesAsString();

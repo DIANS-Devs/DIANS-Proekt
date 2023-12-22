@@ -38,10 +38,10 @@
                     <input type="radio" name="sort" id="radio_distance" value="distance">
                     Оддалеченост
                 </label>
-                <label for="radio_open">
-                    <input type="radio" name="sort" id="radio_open" value="open">
-                    Отворено
-                </label>
+<!--                <label for="radio_open">-->
+<!--                    <input type="radio" name="sort" id="radio_open" value="open">-->
+<!--                    Отворено-->
+<!--                </label>-->
                 <label for="radio_rating">
                     <input type="radio" name="sort" id="radio_rating" value="rating">
                     Рејтинг
@@ -92,7 +92,7 @@
                 <!--                    getDistance metod sega za sega fiksno-->
                 <p><b>Оддалеченост:</b>
 <!--                    <span class="distance_winery" th:data-winery="${winery}">Не може да се пресмета</span>-->
-                     <span class="distance_winery" th:data-winery-lat="${winery.getLatitude()}" th:data-winery-lng="${winery.getLongitude()}">Не може да се пресмета</span>
+                     <span class="distance_winery" th:data-winery-id="${winery.getId()}" th:data-winery-lat="${winery.getLatitude()}" th:data-winery-lng="${winery.getLongitude()}">Не може да се пресмета</span>
                 </p>
                 <p><b>Работно време:</b><span th:text="${winery.getWorkingTime()}"></span></p>
             </div>

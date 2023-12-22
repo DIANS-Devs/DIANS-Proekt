@@ -117,6 +117,9 @@ public class WineryController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        //TODO fix this later
+        model.addAttribute("userReview", "");
+
         if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
             Object principal = authentication.getPrincipal();
 
@@ -236,7 +239,8 @@ public class WineryController {
                 } else {
                     return "redirect:/error";
                 }
-            } else {
+            }
+            else {
                 return "LogIn";
             }
         }

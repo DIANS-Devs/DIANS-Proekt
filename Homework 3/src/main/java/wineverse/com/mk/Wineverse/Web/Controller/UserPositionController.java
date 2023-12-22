@@ -1,4 +1,4 @@
-package wineverse.com.mk.Wineverse.Controller;
+package wineverse.com.mk.Wineverse.Web.Controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;

@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function addMarkerForUserLocation() {
-        console.log("ITS HERE")
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 function (position) {

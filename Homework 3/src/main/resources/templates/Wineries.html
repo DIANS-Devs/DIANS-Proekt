@@ -95,7 +95,7 @@
                 <p><b>Работно време:</b><span th:text="${winery.getWorkingTime()}"></span></p>
             </div>
             <div class="right_part">
-                <p th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)" id="favourite_container">
+                <p th:data-winery-id="${winery.getId()}" onclick="addOrRemoveFavorite(this)" id="favourite_container">
                     <i class="far fa-heart"></i>
                 </p>
                 <p>

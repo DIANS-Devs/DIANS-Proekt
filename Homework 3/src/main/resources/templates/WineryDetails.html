@@ -55,7 +55,7 @@
             <br>
             <span class="p-4">
                     <strong>Омилено: </strong>
-                    <span th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)" id="favourite_container">
+                    <span th:data-winery-id="${winery.getId()}" onclick="addOrRemoveFavorite(this)" id="favourite_container">
                         <i class="far fa-heart" style="color: red"></i>
                     </span>
             </span>

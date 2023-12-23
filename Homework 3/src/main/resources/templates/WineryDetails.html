@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title=${winery.getName()})}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    th:replace="~{base/Layout :: base(title=${winery.getName()})}">
 <body th:fragment="content">
 
 <!-- Details -->
@@ -7,7 +10,6 @@
     <h3 th:text="${winery.getName()}"></h3>
     <br>
     <div class="row">
-
         <!-- Left box -->
         <div class="col-md-6">
             <span class="p-4">
@@ -19,10 +21,9 @@
                 </span>
             <br>
             <span class="p-4">
-                    <strong>Оддалеченост:</strong>
-                    <!-- <span class="distance_winery" th:data-winery="${winery}">Не може да се пресмета</span> -->
-                    <span class="distance_winery" th:data-winery-lat="${winery.getLatitude()}" th:data-winery-lng="${winery.getLongitude()}">Не може да се пресмета</span>
-                </span>
+                <strong>Оддалеченост:</strong>
+                <span class="distance_winery" th:data-winery-id="${winery.getId()}" th:data-winery-lat="${winery.getLatitude()}" th:data-winery-lng="${winery.getLongitude()}">Не може да се пресмета</span>
+            </span>
 
             <br>
             <span class="p-4">
@@ -61,7 +62,7 @@
 
 
             <!--Add review rating form button-->
-            <button class="btn btn-primary" onclick="openReviewForm()">Add Review</button>
+            <button class="btn btn-primary" onclick="openReviewForm()" sec:authorize="isAuthenticated()">Add Review</button>
             <div th:replace="~{fragments/ReviewForm :: #reviewModal(wineryId=${winery.getId()}, userReview=${userReview})}"></div>
             <!--------------------------------->
 
@@ -101,17 +102,17 @@
 
         </div>
     </div>
-    <div class="container bg-body-primary mb-3 p-4 review-box">
-        <div class="container bg-body-primary mb-3 p-4 review-section review-box" th:each="review : ${reviews.reversed()}">
-            <!-- Add a class to the div to apply a slightly darker background color -->
-            <section>
-                <span th:text="${review.getAuthor().getName() + ' ' + review.getAuthor().getSurname()}"></span><br>
-                <div th:replace="~{fragments/StarRating :: rating(${review.getRating()}, '1em')}"></div>
-                <span th:text="${review.getDate()}"></span><br>
-                <span th:text="${review.getContent()}"></span><br>
-            </section>
+        <div class="container bg-body-primary mb-3 p-4 review-box">
+            <div class="container bg-body-primary mb-3 p-4 review-section review-box" th:each="review : ${reviews.reversed()}">
+                <!-- Add a class to the div to apply a slightly darker background color -->
+                <section>
+                    <span th:text="${review.getAuthor().getName() + ' ' + review.getAuthor().getSurname()}"></span><br>
+                    <div th:replace="~{fragments/StarRating :: rating(${review.getRating()}, '1em')}"></div>
+                    <span th:text="${review.getDate()}"></span><br>
+                    <span th:text="${review.getContent()}"></span><br>
+                </section>
+            </div>
         </div>
-    </div>
 </div>
 <!---->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

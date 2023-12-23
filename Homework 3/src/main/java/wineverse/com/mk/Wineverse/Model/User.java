@@ -22,11 +22,17 @@ public class User {
     private String surname;
     private String email;
 
+    @Transient
+    private String userLatitude = null;
+    @Transient
+    private String userLongitude = null;
+
     @Column(name = "phone_number")
     private String phonenumber;
 
     @OneToMany
     List<Winery> favorites;
+
     public User(String username, String password, String name, String surname,String email, String phoneNumber) {
         this.username = username;
         this.password = password;

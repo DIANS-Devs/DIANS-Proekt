@@ -1,4 +1,4 @@
-package wineverse.com.mk.Wineverse.Controller;
+package wineverse.com.mk.Wineverse.Web.Controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -11,16 +11,12 @@ import wineverse.com.mk.Wineverse.Config.LogIn.UserInfoUserDetails;
 import wineverse.com.mk.Wineverse.Form.ReviewForm;
 import wineverse.com.mk.Wineverse.Model.*;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
-import wineverse.com.mk.Wineverse.Service.CityService;
-import wineverse.com.mk.Wineverse.Service.TypeService;
-import wineverse.com.mk.Wineverse.Service.UserService;
-import wineverse.com.mk.Wineverse.Service.WineryService;
+import wineverse.com.mk.Wineverse.Service.*;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 
 @Controller
 @AllArgsConstructor
@@ -30,8 +26,7 @@ public class WineryController {
     private final WineryService wineryService;
     private final UserService userService;
     private final TypeService typeService;
-
-//    private final WinerySorting winerySorting;
+    private final WinerySortingService winerySortingService;
 
     private void setCitiesAttribute(Model model){
         model.addAttribute("cities", cityService.getAllCities());
@@ -49,16 +44,20 @@ public class WineryController {
         session.setAttribute("searchQuery", searchQuery);
     }
 
-    private void removeSearchQueryAttribute(HttpSession session){
-        session.removeAttribute("searchQuery");
+    private void setDefaultSearchParameters(Model model, HttpSession session){
+        SearchQuery searchQuery = new SearchQuery("", (float)0, (float)300, cityService.findCity("Цела Македонија"), wineryService.getAllWineries());
+        setSearchAttributes(model, searchQuery);
+        addSearchQueryAttribute(session, searchQuery);
     }
 
     @GetMapping()
     public String getResultsMapping(Model model, HttpSession session) {
         setCitiesAttribute(model);
         model.addAttribute("wineries", wineryService.getAllWineries());
-        removeSearchQueryAttribute(session);
-//        session.removeAttribute("wineryList");
+
+        //set the default parameters
+        setDefaultSearchParameters(model, session);
+
         return "Wineries";
     }
     @PostMapping()
@@ -66,14 +65,20 @@ public class WineryController {
                                         @RequestParam(name = "rating", required = false) Float wineryRating,
                                         @RequestParam(name = "distance", required = false) Float wineryDistance,
                                         @RequestParam(name = "location", required = false) String wineryCityName,
+                                        @RequestParam(name = "sort", required = false) String sortingMethod,
                                         Model model, HttpSession session) {
         //TODO SHOULD BE MODIFIED TO ID, NOT BY NAME
         setCitiesAttribute(model);
         SearchQuery retrievedQuery = (SearchQuery) session.getAttribute("searchQuery");
-//        List<Winery> wineryList = (List<Winery>) session.getAttribute("wineryList");
+
+        String userLocation = (String) session.getAttribute("userGeolocation");
+
         if(retrievedQuery != null && wineryName == null && wineryCityName == null && wineryRating == null && wineryDistance == null){
-//            retrievedQuery.setWineries(winerySorting.sortWineriesByStatus(retrievedQuery.getWineries()));
+            if(sortingMethod != null) {
+                List<Winery> test = winerySortingService.sortWineries(sortingMethod, retrievedQuery, userLocation);
+            }
             setSearchAttributes(model, retrievedQuery);
+
             return "Wineries";
         }
         // if everything is null, set to default values
@@ -91,7 +96,7 @@ public class WineryController {
         }
 
         City wineryCity = cityService.findCity(wineryCityName);
-        List<Winery> filtered_wineries = wineryService.filteredWineries(wineryName, wineryRating, wineryDistance, wineryCity);
+        List<Winery> filtered_wineries = wineryService.filteredWineries(wineryName, wineryRating, wineryDistance, wineryCity, userLocation);
 
         SearchQuery searchQuery = new SearchQuery(wineryName, wineryRating, wineryDistance, wineryCity, filtered_wineries);
         setSearchAttributes(model, searchQuery);
@@ -111,6 +116,9 @@ public class WineryController {
         model.addAttribute("reviews", reviews);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        //TODO fix this later
+        model.addAttribute("userReview", "");
 
         if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
             Object principal = authentication.getPrincipal();
@@ -145,9 +153,7 @@ public class WineryController {
         model.addAttribute("wineriesList", wineries);
         setCitiesAttribute(model);
 
-        session.removeAttribute("wineryList");
-
-        removeSearchQueryAttribute(session);
+        setDefaultSearchParameters(model ,session);
 
         return "WineriesMap";
     }
@@ -185,14 +191,15 @@ public class WineryController {
     @PostMapping("/addedWinery")
     public String saveWinery(@RequestParam String name, @RequestParam("types") List<Long> typeIds,
                              @RequestParam String address, @RequestParam String city,
-                             @RequestParam String phoneNumber, @RequestParam String internationalPhoneNumber,
-                             @RequestParam String workingTime, @RequestParam String website,@RequestParam Boolean wheelchairAccess,
+                             @RequestParam String phoneNumber,@RequestParam OperationalStatus operationalStatus, @RequestParam String internationalPhoneNumber,
+                             @RequestParam String startTime,@RequestParam String endTime, @RequestParam String website,@RequestParam Boolean wheelchairAccess,
                              @RequestParam Float latitude, @RequestParam Float longitude){
         List<Type> types = typeIds.stream()
                 .map(id -> typeService.findById(id).orElse(null))
                 .collect(Collectors.toList());
+        String workingTime = startTime + " - " + endTime;
         City city1 = cityService.findCity(city);
-        Winery winery = new Winery(name, types, address, city1, phoneNumber, internationalPhoneNumber, workingTime, website, OperationalStatus.OPEN, wheelchairAccess, latitude, longitude);
+        Winery winery = new Winery(name, types, address, city1, phoneNumber, internationalPhoneNumber, workingTime, website, operationalStatus, wheelchairAccess, latitude, longitude);
         wineryService.saveWinery(winery);
         return "redirect:/wineries";
     }
@@ -232,7 +239,8 @@ public class WineryController {
                 } else {
                     return "redirect:/error";
                 }
-            } else {
+            }
+            else {
                 return "LogIn";
             }
         }

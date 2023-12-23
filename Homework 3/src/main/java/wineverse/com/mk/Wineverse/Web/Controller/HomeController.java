@@ -1,4 +1,4 @@
-package wineverse.com.mk.Wineverse.Controller;
+package wineverse.com.mk.Wineverse.Web.Controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

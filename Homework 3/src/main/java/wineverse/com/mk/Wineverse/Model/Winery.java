@@ -36,7 +36,7 @@ public class Winery implements Serializable {
     private Float rating;
     private Integer totalReviews;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Review> reviews;
 
     private boolean wheelchairAccessible;

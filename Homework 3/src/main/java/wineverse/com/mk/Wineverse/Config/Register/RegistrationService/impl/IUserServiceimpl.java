@@ -4,12 +4,12 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import wineverse.com.mk.Wineverse.Config.Register.Exceptions.UserAlreadyExistException;
 import wineverse.com.mk.Wineverse.Config.Register.RegistrationModel.UserDto;
 import wineverse.com.mk.Wineverse.Config.Register.RegistrationService.IUserService;
 import wineverse.com.mk.Wineverse.Model.User;
 import wineverse.com.mk.Wineverse.Repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +22,7 @@ public class IUserServiceimpl implements IUserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public User registerNewUserAccount(UserDto userDto) throws UserAlreadyExistException {
+    public User registerNewUserAccount(UserDto userDto) {
         if (emailExists(userDto.getEmail())) {
            return null; //return null if user with the certain email exists
         }
@@ -37,7 +37,7 @@ public class IUserServiceimpl implements IUserService {
             return user;
         }
         User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), userDto.getName(), userDto.getLastname(),
-                userDto.getEmail(), phoneNumber);
+                userDto.getEmail(), phoneNumber, new ArrayList<>());
         return repository.save(user);
     }
     public boolean emailExists(String email) {

@@ -1,6 +1,5 @@
 package wineverse.com.mk.Wineverse.Config.LogIn;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,10 +18,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
-    @Autowired
-    private AuthenticationFacade authenticationFacade;
-
     @Bean
     //authentication
     public UserDetailsService userDetailsService() {
@@ -33,7 +28,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.GET, "/add-winery", "/user").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/favorites", "/wineries/add", "/user").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/wineries/submitReview", "/change-favorite").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form

@@ -28,19 +28,11 @@ public class DataHolder {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    
-    //    public DataHolder(CityRepository cityRepository, TypeRepository typeRepository, WineryRepository wineryRepository, UserRepository userRepository) {
-//        this.cityRepository = cityRepository;
-//        this.typeRepository = typeRepository;
-//        this.wineryRepository = wineryRepository;
-//        this.userRepository = userRepository;
-//    }
-
     @PostConstruct
     @Transactional
     public void init() {
-        User user = new User("admin", passwordEncoder.encode( "admin"), "admin", "admin","admin@gmail.com", "074444244");
-        User user1 = new User("user", passwordEncoder.encode("user"), "user", "user", "user@gmail.com","12213112");
+        User user = new User("admin", passwordEncoder.encode( "admin"), "admin", "admin","admin@gmail.com", "074444244", new ArrayList<>());
+        User user1 = new User("user", passwordEncoder.encode("user"), "user", "user", "user@gmail.com","12213112", new ArrayList<>());
         if(userRepository.findAll().isEmpty()) {
             userRepository.save(user);
             userRepository.save(user1);
@@ -71,7 +63,6 @@ public class DataHolder {
         List<Type> types = new ArrayList<>();
         List<Type> types1 = new ArrayList<>();
         List<Type> types2 = new ArrayList<>();
-        List<Type> types3 = new ArrayList<>();
 
         types.add(typeRepository.findFirstByType("храна"));
         types.add(typeRepository.findFirstByType("популарно место"));
@@ -82,15 +73,7 @@ public class DataHolder {
         types2.add(typeRepository.findFirstByType("вино"));
         types2.add(typeRepository.findFirstByType("популарно место"));
 
-        types3.add(typeRepository.findFirstByType("храна"));
-        types3.add(typeRepository.findFirstByType("вино"));
-
-
         if(wineryRepository.findAll().isEmpty()){
-//            Winery winery1 = new Winery("Борд живот", types,"Улица 103, Кучково, Општина Ѓорче Петров, Град Скопје, Скопски СР", cityRepository.findByName("Скопје"),"070 331 114","+389 70 331 114","Monday - Sunday:  7:00AM–10:00PM", "Нема", OperationalStatus.OPEN, true, (float)42.0586418, (float)21.3176565);
-//            Winery winery2 = new Winery("Винарите Камник", types1,"Камник, Товарник 1, Ченто, Гази Баба, Скопје, Општина Гази Баба, Град Скопје, Скопски СР, 1001", cityRepository.findByName("Скопје"),"070 333 666","+389 70 331 114","Monday - Sunday:  7:00AM–10:00PM", "Нема", OperationalStatus.OPEN, true, (float)42.0077514, (float)21.4902808);
-//            Winery winery3 = new Winery("Винарија со слики", types1,"67, Македонска Преродба, Оризари, Ѓорче Петров, Скопје, Општина Ѓорче Петров, Град Скопје, Скопски СР, 1060", cityRepository.findByName("Свети Николе"),"071 331 114","+389 70 331 114","Monday - Sunday:  7:00AM–10:00PM", "Нема", OperationalStatus.OPEN, true, (float)42.0037876, (float)21.9278854);
-//            Winery winery4 = new Winery("Винарија Картал", types2,"Улица 103, Кучково, Општина Ѓорче Петров, Град Скопје, Скопски СР", cityRepository.findByName("Велес"),"070 331 114","+389 74 331 114","Monday - Sunday:  7:00AM–10:00PM", "Нема", OperationalStatus.OPEN, true, (float)41.7988315, (float)21.7721987);
             Winery winery1 = new Winery("Борд живот", types, "Улица 103, Кучково, Општина Ѓорче Петров, Град Скопје, Скопски СР", cityRepository.findByName("Скопје"), "070 331 114", "+389 70 331 114", "Monday - Sunday:  7:00AM–10:00PM", "Нема", OperationalStatus.OPEN, true, (float) 42.0586418, (float) 21.3176565);
 
 // Add 5 manual reviews for winery1 and save them first

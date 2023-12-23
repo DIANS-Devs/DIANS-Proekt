@@ -11,10 +11,12 @@
     </div>
 </div>
 <div th:each="winery : ${wineries}" class="container bg-body-secondary mb-3 p-4">
-    <span class="float-end">
-        <button th:data-winery-id="${winery.getId()}" onclick="addOrRemoveFavorite(this)"
-        class="border-0 bg-transparent">&#10084;</button>
-    </span>
+    <form th:action="@{/change-favorite}" method="post" id="favoriteForm">
+        <span class="float-end">
+            <input type="hidden" name="wineryId" th:value="${winery.getId()}">
+            <button class="border-0 bg-transparent">&#10084;</button>
+        </span>
+    </form>
     <a th:href="@{'/wineries/' + ${winery.getId()}}" th:text="${winery.getName()}" class="text-dark h3 d-inline-block mb-3"></a>
     <br>
     <span class="p-4">
@@ -29,6 +31,5 @@
             <strong>Работно време:</strong> <span th:text="${winery.getWorkingTime()}"></span>
     </span>
 </div>
-<script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
 </body>
 </html>

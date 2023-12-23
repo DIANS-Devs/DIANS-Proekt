@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import wineverse.com.mk.Wineverse.Config.LogIn.UserInfoUserDetails;
 import wineverse.com.mk.Wineverse.Form.ReviewForm;
 import wineverse.com.mk.Wineverse.Model.*;
@@ -14,6 +15,7 @@ import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 import wineverse.com.mk.Wineverse.Service.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,13 +53,15 @@ public class WineryController {
     }
 
     @GetMapping()
-    public String getResultsMapping(Model model, HttpSession session) {
+    public String getResultsMapping(Model model, HttpSession session,  @ModelAttribute("wineries") ArrayList<Winery> filtered_wineries) {
         setCitiesAttribute(model);
+        //TODO filtered wineries on back click from post
+        if(filtered_wineries != null && filtered_wineries.size() != 0){
+            model.addAttribute("wineries", filtered_wineries);
+        }
+        else{
         model.addAttribute("wineries", wineryService.getAllWineries());
-
-        //set the default parameters
-        setDefaultSearchParameters(model, session);
-
+        setDefaultSearchParameters(model, session);}
         return "Wineries";
     }
     @PostMapping()
@@ -66,7 +70,7 @@ public class WineryController {
                                         @RequestParam(name = "distance", required = false) Float wineryDistance,
                                         @RequestParam(name = "location", required = false) String wineryCityName,
                                         @RequestParam(name = "sort", required = false) String sortingMethod,
-                                        Model model, HttpSession session) {
+                                        Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         //TODO SHOULD BE MODIFIED TO ID, NOT BY NAME
         setCitiesAttribute(model);
         SearchQuery retrievedQuery = (SearchQuery) session.getAttribute("searchQuery");
@@ -78,8 +82,9 @@ public class WineryController {
                 List<Winery> test = winerySortingService.sortWineries(sortingMethod, retrievedQuery, userLocation);
             }
             setSearchAttributes(model, retrievedQuery);
+            redirectAttributes.addFlashAttribute("wineries", null);
 
-            return "Wineries";
+            return "redirect:/wineries";
         }
         // if everything is null, set to default values
         if(wineryName == null) {
@@ -101,8 +106,9 @@ public class WineryController {
         SearchQuery searchQuery = new SearchQuery(wineryName, wineryRating, wineryDistance, wineryCity, filtered_wineries);
         setSearchAttributes(model, searchQuery);
         addSearchQueryAttribute(session, searchQuery);
+        redirectAttributes.addFlashAttribute("wineries", filtered_wineries);
 
-        return "Wineries";
+        return "redirect:/wineries";
     }
 
     @GetMapping("/{id}")

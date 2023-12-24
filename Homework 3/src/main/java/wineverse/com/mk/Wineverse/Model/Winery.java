@@ -68,13 +68,12 @@ public class Winery implements Serializable {
         this.longitude = longitude;
     }
 
-    @Transactional
     public void addReview(Review review){
+        this.reviews.remove(review);
         this.reviews.add(review);
         this.rating = (float) reviews.stream().mapToInt(Review::getRating).average().orElse(0.0);
         this.totalReviews = reviews.size();
     }
-
     public String getWineryTypesAsString(){
         if (types != null && !types.isEmpty()) {
             return types.stream().map(Type::getType).collect(Collectors.joining(", "));
@@ -92,7 +91,8 @@ public class Winery implements Serializable {
         return (double) count / reviews.size() * 100;
     }
     public double getRating(){
-        return Math.round(rating * 10.0) / 10.0;
+        double temp =Math.round(rating * 10.0) / 10.0;
+        return temp;
     }
 
     public String getReviewsAsString(){

@@ -1,6 +1,7 @@
 package wineverse.com.mk.Wineverse.Service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.Model.City;
@@ -59,23 +60,22 @@ public class WineryServiceImpl implements WineryService {
     }
 
     @Override
+    @Transactional
     public void setNewReview(Long wineryId, Review review) {
         Winery winery = wineryRepository.findById(wineryId).orElseThrow();
 
         // Check if the review already exists
-        boolean reviewExists = winery.getReviews().stream()
-                .anyMatch(item -> item.getAuthor().equals(review.getAuthor()));
+        Optional<Review> existingReview = winery.getReviews().stream()
+                .filter(item -> item.getAuthor().equals(review.getAuthor()))
+                .findFirst();
 
-        if (reviewExists) {
+        if (existingReview.isPresent()) {
             // If the review exists, update its properties
-            winery.getReviews().stream()
-                    .filter(item -> item.getAuthor().equals(review.getAuthor()))
-                    .findFirst()
-                    .ifPresent(existingReview -> {
-                        existingReview.setRating(review.getRating());
-                        existingReview.setContent(review.getContent());
-                        reviewRepository.save(existingReview);
-                    });
+            Review reviewToUpdate = existingReview.get();
+            reviewToUpdate.setRating(review.getRating());
+            reviewToUpdate.setContent(review.getContent());
+            winery.addReview(reviewToUpdate);
+            reviewRepository.save(reviewToUpdate);
         } else {
             // If the review doesn't exist, add it to the winery's reviews
             winery.addReview(review);

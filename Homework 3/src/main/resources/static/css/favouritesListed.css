@@ -24,3 +24,8 @@
 .resultButtons button > i{
     margin-left: 0.5em;
 }
+
+.fa-heart{
+    color: red;
+    cursor: pointer;
+}

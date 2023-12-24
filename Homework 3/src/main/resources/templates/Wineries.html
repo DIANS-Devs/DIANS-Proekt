@@ -95,9 +95,9 @@
                 <p><b>Работно време:</b><span th:text="${winery.getWorkingTime()}"></span></p>
             </div>
             <div class="right_part">
-                <form th:action="@{/change-favorite}" method="post" id="favoriteForm">
+                <form th:action="@{/change-favorite}" method="post" th:id="${'favoriteForm' + wineries.indexOf(winery)}">
                     <input type="hidden" name="wineryId" th:value="${winery.getId()}">
-                    <p id="favourite_container">
+                    <p class="favourite_container">
                         <i class="far fa-heart"></i>
                     </p>
                 </form>

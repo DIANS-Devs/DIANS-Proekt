@@ -23,7 +23,7 @@
 <body>
     <div th:insert="~{fragments/Header :: header}"></div>
 
-    <div th:unless="${title == 'About Us' or title == 'Home' or title == 'WineriesAdd'}">
+    <div th:unless="${title == 'About Us' or title == 'Home' or title == 'WineriesAdd' or title == 'Error'}">
         <div th:insert="~{fragments/Search :: search}"></div>
     </div>
 

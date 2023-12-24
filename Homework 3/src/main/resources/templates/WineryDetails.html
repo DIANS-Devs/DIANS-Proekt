@@ -66,11 +66,10 @@
                 </form>
             </div>
 
-
-            <!--Add review rating form button-->
-            <button class="btn btn-primary" onclick="openReviewForm()" sec:authorize="isAuthenticated()">Add Review</button>
+            <button class="btn btn-secondary float-end" onclick="openReviewForm()" sec:authorize="isAuthenticated()">
+                Додади рецензија
+            </button>
             <div th:replace="~{fragments/ReviewForm :: #reviewModal(wineryId=${winery.getId()}, userReview=${userReview})}"></div>
-            <!--------------------------------->
 
         </div>
     </div>
@@ -109,7 +108,7 @@
         </div>
     </div>
         <div class="container bg-body-primary mb-3 p-4 review-box">
-            <div class="container bg-body-primary mb-3 p-4 review-section review-box" th:each="review : ${reviews.reversed()}">
+            <div class="container bg-body-primary mb-3 p-4 review-section review-box" th:each="review : ${reviews}">
                 <!-- Add a class to the div to apply a slightly darker background color -->
                 <section>
                     <span th:text="${review.getAuthor().getName() + ' ' + review.getAuthor().getSurname()}"></span><br>

@@ -28,7 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.GET, "/favorites", "/wineries/add", "/user").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/favorites/map", "/favorites", "/wineries/add", "/user").authenticated()
                         .requestMatchers(HttpMethod.POST, "/wineries/submitReview", "/change-favorite").authenticated()
                         .anyRequest().permitAll()
                 )

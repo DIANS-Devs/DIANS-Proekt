@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 function (position) {
-                    const accuracy= 15000;
+                    const accuracy= 500;
                     const { latitude, longitude } = position.coords;
 
                     // marker_helper = L.marker([latitude, longitude], {color: 'green'}).addTo(map);

@@ -14,6 +14,7 @@ import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 import wineverse.com.mk.Wineverse.Service.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,11 +51,20 @@ public class WineryController {
         addSearchQueryAttribute(session, searchQuery);
     }
 
+    private List<Winery> getFavorites(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (userService.getUserByUsername(auth.getName()).isPresent()){
+            User user = userService.getUserByUsername(auth.getName()).get();
+            return wineryService.getWineriesByIds(user.getFavorites());
+        }
+        return new ArrayList<>();
+    }
+
     @GetMapping()
     public String getResultsMapping(Model model, HttpSession session) {
         setCitiesAttribute(model);
         model.addAttribute("wineries", wineryService.getAllWineries());
-
+        model.addAttribute("favorites", getFavorites());
         //set the default parameters
         setDefaultSearchParameters(model, session);
 
@@ -101,6 +111,7 @@ public class WineryController {
         SearchQuery searchQuery = new SearchQuery(wineryName, wineryRating, wineryDistance, wineryCity, filtered_wineries);
         setSearchAttributes(model, searchQuery);
         addSearchQueryAttribute(session, searchQuery);
+        model.addAttribute("favorites", getFavorites());
 
         return "Wineries";
     }
@@ -111,6 +122,7 @@ public class WineryController {
         Winery winery = wineryService.getWineryById(id).get();
         setCitiesAttribute(model);
         model.addAttribute("winery", winery);
+        model.addAttribute("favorites", getFavorites());
 
         List<Review> reviews = winery.getReviews();
         model.addAttribute("reviews", reviews);
@@ -204,45 +216,45 @@ public class WineryController {
         return "redirect:/wineries";
     }
 
-        @PostMapping("/submitReview")
-        public String submitReview(@ModelAttribute ReviewForm reviewForm) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    @PostMapping("/submitReview")
+    public String submitReview(@ModelAttribute ReviewForm reviewForm) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-            if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
-                Object principal = authentication.getPrincipal();
+        if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
+            Object principal = authentication.getPrincipal();
 
-                if (principal instanceof UserInfoUserDetails userDetails) {
+            if (principal instanceof UserInfoUserDetails userDetails) {
 
-                    User user = null;
-                    String userName = userDetails.getUsername();
-                    Optional<User> userOptional = userService.getUserByUsername(userName).stream().findFirst();
+                User user = null;
+                String userName = userDetails.getUsername();
+                Optional<User> userOptional = userService.getUserByUsername(userName).stream().findFirst();
 
-                    if (userOptional.isPresent())
-                        user = userOptional.get();
+                if (userOptional.isPresent())
+                    user = userOptional.get();
 
-                    Long wineryId = reviewForm.getWineryId();
-                    Integer rating = reviewForm.getRating();
-                    String content = reviewForm.getComment();
+                Long wineryId = reviewForm.getWineryId();
+                Integer rating = reviewForm.getRating();
+                String content = reviewForm.getComment();
 
-                    Review review;
+                Review review;
 
-                    try {
-                        review = wineryService.getUserReviewForWinery(wineryId,user);
-                        review.setRating(reviewForm.getRating());
-                        review.setContent(reviewForm.getComment());
-                    } catch (Exception e){
-                        review = new Review(user,rating,content, LocalDate.now());
-                    }
-                    wineryService.setNewReview(wineryId,review);
-
-                    return "redirect:/wineries/"+wineryId;
-                } else {
-                    return "redirect:/error";
+                try {
+                    review = wineryService.getUserReviewForWinery(wineryId,user);
+                    review.setRating(reviewForm.getRating());
+                    review.setContent(reviewForm.getComment());
+                } catch (Exception e){
+                    review = new Review(user,rating,content, LocalDate.now());
                 }
-            }
-            else {
-                return "LogIn";
+                wineryService.setNewReview(wineryId,review);
+
+                return "redirect:/wineries/"+wineryId;
+            } else {
+                return "redirect:/error";
             }
         }
+        else {
+            return "LogIn";
+        }
+    }
 
 }

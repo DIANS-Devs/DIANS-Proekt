@@ -11,9 +11,9 @@
     </div>
 </div>
 <div th:each="winery : ${wineries}" class="container bg-body-secondary mb-3 p-4">
-    <form th:action="@{/change-favorite}" method="post" id="favoriteForm">
+    <form th:action="@{/change-favorite}" method="post" th:id="${'favoriteForm' + wineries.indexOf(winery)}">
         <input type="hidden" name="wineryId" th:value="${winery.getId()}">
-        <p id="favourite_container" class="float-end">
+        <p class="favorite_container float-end">
             <i class="fas fa-heart"></i>
         </p>
     </form>
@@ -31,6 +31,6 @@
             <strong>Работно време:</strong> <span th:text="${winery.getWorkingTime()}"></span>
     </span>
 </div>
-<script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
+<script th:src="@{/js/favorites.js}" defer="defer"></script>
 </body>
 </html>

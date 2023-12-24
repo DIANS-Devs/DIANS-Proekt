@@ -211,7 +211,7 @@ public class WineryController {
     }
 
         @PostMapping("/submitReview")
-        public String submitReview(@ModelAttribute ReviewForm reviewForm) {
+        public String submitReview(@ModelAttribute ReviewForm reviewForm, Model model) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
             if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
@@ -240,6 +240,7 @@ public class WineryController {
                         review = new Review(user,rating,content, LocalDate.now());
                     }
                     wineryService.setNewReview(wineryId,review);
+                    model.addAttribute("reviews", wineryService.getWineryById(wineryId).get().getReviews());
 
                     return "redirect:/wineries/"+wineryId;
                 } else {

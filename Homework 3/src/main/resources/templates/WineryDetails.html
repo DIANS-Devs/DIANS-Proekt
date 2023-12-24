@@ -103,7 +103,7 @@
         </div>
     </div>
         <div class="container bg-body-primary mb-3 p-4 review-box">
-            <div class="container bg-body-primary mb-3 p-4 review-section review-box" th:each="review : ${reviews}">
+            <div class="container bg-body-primary mb-3 p-4 review-section review-box" th:each="review : ${reviews.reversed()}">
                 <!-- Add a class to the div to apply a slightly darker background color -->
                 <section>
                     <span th:text="${review.getAuthor().getName() + ' ' + review.getAuthor().getSurname()}"></span><br>

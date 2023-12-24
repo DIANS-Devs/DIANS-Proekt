@@ -24,6 +24,8 @@
                         <label for="comment">Comment:</label>
                         <textarea class="form-control" id="comment" name="comment" required
                                   th:text="${userReview != 'error' && userReview != '' ? userReview.content : ''}"></textarea>                    </div>
+
+                    <!-- Could be removed -->
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                     <button type="submit" class="btn btn-primary">Submit Review</button>

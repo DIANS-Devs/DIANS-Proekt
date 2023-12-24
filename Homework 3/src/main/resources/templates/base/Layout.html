@@ -23,7 +23,7 @@
 <body>
     <div th:insert="~{fragments/Header :: header}"></div>
 
-    <div th:unless="${title == 'About Us' or title == 'Home'}">
+    <div th:unless="${title == 'About Us' or title == 'Home' or title == 'WineriesAdd'}">
         <div th:insert="~{fragments/Search :: search}"></div>
     </div>
 
@@ -39,7 +39,7 @@
     .main{
         min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
     }
-    .main:not(:has(>.wineriesNoPadding)){
+    .main:not(:has(>.wineriesNoPadding, >.addForm)){
         padding: 5em;
     }
     .review-box {

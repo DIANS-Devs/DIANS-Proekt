@@ -53,12 +53,18 @@
                     th:text="${winery.getInternationalPhoneNumber()}"></span>
                 </span>
             <br>
-            <span class="p-4">
-                    <strong>Омилено: </strong>
-                    <span th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)" id="favourite_container">
-                        <i class="far fa-heart" style="color: red"></i>
+            <div class="p-4">
+                <strong>Омилено: </strong>
+                <form th:action="@{/change-favorite}" method="post" id="favoriteForm0" style="display: inline">
+                    <input type="hidden" name="wineryId" th:value="${winery.getId()}">
+                    <span class="favorite_container">
+                        <i class="fa-heart"
+                           th:classappend="${favorites != null and !#lists.isEmpty(favorites)
+                               and favorites.contains(winery) ? 'fas' : 'far'}">
+                        </i>
                     </span>
-            </span>
+                </form>
+            </div>
 
 
             <!--Add review rating form button-->
@@ -118,7 +124,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" defer="defer"></script>
 <script th:src="@{/js/geolocation.js}" defer="defer"></script>
-<script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
+<script th:src="@{/js/favorites.js}" defer="defer"></script>
 <script th:src="@{/js/modalReviewScript.js}" defer="defer"></script>
 </body>
 </html>

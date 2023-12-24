@@ -52,6 +52,15 @@ public class WineryController {
         addSearchQueryAttribute(session, searchQuery);
     }
 
+    private List<Winery> getFavorites(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (userService.getUserByUsername(auth.getName()).isPresent()){
+            User user = userService.getUserByUsername(auth.getName()).get();
+            return wineryService.getWineriesByIds(user.getFavorites());
+        }
+        return new ArrayList<>();
+    }
+
     @GetMapping()
     public String getResultsMapping(Model model, HttpSession session,  @ModelAttribute("wineries") ArrayList<Winery> filtered_wineries) {
         setCitiesAttribute(model);
@@ -60,8 +69,11 @@ public class WineryController {
             model.addAttribute("wineries", filtered_wineries);
         }
         else{
-        model.addAttribute("wineries", wineryService.getAllWineries());
-        setDefaultSearchParameters(model, session);}
+            model.addAttribute("wineries", wineryService.getAllWineries());
+            setDefaultSearchParameters(model, session);
+        }
+        model.addAttribute("favorites", getFavorites());
+
         return "Wineries";
     }
     @PostMapping()
@@ -107,8 +119,9 @@ public class WineryController {
         setSearchAttributes(model, searchQuery);
         addSearchQueryAttribute(session, searchQuery);
         redirectAttributes.addFlashAttribute("wineries", filtered_wineries);
+        model.addAttribute("favorites", getFavorites());
 
-        return "redirect:/wineries";
+        return "Wineries";
     }
 
     @GetMapping("/{id}")
@@ -117,6 +130,7 @@ public class WineryController {
         Winery winery = wineryService.getWineryById(id).get();
         setCitiesAttribute(model);
         model.addAttribute("winery", winery);
+        model.addAttribute("favorites", getFavorites());
 
         List<Review> reviews = winery.getReviews();
         model.addAttribute("reviews", reviews);

@@ -5,5 +5,6 @@ import wineverse.com.mk.Wineverse.Model.User;
 import java.util.Optional;
 
 public interface UserService {
-    public Optional<User> getUserByUsername(String username);
+    Optional<User> getUserByUsername(String username);
+    void alterFavorites(Long id);
 }

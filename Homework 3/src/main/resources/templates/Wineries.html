@@ -95,9 +95,15 @@
                 <p><b>Работно време:</b><span th:text="${winery.getWorkingTime()}"></span></p>
             </div>
             <div class="right_part">
-                <p th:data-winery-id="${winery.getId()}" onclick="addToFavorites(this)" id="favourite_container">
-                    <i class="far fa-heart"></i>
-                </p>
+                <form th:action="@{/change-favorite}" method="post" th:id="${'favoriteForm' + wineries.indexOf(winery)}">
+                    <input type="hidden" name="wineryId" th:value="${winery.getId()}">
+                    <p class="favorite_container">
+                        <i class="fa-heart"
+                           th:classappend="${favorites != null and !#lists.isEmpty(favorites)
+                           and favorites.contains(winery) ? 'fas' : 'far'}">
+                        </i>
+                    </p>
+                </form>
                 <p>
                     <i class="fas fa-star"></i>
                     <span th:text="${winery.getReviewsAsString()}"></span>
@@ -109,7 +115,7 @@
         <button>Add winery</button>
     </a>
     <script th:src="@{/js/geolocation.js}" defer></script>
-    <script th:src="@{/js/favoriteButton.js}" defer="defer"></script>
+    <script th:src="@{/js/favorites.js}" defer="defer"></script>
 </main>
 </body>
 </html>

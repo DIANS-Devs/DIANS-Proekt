@@ -96,7 +96,8 @@ public class WineryController {
             setSearchAttributes(model, retrievedQuery);
             redirectAttributes.addFlashAttribute("wineries", null);
 
-            return "redirect:/wineries";
+            return "Wineries";
+//            return "redirect:/wineries";
         }
         // if everything is null, set to default values
         if(wineryName == null) {

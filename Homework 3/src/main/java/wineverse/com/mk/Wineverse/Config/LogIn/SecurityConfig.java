@@ -44,7 +44,8 @@ public class SecurityConfig {
                             response.sendRedirect("/wineries");
                         })
                         .permitAll()
-                );
+                )
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/save-user-position"));// Disable CSRF for /test endpoint
 
         return http.build();
     }

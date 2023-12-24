@@ -88,7 +88,7 @@ public class WineryServiceImpl implements WineryService {
     public List<Winery> filteredWineries(String name, Float rating, Float distance, City city, String userLocation) {
         //TODO implement distance filter
         List<Winery> name_wineries = wineryRepository.findByNameContaining(name);
-//        List<Winery> rating_wineries = wineryRepository.findByRatingGreaterThanEqual(rating);
+        List<Winery> rating_wineries = wineryRepository.findByRatingGreaterThanEqual(rating);
         List<Winery> city_wineries;
         if (!city.getName().equals("Цела Македонија")) {
             city_wineries = wineryRepository.findByCity(city);
@@ -102,7 +102,7 @@ public class WineryServiceImpl implements WineryService {
                 .toList();
         
         List<Winery> interceptWineries = new ArrayList<>(name_wineries);
-//        interceptWineries.retainAll(rating_wineries);
+        interceptWineries.retainAll(rating_wineries);
         interceptWineries.retainAll(city_wineries);
         interceptWineries.retainAll(distance_wineries);
         return interceptWineries;

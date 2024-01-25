@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="base(title)">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/8a8cfedc22.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--  CUSTOM CSS FOR WINERIES LISTED  -->
+
+    <!-- START LEAFLET library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <!-- END LEAFLET LIBRARY -->
+
+    <title th:text="${title}"></title>
+    <!--  CUSTOM CSS FOR WINERIES LISTED  -->
+    <link th:href="@{/css/wineriesListed.css}" rel="stylesheet"/>
+    <link th:href="@{/css/wineriesMap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/addForm.css}" rel="stylesheet" href="">
+    <link th:href="@{/css/favouritesListed.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div th:insert="~{fragments/Header :: header}"></div>
+
+    <div th:unless="${title == 'About Us' or title == 'Home' or title == 'WineriesAdd' or title == 'Error'}">
+        <div th:insert="~{fragments/Search :: search}"></div>
+    </div>
+
+    <div th:insert="~{::content}" class="main"></div>
+
+    <div th:insert="~{fragments/Footer :: footer}"></div>
+</body>
+<style>
+    :root{
+        --navbar-height: 56px;
+        --footer-height: 56px;
+    }
+    .main{
+        min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
+    }
+    .main:not(:has(>.wineriesNoPadding, >.addForm)){
+        padding: 5em;
+    }
+    .review-box {
+        max-height: 350px; /* Set the maximum height as needed */
+        overflow: auto;
+    }
+    .review-section{
+        border-radius: 1em;
+    }
+    .review-section:nth-child(even){
+        background-color: #c0c0c0;
+    }
+    .review-section:nth-child(odd){
+        background-color: #d9d9d9;
+    }
+</style>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base/Layout :: base(title='WineriesAdd')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a winery</title>
+</head>
+<body th:fragment="content">
+<script>
+    function validateForm() {
+        // Check if at least one checkbox is checked
+        let checkboxes = document.getElementsByName('types');
+        let checkboxChecked = false;
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checkboxChecked = true;
+                break;
+            }
+        }
+
+        if (!checkboxChecked) {
+            alert('Треба да селектирате барем еден тип.');
+            return false;
+        }
+
+        // Check if a radio button for wheelchair access is chosen
+        let wheelchairAccessTrue = document.getElementById('wheelchairAccessTrue');
+        let wheelchairAccessFalse = document.getElementById('wheelchairAccessFalse');
+
+        if (!wheelchairAccessTrue.checked && !wheelchairAccessFalse.checked) {
+            alert('Селектирајте дали винаријата е пристапна со инвалидска количка.');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+<form th:action="@{'/wineries/addedWinery'}" th:method="post" class="addForm" onsubmit="return validateForm();">
+    <h2>Додади винарија</h2>
+    <div>
+        <label>Име: </label>
+        <input type="text" name="name" title="Внеси име" required/>
+    </div>
+
+    <div>
+        <p>Видови:</p>
+        <div th:each="type : ${types}" class="type">
+            <input type="checkbox" name="types" th:value="${type.getId()}" th:id="'type_' + ${type.getId()}">
+            <label th:text="${type.getType()}" th:for="'type_' + ${type.getId()}"></label>
+        </div>
+    </div>
+
+    <div>
+        <label for="address">Адреса: </label>
+        <input type="text" id="address" name="address" required/>
+    </div>
+
+    <div>
+        <label for="city">Град: </label>
+        <select id="city" name="city" required>
+            <option th:each="city : ${cities}" th:value="${city.getName()}" th:text="${city.getName()}"></option>
+        </select>
+    </div>
+
+    <div>
+        <label for="phoneNumber">Teлефонски број: </label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required/>
+    </div>
+
+    <div>
+        <label for="internationalPhoneNumber">Интернационален тел. број: </label>
+        <input
+                type="text"
+                id="internationalPhoneNumber"
+                name="internationalPhoneNumber"
+                required
+        />
+    </div>
+
+    <div>
+        <p>Пристап за луѓе со посебни потреби: </p>
+        <div class="wheelchairAccess">
+            <input
+                    type="radio"
+                    id="wheelchairAccessTrue"
+                    name="wheelchairAccess"
+                    value="1"
+            />
+            <label for="wheelchairAccessTrue">Има</label>
+
+            <input
+                    type="radio"
+                    id="wheelchairAccessFalse"
+                    name="wheelchairAccess"
+                    value="0"
+            />
+            <label for="wheelchairAccessFalse">Нема</label>
+        </div>
+    </div>
+
+    <div>
+        <label for="website">Веб страна: </label>
+        <input type="text" id="website" name="website" required/>
+    </div>
+
+    <div class="time-range">
+        <label for="startTime">Работно време (Од): </label>
+        <input type="time" class="time" id="startTime" name="startTime" th:range="0-24" required>
+    </div>
+
+    <div class="time-range">
+        <label for="endTime">Работно време (До): </label>
+        <input type="time" class="time" id="endTime" name="endTime" th:range="0-24" required>
+    </div>
+
+    <div>
+        <label for="operationalStatus">Статус: </label>
+        <select id="operationalStatus" name="operationalStatus" required>
+            <option value="OPEN">Отворено</option>
+            <option value="CLOSED">Затворено</option>
+            <option value="TEMPORARILY_CLOSED">Привремено затворено</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="latitude">Географска ширина: </label>
+        <input type="text" id="latitude" name="latitude" required pattern="\d+(\.\d+)?"/>
+    </div>
+
+    <div>
+        <label for="longitude">Географска должина: </label>
+        <input type="text" id="longitude" name="longitude" required pattern="\d+(\.\d+)?"/>
+    </div>
+    <button type="submit">Внеси винарија</button>
+</form>
+
+</body>
+</html>

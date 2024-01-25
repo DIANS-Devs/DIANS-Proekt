@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title='Favourites')}">
+<body th:fragment="content">
+<div class="resultButtons">
+    <h4>Омилени</h4>
+    <div class="buttons" style="display: flex">
+        <button class="listButton" style="margin-right: 1rem">Винарии</button>
+        <form th:action="@{'/favorites/map'}" method="get">
+            <button type="submit" class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>
+        </form>
+    </div>
+</div>
+<div th:each="winery : ${wineries}" class="container bg-body-secondary mb-3 p-4">
+    <form th:action="@{/change-favorite}" method="post" th:id="${'favoriteForm' + wineries.indexOf(winery)}">
+        <input type="hidden" name="wineryId" th:value="${winery.getId()}">
+        <p class="favorite_container float-end">
+            <i class="fas fa-heart"></i>
+        </p>
+    </form>
+    <a th:href="@{'/wineries/' + ${winery.getId()}}" th:text="${winery.getName()}" class="text-dark h3 d-inline-block mb-3"></a>
+    <br>
+    <span class="p-4">
+          <strong>Адреса:</strong> <span th:text="${winery.getAddress()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+            <strong>Град:</strong> <span th:text="${winery.getCity().getName()}"></span>
+    </span>
+    <br>
+    <span class="p-4">
+            <strong>Работно време:</strong> <span th:text="${winery.getWorkingTime()}"></span>
+    </span>
+</div>
+<script th:src="@{/js/favorites.js}" defer="defer"></script>
+</body>
+</html>

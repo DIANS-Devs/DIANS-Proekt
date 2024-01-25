@@ -18,12 +18,17 @@
 #
 ## Run spring boot application
 #CMD ["mvn", "spring-boot:run"]
-FROM maven:3.8.4-openjdk-17-slim
-
-WORKDIR /app
-
-COPY . /app
-
+#FROM maven:3.8.4-openjdk-17-slim
+#
+#WORKDIR /app
+#
+#COPY . /app
+#
+#EXPOSE 8080
+#
+#CMD ["mvn", "spring-boot:run"]
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 EXPOSE 8080
-
-CMD ["mvn", "spring-boot:run"]

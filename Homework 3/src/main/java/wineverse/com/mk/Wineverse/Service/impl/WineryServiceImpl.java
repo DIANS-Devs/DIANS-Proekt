@@ -1,17 +1,16 @@
 package wineverse.com.mk.Wineverse.Service.impl;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import wineverse.com.mk.Wineverse.Model.City;
 import wineverse.com.mk.Wineverse.Model.Review;
 import wineverse.com.mk.Wineverse.Model.User;
+import wineverse.com.mk.Wineverse.Model.Winery;
 import wineverse.com.mk.Wineverse.Repository.ReviewRepository;
 import wineverse.com.mk.Wineverse.Repository.WineryRepository;
-import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.Service.WineryService;
-import wineverse.com.mk.Wineverse.Model.City;
-import wineverse.com.mk.Wineverse.Model.Winery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,23 +60,22 @@ public class WineryServiceImpl implements WineryService {
     }
 
     @Override
+    @Transactional
     public void setNewReview(Long wineryId, Review review) {
         Winery winery = wineryRepository.findById(wineryId).orElseThrow();
 
         // Check if the review already exists
-        boolean reviewExists = winery.getReviews().stream()
-                .anyMatch(item -> item.getAuthor().equals(review.getAuthor()));
+        Optional<Review> existingReview = winery.getReviews().stream()
+                .filter(item -> item.getAuthor().equals(review.getAuthor()))
+                .findFirst();
 
-        if (reviewExists) {
+        if (existingReview.isPresent()) {
             // If the review exists, update its properties
-            winery.getReviews().stream()
-                    .filter(item -> item.getAuthor().equals(review.getAuthor()))
-                    .findFirst()
-                    .ifPresent(existingReview -> {
-                        existingReview.setRating(review.getRating());
-                        existingReview.setContent(review.getContent());
-                        reviewRepository.save(existingReview);
-                    });
+            Review reviewToUpdate = existingReview.get();
+            reviewToUpdate.setRating(review.getRating());
+            reviewToUpdate.setContent(review.getContent());
+            winery.addReview(reviewToUpdate);
+            reviewRepository.save(reviewToUpdate);
         } else {
             // If the review doesn't exist, add it to the winery's reviews
             winery.addReview(review);
@@ -116,16 +114,8 @@ public class WineryServiceImpl implements WineryService {
     }
 
     @Override
-    public List<Winery> getWineriesByIds(List<String> favoriteWineryIds) {
-        List<Winery> return_wineries = new ArrayList<>();
-        for(Winery w: wineryRepository.findAll()){
-            for(String ids : favoriteWineryIds){
-                long id = Long.parseLong(ids);
-                if(id == w.getId())
-                    return_wineries.add(w);
-            }
-        }
-        return return_wineries;
+    public List<Winery> getWineriesByIds(List<Long> favoriteWineryIds) {
+        return wineryRepository.findAllById(favoriteWineryIds);
     }
 
     @Override
@@ -137,9 +127,8 @@ public class WineryServiceImpl implements WineryService {
     }
 
     @Override
-    public List<String> getFavouriteWineriesAsString() {
-        //TODO NOT THIS CODE, CHANGE IT
-        List<Winery> wineries = wineryRepository.findAll();
+    public List<String> getFavoritesAsString(List<Long> ids){
+        List<Winery> wineries = wineryRepository.findAllById(ids);
         return wineries.stream()
                 .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
                 .collect(Collectors.toList());

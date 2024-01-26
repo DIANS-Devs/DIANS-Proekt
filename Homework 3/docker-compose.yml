@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: wineverse_db
+      POSTGRES_USER: dario
+      POSTGRES_PASSWORD: master15820
+    ports:
+      - "5432:5432"
+
+  wineverse:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres

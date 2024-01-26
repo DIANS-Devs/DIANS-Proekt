@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title='Wineries Map')}">
+<body >
+    <main class="wineriesMap wineriesNoPadding" th:fragment="content">
+        <div class="resultButtons">
+            <p>Пребарувањето врати <span th:text="${wineriesList.size()}"></span> резултати</p>
+            <div class="buttons">
+                <form th:action="@{'/wineries'}" method="post" style="display: inline-block">
+                    <button class="listButton">Винарии</button>
+                </form>
+                <button class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>
+            </div>
+        </div>
+        <div id="map" th:wineriesList="${wineriesList}"></div>
+        <script th:src="@{/js/drawMap.js}" defer="defer"></script>
+    </main>
+</body>
+</html>

@@ -12,9 +12,9 @@ public interface WineryService {
     List<Winery> getAllWineries();
     List<Winery> filteredWineries(String name, Float rating, Float distance, City city, String userLocation);
     Optional<Winery> getWineryById(Long id);
-    List<Winery> getWineriesByIds(List<String> favoriteWineryIds);
+    List<Winery> getWineriesByIds(List<Long> favoriteWineryIds);
     List<String> getWineriesAsString();
-    List<String> getFavouriteWineriesAsString();
+    List<String> getFavoritesAsString(List<Long> ids);
     void setNewReview(Long wineryId, Review review);
     void saveWinery(Winery winery);
 

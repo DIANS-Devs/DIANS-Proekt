@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import wineverse.com.mk.Wineverse.HelpServices.DistanceCalculator;
 import wineverse.com.mk.Wineverse.Model.*;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
 import wineverse.com.mk.Wineverse.Repository.CityRepository;
@@ -24,28 +25,14 @@ public class WineryServiceImpl implements WineryService {
     private final ReviewRepository reviewRepository;
     private final WineryCacheService wineryCacheService;
     private final CityRepository cityRepository;
+    private final DistanceCalculator distanceCalculator;
 
-    public WineryServiceImpl(WineryRepository wineryRepository, ReviewRepository reviewRepository, CityRepository cityRepository) {
+    public WineryServiceImpl(WineryRepository wineryRepository, ReviewRepository reviewRepository, CityRepository cityRepository, DistanceCalculator distanceCalculator) {
         this.wineryRepository = wineryRepository;
         this.reviewRepository = reviewRepository;
         this.cityRepository = cityRepository;
         this.wineryCacheService = WineryCacheServiceImpl.getInstance(wineryRepository);
-    }
-
-    public static double getDistance(String userLocation, double wineryLat, double wineryLon){
-        if (userLocation == null) return 0;
-
-        double userLat = Double.parseDouble(userLocation.split(",")[0]);
-        double userLon = Double.parseDouble(userLocation.split(",")[1]);
-
-        double R = 6371; // Radius of the Earth in kilometers
-        double dLat = Math.toRadians(wineryLat - userLat);
-        double dLon = Math.toRadians(wineryLon - userLon);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(wineryLat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-//        System.out.println("The distance is "+ R*c);
-        return R * c; // Distance in kilometers
+        this.distanceCalculator = distanceCalculator;
     }
 
     @Override
@@ -111,7 +98,7 @@ public class WineryServiceImpl implements WineryService {
         List<Winery> distance_wineries = wineryCacheService
                 .listAll()
                 .stream()
-                .filter(winery -> distance >= getDistance(userLocation, winery.getLatitude(), winery.getLongitude()))
+                .filter(winery -> distance >= distanceCalculator.getDistance(userLocation, winery.getLatitude(), winery.getLongitude()))
                 .toList();
         
         List<Winery> interceptWineries = new ArrayList<>(name_wineries);

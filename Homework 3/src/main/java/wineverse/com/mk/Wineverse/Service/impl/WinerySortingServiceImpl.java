@@ -69,7 +69,7 @@ public class WinerySortingServiceImpl implements WinerySortingService {
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(wineryLat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        System.out.println("The distance is "+ R*c);
+//        System.out.println("The distance is "+ R*c);
         return R * c; // Distance in kilometers
     }
 

@@ -219,9 +219,7 @@ public class WineryController {
                 .map(id -> typeService.findById(id).orElse(null))
                 .collect(Collectors.toList());
         String workingTime = startTime + " - " + endTime;
-        City city1 = cityService.findCity(city);
-        Winery winery = new Winery(name, types, address, city1, phoneNumber, internationalPhoneNumber, workingTime, website, operationalStatus, wheelchairAccess, latitude, longitude);
-        wineryService.saveWinery(winery);
+        wineryService.saveWinery(name, types, address, city, phoneNumber, internationalPhoneNumber, workingTime, website, operationalStatus, wheelchairAccess, latitude, longitude);
         return "redirect:/wineries";
     }
 

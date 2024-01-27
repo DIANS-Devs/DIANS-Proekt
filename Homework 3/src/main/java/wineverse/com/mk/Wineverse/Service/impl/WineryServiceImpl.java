@@ -4,12 +4,13 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import wineverse.com.mk.Wineverse.Model.City;
-import wineverse.com.mk.Wineverse.Model.Review;
-import wineverse.com.mk.Wineverse.Model.User;
-import wineverse.com.mk.Wineverse.Model.Winery;
+import wineverse.com.mk.Wineverse.HelpServices.DistanceCalculator;
+import wineverse.com.mk.Wineverse.Model.*;
+import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
+import wineverse.com.mk.Wineverse.Repository.CityRepository;
 import wineverse.com.mk.Wineverse.Repository.ReviewRepository;
 import wineverse.com.mk.Wineverse.Repository.WineryRepository;
+import wineverse.com.mk.Wineverse.Service.WineryCacheService;
 import wineverse.com.mk.Wineverse.Service.WineryService;
 
 import java.util.ArrayList;
@@ -18,30 +19,25 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class WineryServiceImpl implements WineryService {
     private final WineryRepository wineryRepository;
     private final ReviewRepository reviewRepository;
+    private final WineryCacheService wineryCacheService;
+    private final CityRepository cityRepository;
+    private final DistanceCalculator distanceCalculator;
 
-    public static double getDistance(String userLocation, double wineryLat, double wineryLon){
-        if (userLocation == null) return 0;
-
-        double userLat = Double.parseDouble(userLocation.split(",")[0]);
-        double userLon = Double.parseDouble(userLocation.split(",")[1]);
-
-        double R = 6371; // Radius of the Earth in kilometers
-        double dLat = Math.toRadians(wineryLat - userLat);
-        double dLon = Math.toRadians(wineryLon - userLon);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(wineryLat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        System.out.println("The distance is "+ R*c);
-        return R * c; // Distance in kilometers
+    public WineryServiceImpl(WineryRepository wineryRepository, ReviewRepository reviewRepository, CityRepository cityRepository, DistanceCalculator distanceCalculator) {
+        this.wineryRepository = wineryRepository;
+        this.reviewRepository = reviewRepository;
+        this.cityRepository = cityRepository;
+        this.wineryCacheService = WineryCacheServiceImpl.getInstance(wineryRepository);
+        this.distanceCalculator = distanceCalculator;
     }
 
     @Override
     public Review getUserReviewForWinery(Long wineryId, User user) {
-        Optional<Review> userReview = wineryRepository.findById(wineryId).get().getReviews()
+        Optional<Review> userReview = wineryCacheService.findById(wineryId).get().getReviews()
                 .stream()
                 .filter(review -> review.getAuthor().equals(user))
                 .findFirst();
@@ -56,13 +52,13 @@ public class WineryServiceImpl implements WineryService {
 
     @Override
     public List<Winery> getAllWineries() {
-        return wineryRepository.findAll();
+        return wineryCacheService.listAll();
     }
 
     @Override
     @Transactional
     public void setNewReview(Long wineryId, Review review) {
-        Winery winery = wineryRepository.findById(wineryId).orElseThrow();
+        Winery winery = wineryCacheService.findById(wineryId).orElseThrow();
 
         // Check if the review already exists
         Optional<Review> existingReview = winery.getReviews().stream()
@@ -81,24 +77,28 @@ public class WineryServiceImpl implements WineryService {
             winery.addReview(review);
             reviewRepository.save(review);
         }
+        wineryRepository.save(winery);
+        //Need to update the cache after each review,
+        // or we can update just the element with the new review,
+        // but that would be the same since we need to search for element O(n) and then update it
+        wineryCacheService.update();
     }
 
     @Override
     //Worst case: Name="", rating = 0, distance = 300, City = Цела Македонија
     public List<Winery> filteredWineries(String name, Float rating, Float distance, City city, String userLocation) {
-        //TODO implement distance filter
-        List<Winery> name_wineries = wineryRepository.findByNameContaining(name);
-        List<Winery> rating_wineries = wineryRepository.findByRatingGreaterThanEqual(rating);
+        List<Winery> name_wineries = wineryCacheService.findByNameContaining(name);
+        List<Winery> rating_wineries = wineryCacheService.findByRatingGreaterThanEqual(rating);
         List<Winery> city_wineries;
         if (!city.getName().equals("Цела Македонија")) {
-            city_wineries = wineryRepository.findByCity(city);
+            city_wineries = wineryCacheService.findByCity(city);
         } else {
-            city_wineries = wineryRepository.findAll();
+            city_wineries = wineryCacheService.listAll();
         }
-        List<Winery> distance_wineries = wineryRepository
-                .findAll()
+        List<Winery> distance_wineries = wineryCacheService
+                .listAll()
                 .stream()
-                .filter(winery -> distance >= getDistance(userLocation, winery.getLatitude(), winery.getLongitude()))
+                .filter(winery -> distance >= distanceCalculator.getDistance(userLocation, winery.getLatitude(), winery.getLongitude()))
                 .toList();
         
         List<Winery> interceptWineries = new ArrayList<>(name_wineries);
@@ -110,32 +110,35 @@ public class WineryServiceImpl implements WineryService {
 
     @Override
     public Optional<Winery> getWineryById(Long id) {
-        return wineryRepository.findById(id);
+        return wineryCacheService.findById(id);
     }
 
     @Override
     public List<Winery> getWineriesByIds(List<Long> favoriteWineryIds) {
-        return wineryRepository.findAllById(favoriteWineryIds);
+        return wineryCacheService.findAllById(favoriteWineryIds);
     }
 
     @Override
     public List<String> getWineriesAsString(){
-        List<Winery> wineries = wineryRepository.findAll();
+        List<Winery> wineries = wineryCacheService.listAll();
         return wineries.stream()
-                .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
+                .map(WineryAdapter::convertToString)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<String> getFavoritesAsString(List<Long> ids){
-        List<Winery> wineries = wineryRepository.findAllById(ids);
+        List<Winery> wineries = wineryCacheService.findAllById(ids);
         return wineries.stream()
-                .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
+                .map(WineryAdapter::convertToString)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void saveWinery(Winery winery) {
+    public void saveWinery(String name, List<Type> types, String address, String city, String phoneNumber, String internationalPhoneNumber, String workingTime, String website, OperationalStatus operationalStatus, Boolean wheelchairAccess, Float latitude, Float longitude) {
+        City c = cityRepository.findByName(city);
+        Winery winery = new Winery(name, types, address, c, phoneNumber, internationalPhoneNumber, workingTime, website, operationalStatus, wheelchairAccess, latitude, longitude);
         wineryRepository.save(winery);
+        wineryCacheService.update();
     }
 }

@@ -13,7 +13,7 @@ public class UserPositionController {
     @PostMapping("/save-user-position")
     public ResponseEntity<String> saveUserPosition(@RequestBody String userPosition, HttpSession session) {
         // Process userPosition as needed (e.g., store it in a database)
-        System.out.println("Received user position: " + userPosition);
+//        System.out.println("Received user position: " + userPosition);
         // Save it into the session
         session.setAttribute("userGeolocation", userPosition);
 

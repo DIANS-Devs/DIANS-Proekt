@@ -3,15 +3,15 @@ package wineverse.com.mk.Wineverse.Data;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import wineverse.com.mk.Wineverse.Model.*;
+import wineverse.com.mk.Wineverse.Model.City;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
-import wineverse.com.mk.Wineverse.Repository.*;
+import wineverse.com.mk.Wineverse.Model.Type;
+import wineverse.com.mk.Wineverse.Model.Winery;
+import wineverse.com.mk.Wineverse.Repository.CityRepository;
+import wineverse.com.mk.Wineverse.Repository.TypeRepository;
+import wineverse.com.mk.Wineverse.Repository.WineryRepository;
 
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,10 +23,6 @@ public class DataHolder {
     private final CityRepository cityRepository;
     private final TypeRepository typeRepository;
     private final WineryRepository wineryRepository;
-    private final UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @PostConstruct
     @Transactional

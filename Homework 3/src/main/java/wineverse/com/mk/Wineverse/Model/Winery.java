@@ -1,12 +1,8 @@
 package wineverse.com.mk.Wineverse.Model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import lombok.Data;
 import wineverse.com.mk.Wineverse.Model.Enumerations.OperationalStatus;
-
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -91,8 +87,7 @@ public class Winery implements Serializable {
         return (double) count / reviews.size() * 100;
     }
     public double getRating(){
-        double temp =Math.round(rating * 10.0) / 10.0;
-        return temp;
+        return Math.round(rating * 10.0) / 10.0;
     }
 
     public String getReviewsAsString(){

@@ -41,7 +41,7 @@
             <span class="flag-icon flag-icon-mk"></span> +389
           </div>
         </div>
-        <input type="text" th:field="*{phonenumber}" class="form-control" pattern="\d{8}" title="Enter exactly 8 numbers" required/>
+        <input type="text" th:field="*{phoneNumber}" class="form-control" pattern="\d{8}" title="Enter exactly 8 numbers" required/>
       </div>
       <p th:if="${phoneExists}" class="text-warning">Phone number already exists</p>
     </div>

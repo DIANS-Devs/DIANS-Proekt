@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class CityServiceimpl implements CityService {
+public class CityServiceImpl implements CityService {
     private final CityRepository cityRepository;
 
     @Override

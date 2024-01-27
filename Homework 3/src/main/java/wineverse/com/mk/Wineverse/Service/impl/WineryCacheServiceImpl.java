@@ -2,12 +2,10 @@ package wineverse.com.mk.Wineverse.Service.impl;
 
 import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.Model.City;
-import wineverse.com.mk.Wineverse.Model.Exceptions.InvalidWineryIdException;
 import wineverse.com.mk.Wineverse.Model.Winery;
 import wineverse.com.mk.Wineverse.Repository.WineryRepository;
 import wineverse.com.mk.Wineverse.Service.WineryCacheService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

@@ -15,7 +15,4 @@ public class AuthenticationFacade {
     public void setAuthentication(Authentication authentication) {
         this.authentication = authentication;
     }
-    public void clearAuthentication() {
-        this.authentication = null;
-    }
 }

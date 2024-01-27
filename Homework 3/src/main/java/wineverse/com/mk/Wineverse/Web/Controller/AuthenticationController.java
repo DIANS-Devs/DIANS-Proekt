@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
-import wineverse.com.mk.Wineverse.Config.LogIn.AuthenticationFacade;
 import wineverse.com.mk.Wineverse.Config.Register.Exceptions.UserAlreadyExistException;
 import wineverse.com.mk.Wineverse.Config.Register.RegistrationModel.UserDto;
 import wineverse.com.mk.Wineverse.Config.Register.RegistrationService.IUserService;
@@ -21,8 +19,6 @@ import wineverse.com.mk.Wineverse.Model.User;
 
 @Controller
 public class AuthenticationController {
-    @Autowired
-    private AuthenticationFacade authenticationFacade;
 
     @Autowired
     private IUserService userService;
@@ -67,7 +63,7 @@ public class AuthenticationController {
                 model.addAttribute("usernameExists", true);
                 return "Registration";
             }
-            else if(registered.getPhonenumber().equals("exists")){
+            else if(registered.getPhoneNumber().equals("exists")){
                 model.addAttribute("phoneExists", true);
                 return "Registration";
             }

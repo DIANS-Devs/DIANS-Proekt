@@ -3,16 +3,12 @@ package wineverse.com.mk.Wineverse.Service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.HelpServices.DistanceCalculator;
-import wineverse.com.mk.Wineverse.Model.Review;
 import wineverse.com.mk.Wineverse.Model.SearchQuery;
 import wineverse.com.mk.Wineverse.Model.Winery;
 import wineverse.com.mk.Wineverse.Service.WinerySortingService;
 
-import java.time.LocalTime;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,15 +52,12 @@ public class WinerySortingServiceImpl implements WinerySortingService {
     @Override
     public List<Winery> sortWineries(String sortingMethod, SearchQuery retrievedQuery, String userLocation) {
         List<Winery> current = retrievedQuery.getWineries();
-        if(sortingMethod.equals("distance")){
-            current = sortWineriesByDistance(current, userLocation);
-        }
-        else if(sortingMethod.equals("rating")){
-            current = sortWineriesByRating(current);
-        }
-        else if (sortingMethod.equals("popularity")){
-            current = sortWineriesByPopularity(current);
-        }
+        current = switch (sortingMethod) {
+            case "distance" -> sortWineriesByDistance(current, userLocation);
+            case "rating" -> sortWineriesByRating(current);
+            case "popularity" -> sortWineriesByPopularity(current);
+            default -> current;
+        };
         retrievedQuery.setWineries(current);
         return current;
     }

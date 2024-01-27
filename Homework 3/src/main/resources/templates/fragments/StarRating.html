@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="rating(rating, size)">
     <span th:each="i : ${#numbers.sequence(1, 5)}">
-        <img th:src="${rating >= i ? '/images/full-star.png' : (rating + 0.5 >= i ? '/images/half-star.png' : '/images/empty-star.png')}" alt="Star" th:style="'width: ' + ${size} + '; height: ' + ${size}" />
+        <img th:src="${rating >= i ? '/images/full-star.png' : (rating + 0.5 >= i ? '/images/half-star.png' : '/images/empty-star.png')}"
+             alt="Star" th:style="'width: ' + ${size} + '; height: ' + ${size}" />
     </span>
 </div>
 </html>

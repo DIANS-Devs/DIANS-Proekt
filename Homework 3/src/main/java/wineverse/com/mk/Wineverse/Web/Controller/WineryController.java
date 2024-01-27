@@ -97,7 +97,6 @@ public class WineryController {
             redirectAttributes.addFlashAttribute("wineries", null);
 
             return "Wineries";
-//            return "redirect:/wineries";
         }
         // if everything is null, set to default values
         if(wineryName == null) {

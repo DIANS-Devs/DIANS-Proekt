@@ -4,18 +4,18 @@ function updateDistance(element, id, lat2, lon2) {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
-                var lat1 = position.coords.latitude;
-                var lon1 = position.coords.longitude;
+                let lat1 = position.coords.latitude;
+                let lon1 = position.coords.longitude;
 
-                var R = 6371; // Radius of the Earth in kilometers
-                var dLat = deg2rad(lat2 - lat1);
-                var dLon = deg2rad(lon2 - lon1);
-                var a =
+                let R = 6371; // Radius of the Earth in kilometers
+                let dLat = deg2rad(lat2 - lat1);
+                let dLon = deg2rad(lon2 - lon1);
+                let a =
                     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
                     Math.sin(dLon / 2) * Math.sin(dLon / 2);
-                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                var distance = R * c; // Distance in kilometers
+                let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                let distance = R * c; // Distance in kilometers
 
                 element.innerText = distance.toFixed(2)+ " km";
             },

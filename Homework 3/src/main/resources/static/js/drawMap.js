@@ -83,43 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function getDirections(destLat, destLng) {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                function (position) {
-                    const { latitude, longitude } = position.coords;
-                    const apiKey = '1fa6f4e5-80ed-428e-8482-7541339a3855\t';
-                    const apiUrl = `https://graphhopper.com/api/1/route?point=${latitude},${longitude}&point=${destLat},${destLng}&vehicle=car&locale=en-US&key=${apiKey}`;
-
-                    // Make an HTTP request to the GraphHopper API
-                    fetch(apiUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            // Extract information from the API response
-                            const points = data.paths[0].points.coordinates;
-
-                            // Draw the route on the map
-                            const route = L.polyline(points, { color: 'blue' }).addTo(map);
-                            map.fitBounds(route.getBounds());
-
-                            // You can also display additional information, such as duration and distance
-                            const distance = data.paths[0].distance;
-                            const duration = data.paths[0].time / 1000; // Convert milliseconds to seconds
-                            console.log(`Distance: ${distance} meters`);
-                            console.log(`Duration: ${duration} seconds`);
-                        })
-                        .catch(error => {
-                            console.error("Error getting directions:", error);
-                        });
-                },
-                function (error) {
-                    console.error("Error getting user location:", error);
-                },
-                { timeout: 10000 } // Set a timeout of 10 seconds
-            );
-        }
-    }
-
     const wineriesList = document.getElementById('map').getAttribute('wineriesList');
     // Now you can use 'myData' in your JavaScript logic
     drawLocations(wineriesList);

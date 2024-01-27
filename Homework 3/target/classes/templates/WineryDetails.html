@@ -4,7 +4,6 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
     th:replace="~{base/Layout :: base(title=${winery.getName()})}">
 <body th:fragment="content">
-
 <!-- Details -->
 <div class="container bg-body-secondary mb-3 p-4">
     <h3 th:text="${winery.getName()}"></h3>
@@ -119,9 +118,7 @@
             </div>
         </div>
 </div>
-<!---->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" defer="defer"></script>
 <script th:src="@{/js/geolocation.js}" defer="defer"></script>
 <script th:src="@{/js/favorites.js}" defer="defer"></script>
 <script th:src="@{/js/modalReviewScript.js}" defer="defer"></script>

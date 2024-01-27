@@ -1,5 +1,3 @@
-let memory = [];
-
 function updateDistance(element, id, lat2, lon2) {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(

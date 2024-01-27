@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-import wineverse.com.mk.Wineverse.Config.Register.Exceptions.UserAlreadyExistException;
 import wineverse.com.mk.Wineverse.Config.Register.RegistrationModel.UserDto;
 import wineverse.com.mk.Wineverse.Config.Register.RegistrationService.IUserService;
 import wineverse.com.mk.Wineverse.Model.User;
@@ -53,25 +52,19 @@ public class AuthenticationController {
             @ModelAttribute("user") @Valid UserDto userDto,
             HttpServletRequest request,
             Errors errors, Model model) {
-
-        try {
-            User registered = userService.registerNewUserAccount(userDto);
-            if(registered == null){
-                model.addAttribute("emailExists", true);
-                return "Registration"; }
-            else if(registered.getUsername() == null){
-                model.addAttribute("usernameExists", true);
-                return "Registration";
-            }
-            else if(registered.getPhoneNumber().equals("exists")){
-                model.addAttribute("phoneExists", true);
-                return "Registration";
-            }
-        } catch (UserAlreadyExistException uaeEx) {
-//            ModelAndView mav = new ModelAndView();
-//            mav.addObject("message", "An account for that username/email already exists.");
-//            return mav;
+        User registered = userService.registerNewUserAccount(userDto);
+        if(registered == null){
+            model.addAttribute("emailExists", true);
+            return "Registration"; }
+        else if(registered.getUsername() == null){
+            model.addAttribute("usernameExists", true);
+            return "Registration";
         }
+        else if(registered.getPhoneNumber().equals("exists")){
+            model.addAttribute("phoneExists", true);
+            return "Registration";
+        }
+
         return "redirect:/user/registration/success";
     }
 

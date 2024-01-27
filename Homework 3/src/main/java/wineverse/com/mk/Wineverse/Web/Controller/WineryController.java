@@ -28,7 +28,6 @@ public class WineryController {
     private final WineryService wineryService;
     private final UserService userService;
     private final TypeService typeService;
-    private final WinerySortingService winerySortingService;
 
     private void setCitiesAttribute(Model model){
         model.addAttribute("cities", cityService.getAllCities());
@@ -65,7 +64,7 @@ public class WineryController {
     public String getResultsMapping(Model model, HttpSession session,  @ModelAttribute("wineries") ArrayList<Winery> filtered_wineries) {
         setCitiesAttribute(model);
         //TODO filtered wineries on back click from post
-        if(filtered_wineries != null && filtered_wineries.size() != 0){
+        if(filtered_wineries != null && !filtered_wineries.isEmpty()){
             model.addAttribute("wineries", filtered_wineries);
         }
         else{
@@ -90,9 +89,6 @@ public class WineryController {
         String userLocation = (String) session.getAttribute("userGeolocation");
 
         if(retrievedQuery != null && wineryName == null && wineryCityName == null && wineryRating == null && wineryDistance == null){
-            if(sortingMethod != null) {
-                List<Winery> test = winerySortingService.sortWineries(sortingMethod, retrievedQuery, userLocation);
-            }
             setSearchAttributes(model, retrievedQuery);
             redirectAttributes.addFlashAttribute("wineries", null);
 

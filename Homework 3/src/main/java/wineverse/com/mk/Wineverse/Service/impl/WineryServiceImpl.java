@@ -122,7 +122,7 @@ public class WineryServiceImpl implements WineryService {
     public List<String> getWineriesAsString(){
         List<Winery> wineries = wineryCacheService.listAll();
         return wineries.stream()
-                .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
+                .map(WineryAdapter::convertToString)
                 .collect(Collectors.toList());
     }
 
@@ -130,7 +130,7 @@ public class WineryServiceImpl implements WineryService {
     public List<String> getFavoritesAsString(List<Long> ids){
         List<Winery> wineries = wineryCacheService.findAllById(ids);
         return wineries.stream()
-                .map(winery -> String.format("%d|%s|%s|%s", winery.getId(), winery.getLatitude(), winery.getLongitude(), winery.getName()))
+                .map(WineryAdapter::convertToString)
                 .collect(Collectors.toList());
     }
 

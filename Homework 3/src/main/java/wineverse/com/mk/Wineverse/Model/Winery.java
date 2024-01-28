@@ -20,7 +20,7 @@ public class Winery implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String name;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<Type> types;
     private String address;
     @ManyToOne

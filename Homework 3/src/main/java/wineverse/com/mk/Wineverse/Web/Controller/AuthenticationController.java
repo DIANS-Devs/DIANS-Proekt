@@ -1,17 +1,14 @@
 package wineverse.com.mk.Wineverse.Web.Controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.context.request.WebRequest;
 import wineverse.com.mk.Wineverse.Config.Register.RegistrationModel.UserDto;
 import wineverse.com.mk.Wineverse.Config.Register.RegistrationService.IUserService;
 import wineverse.com.mk.Wineverse.Model.User;
@@ -21,7 +18,6 @@ public class AuthenticationController {
 
     @Autowired
     private IUserService userService;
-
 
     @GetMapping("/login")
     public String getLogInPage() {
@@ -34,9 +30,8 @@ public class AuthenticationController {
         }
     }
 
-
     @GetMapping("/user/registration")
-    public String showRegistrationForm(WebRequest request, Model model) {
+    public String showRegistrationForm(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
             return "redirect:/wineries";
@@ -50,8 +45,7 @@ public class AuthenticationController {
     @PostMapping("/user/registration")
     public String registerUserAccount(
             @ModelAttribute("user") @Valid UserDto userDto,
-            HttpServletRequest request,
-            Errors errors, Model model) {
+            Model model) {
         User registered = userService.registerNewUserAccount(userDto);
         if(registered == null){
             model.addAttribute("emailExists", true);
@@ -69,7 +63,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/user/registration/success")
-    public String successfulRegistration(Model model){
+    public String successfulRegistration(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
             return "redirect:/wineries";

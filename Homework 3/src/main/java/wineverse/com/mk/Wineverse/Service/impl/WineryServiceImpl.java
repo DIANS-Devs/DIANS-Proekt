@@ -77,9 +77,6 @@ public class WineryServiceImpl implements WineryService {
             reviewRepository.save(review);
         }
         wineryRepository.save(winery);
-        //Need to update the cache after each review,
-        // or we can update just the element with the new review,
-        // but that would be the same since we need to search for element O(n) and then update it
         wineryCacheService.update();
     }
 

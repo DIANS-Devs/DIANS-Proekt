@@ -80,7 +80,6 @@ public class WineryController {
                                         @RequestParam(name = "rating", required = false) Float wineryRating,
                                         @RequestParam(name = "distance", required = false) Float wineryDistance,
                                         @RequestParam(name = "location", required = false) String wineryCityName,
-                                        @RequestParam(name = "sort", required = false) String sortingMethod,
                                         Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         //TODO SHOULD BE MODIFIED TO ID, NOT BY NAME
         setCitiesAttribute(model);

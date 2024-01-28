@@ -5,5 +5,5 @@ https://www.youtube.com/watch?v=mObdKileADs
 https://www.youtube.com/watch?v=OdytaggbaPM
 
 ## Линк до хостираниот сајт
-https://wineverse.onrender.com/
+https://wineverse.onrender.com/ \
 Бидејќи апликацијата е хостирана бесплатно на страната redner, поради поголема неактивност апликацијата се исклучува и потоа е потребно неколку минути за повторно да се вклучи кога ќе има ново барање. При првото барање, почекајте 2-3 минути. Ви благодариме.

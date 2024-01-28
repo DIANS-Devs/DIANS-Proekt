@@ -2,7 +2,6 @@ package wineverse.com.mk.Wineverse.Service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.HelpServices.DistanceCalculator;
 import wineverse.com.mk.Wineverse.Model.*;
@@ -78,9 +77,6 @@ public class WineryServiceImpl implements WineryService {
             reviewRepository.save(review);
         }
         wineryRepository.save(winery);
-        //Need to update the cache after each review,
-        // or we can update just the element with the new review,
-        // but that would be the same since we need to search for element O(n) and then update it
         wineryCacheService.update();
     }
 

@@ -2,12 +2,10 @@ package wineverse.com.mk.Wineverse.Service.impl;
 
 import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.Model.City;
-import wineverse.com.mk.Wineverse.Model.Exceptions.InvalidWineryIdException;
 import wineverse.com.mk.Wineverse.Model.Winery;
 import wineverse.com.mk.Wineverse.Repository.WineryRepository;
 import wineverse.com.mk.Wineverse.Service.WineryCacheService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,7 +19,6 @@ public class WineryCacheServiceImpl implements WineryCacheService {
     private WineryCacheServiceImpl(WineryRepository wineryRepository) {
         this.wineryRepository = wineryRepository;
         cachedWineries = wineryRepository.findAll();
-//        updateCache();
     }
 
     public static synchronized WineryCacheServiceImpl getInstance(WineryRepository wineryRepository) {
@@ -31,15 +28,8 @@ public class WineryCacheServiceImpl implements WineryCacheService {
         return instance;
     }
 
-    private void updateCache() {
-        if (cachedWineries.isEmpty()) {
-            cachedWineries = wineryRepository.findAll();
-        }
-    }
-
     @Override
     public List<Winery> listAll() {
-//        updateCache();
         return cachedWineries;
     }
 
@@ -50,35 +40,30 @@ public class WineryCacheServiceImpl implements WineryCacheService {
 
     @Override
     public Optional<Winery> findById(Long id) {
-//        updateCache();
         return cachedWineries.stream()
                 .filter(winery -> winery.getId().equals(id)).findFirst();
     }
 
     @Override
     public List<Winery> findAllById(List<Long> ids){
-//        updateCache();
         return cachedWineries.stream()
                 .filter(winery -> ids.contains(winery.getId())).collect(Collectors.toList());
     }
 
     @Override
     public List<Winery> findByNameContaining(String name) {
-//        updateCache();
         return cachedWineries.stream()
                 .filter(winery -> winery.getName().contains(name)).collect(Collectors.toList());
     }
 
     @Override
     public List<Winery> findByCity(City city) {
-//        updateCache();
         return cachedWineries.stream()
                 .filter(winery -> winery.getCity().getId().equals(city.getId())).collect(Collectors.toList());
     }
 
     @Override
     public List<Winery> findByRatingGreaterThanEqual(Float rating) {
-//        updateCache();
         return cachedWineries.stream()
                 .filter(winery -> winery.getRating() >= rating).collect(Collectors.toList());
     }

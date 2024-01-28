@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class FavouritesController {
+public class FavoritesController {
     private final WineryService wineryService;
     private final CityService cityService;
     private final UserService userService;
 
-    public FavouritesController(WineryService wineryService, CityService cityService, UserService userService) {
+    public FavoritesController(WineryService wineryService, CityService cityService, UserService userService) {
         this.wineryService = wineryService;
         this.cityService = cityService;
         this.userService = userService;
@@ -54,14 +54,14 @@ public class FavouritesController {
     public String getFavorites(Model model) {
         setCitiesAttribute(model);
         model.addAttribute("wineries", getFavorites());
-        return "Favourites";
+        return "Favorites";
     }
 
     @GetMapping("/favorites/map")
     public String showWineriesMap(Model model){
         setCitiesAttribute(model);
         model.addAttribute("favoritesList", getFavoritesAsString());
-        return "FavouritesMap";
+        return "FavoritesMap";
     }
 
     @PostMapping("/change-favorite")

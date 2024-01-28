@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1f2955d2-f2eb-4e9d-86fb-5de5af2b889b" name="Changes" comment="reverted changes 4">
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/Readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Config/LogIn/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Config/LogIn/UserInfoUserDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Config/LogIn/UserInfoUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Config/Register/RegistrationService/IUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Data/DataHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/HelpServices/DistanceCalculator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Model/Enumerations/OperationalStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Model/Winery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Repository/CityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Repository/TypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Service/WinerySortingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Service/impl/CityServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Service/impl/WineryAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/FavoritesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/UserPositionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/WineryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/static/css/addForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/static/images/empty-star.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/static/images/full-star.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/static/images/half-star.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/static/js/favorites.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/static/js/geolocation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/static/js/saveUserLocation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/templates/Index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/templates/PostRegistration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/templates/Wineries.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/templates/WineriesAdd.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/templates/WineriesMap.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/templates/fragments/Header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/templates/fragments/ReviewForm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/src/main/resources/templates/fragments/Search.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/application-prod.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/css/addForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/css/favoritesListed.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/css/wineriesListed.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/css/wineriesMap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/images/empty-star.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/images/full-star.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/js/drawMap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/js/geolocation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/js/modalReviewScript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/static/js/saveUserLocation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/Error.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/Favorites.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/Index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/LogIn.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/PostRegistration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/Registration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/Wineries.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/WineriesMap.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/fragments/Search.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/templates/fragments/StarRating.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Config/LogIn/SecurityConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Config/Register/EmailValidation/EmailValidator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Config/Register/EmailValidation/ValidEmail.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Config/Register/PasswordValidation/PasswordMatches.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Config/Register/PasswordValidation/PasswordMatchesValidator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Config/Register/RegistrationService/IUserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Config/Register/RegistrationService/impl/IUserServiceimpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Form/ReviewForm.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Model/SearchQuery.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Model/Type.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Repository/CityRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Repository/WineryRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Service/CityService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Service/TypeService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Service/UserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Service/WineryCacheService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Service/WineryService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Service/WinerySortingService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Service/impl/CityServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Web/Controller/FavoritesController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Web/Controller/UserPositionController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Web/Controller/WineryController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/Web/Controller/WineverseErrorController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/classes/wineverse/com/mk/Wineverse/WineverseApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Homework 3 - Homework 4/target/surefire-reports/TEST-wineverse.com.mk.Wineverse.WineverseApplicationTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/LogIn/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/LogIn/UserInfoUserDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/LogIn/UserInfoUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/Register/EmailValidation/EmailValidator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/Register/EmailValidation/ValidEmail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/Register/PasswordValidation/PasswordMatches.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/Register/PasswordValidation/PasswordMatchesValidator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/Register/RegistrationModel/UserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/Register/RegistrationService/IUserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Config/Register/RegistrationService/impl/IUserServiceimpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Data/DataHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Form/ReviewForm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/HelpServices/DistanceCalculator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Model/City.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Model/Enumerations/OperationalStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Model/Review.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Model/SearchQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Model/Type.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Model/Winery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Repository/CityRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Repository/ReviewRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Repository/TypeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Repository/WineryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/CityService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/TypeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/WineryCacheService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/WineryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/WinerySortingService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/impl/CityServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/impl/TypeServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/impl/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/impl/WineryAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/impl/WineryCacheServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/impl/WineryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Service/impl/WinerySortingServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/ServletInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/AuthenticationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/FavoritesController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/HomeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/UserPositionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/WineryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/Web/Controller/WineverseErrorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wineverse/com/mk/Wineverse/WineverseApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-test.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/message.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/addForm.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/favoritesListed.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/loginAndRegistration.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/wineriesListed.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/wineriesMap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/empty-star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/full-star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/half-star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/drawMap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/favorites.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/geolocation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/modalReviewScript.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/saveUserLocation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/AboutUs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Error.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Favorites.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/FavoritesMap.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/LogIn.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/PostRegistration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Registration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Wineries.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/WineriesAdd.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/WineriesMap.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/WineryDetails.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/base/Layout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/Footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/Header.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/ReviewForm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/Search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/StarRating.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/wineverse/com/mk/Wineverse/WineverseApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Wineverse-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Wineverse-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application-prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/message.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/addForm.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/favoritesListed.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/loginAndRegistration.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/wineriesListed.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/wineriesMap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/images/empty-star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/images/full-star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/images/half-star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/drawMap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/favorites.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/geolocation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/modalReviewScript.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/saveUserLocation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/AboutUs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Error.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Favorites.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/FavoritesMap.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/LogIn.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/PostRegistration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Registration.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Wineries.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/WineriesAdd.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/WineriesMap.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/WineryDetails.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/base/Layout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/fragments/Footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/fragments/Header.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/fragments/ReviewForm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/fragments/Search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/fragments/StarRating.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/LogIn/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/LogIn/UserInfoUserDetails.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/LogIn/UserInfoUserDetailsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/Register/EmailValidation/EmailValidator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/Register/EmailValidation/ValidEmail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/Register/PasswordValidation/PasswordMatches.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/Register/PasswordValidation/PasswordMatchesValidator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/Register/RegistrationModel/UserDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/Register/RegistrationService/IUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Config/Register/RegistrationService/impl/IUserServiceimpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Data/DataHolder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Form/ReviewForm.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/HelpServices/DistanceCalculator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Model/City.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Model/Enumerations/OperationalStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Model/Review.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Model/SearchQuery.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Model/Type.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Model/Winery.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Repository/CityRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Repository/ReviewRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Repository/TypeRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Repository/WineryRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/CityService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/TypeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/WineryCacheService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/WineryService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/WinerySortingService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/impl/CityServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/impl/TypeServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/impl/UserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/impl/WineryAdapter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/impl/WineryCacheServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/impl/WineryServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Service/impl/WinerySortingServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/ServletInitializer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Web/Controller/AuthenticationController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Web/Controller/FavoritesController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Web/Controller/HomeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Web/Controller/UserPositionController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Web/Controller/WineryController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/Web/Controller/WineverseErrorController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wineverse/com/mk/Wineverse/WineverseApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-wineverse.com.mk.Wineverse.WineverseApplicationTests.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/wineverse.com.mk.Wineverse.WineverseApplicationTests.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/wineverse/com/mk/Wineverse/WineverseApplicationTests.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Class" />
+        <option value="CSS File" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="dimi-main-branch" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;popovd209&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="ece6b360-3f26-4b2a-b249-a5551cb62c8e" />
+        <option name="url" value="https://github.com/DIANS-Devs/DIANS-Proekt.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2ZgUoBSUgch4BLGlY9cricpOfWV" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Dimi/IdeaProjects/DIANS-Proekt/Homework 3 - Homework 4",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="WineverseApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-21" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Wineverse" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="wineverse.com.mk.Wineverse.WineverseApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f2955d2-f2eb-4e9d-86fb-5de5af2b889b" name="Changes" comment="" />
+      <created>1702843390313</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702843390313</updated>
+      <workItem from="1702843391371" duration="1205000" />
+      <workItem from="1702933896572" duration="5155000" />
+      <workItem from="1703227517746" duration="5000" />
+      <workItem from="1703335165174" duration="22665000" />
+      <workItem from="1703409863762" duration="22243000" />
+      <workItem from="1703595623717" duration="597000" />
+      <workItem from="1703849204491" duration="27000" />
+      <workItem from="1706376095859" duration="11955000" />
+      <workItem from="1706449382130" duration="1153000" />
+      <workItem from="1706451571973" duration="5467000" />
+      <workItem from="1706457192685" duration="376000" />
+      <workItem from="1706457581464" duration="87000" />
+    </task>
+    <task id="LOCAL-00001" summary="made some little changes">
+      <option name="closed" value="true" />
+      <created>1702939041992</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1702939041992</updated>
+    </task>
+    <task id="LOCAL-00002" summary="changed the cookie">
+      <option name="closed" value="true" />
+      <created>1703352334812</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1703352334813</updated>
+    </task>
+    <task id="LOCAL-00003" summary="removed cookie for favorites, todo is to implement favorites with database">
+      <option name="closed" value="true" />
+      <created>1703362229718</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1703362229718</updated>
+    </task>
+    <task id="LOCAL-00004" summary="made favorites work for wineries">
+      <option name="closed" value="true" />
+      <created>1703421092610</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1703421092610</updated>
+    </task>
+    <task id="LOCAL-00005" summary="made the coloring for favorites work">
+      <option name="closed" value="true" />
+      <created>1703430095755</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1703430095755</updated>
+    </task>
+    <task id="LOCAL-00006" summary="reverted changes">
+      <option name="closed" value="true" />
+      <created>1703431464248</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1703431464248</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added error handling page">
+      <option name="closed" value="true" />
+      <created>1703435163158</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1703435163158</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactored login and registration pages">
+      <option name="closed" value="true" />
+      <created>1706389338337</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706389338337</updated>
+    </task>
+    <task id="LOCAL-00009" summary="renamed favourites to favorites">
+      <option name="closed" value="true" />
+      <created>1706389736806</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706389736806</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fixed some warnings and removed some comments">
+      <option name="closed" value="true" />
+      <created>1706389850313</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1706389850313</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fixed some more warnings">
+      <option name="closed" value="true" />
+      <created>1706391332885</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706391332885</updated>
+    </task>
+    <task id="LOCAL-00012" summary="removed unused imports and methods">
+      <option name="closed" value="true" />
+      <created>1706392775657</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706392775657</updated>
+    </task>
+    <task id="LOCAL-00013" summary="made some final adjustments">
+      <option name="closed" value="true" />
+      <created>1706393484421</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706393484421</updated>
+    </task>
+    <task id="LOCAL-00014" summary="final adjustments">
+      <option name="closed" value="true" />
+      <created>1706450469977</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1706450469977</updated>
+    </task>
+    <task id="LOCAL-00015" summary="class files adjustments">
+      <option name="closed" value="true" />
+      <created>1706450520892</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1706450520892</updated>
+    </task>
+    <task id="LOCAL-00016" summary="reverted changes">
+      <option name="closed" value="true" />
+      <created>1706454020293</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1706454020293</updated>
+    </task>
+    <task id="LOCAL-00017" summary="reverted changes 2">
+      <option name="closed" value="true" />
+      <created>1706454162001</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1706454162001</updated>
+    </task>
+    <task id="LOCAL-00018" summary="reverted changes 3">
+      <option name="closed" value="true" />
+      <created>1706455254366</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1706455254366</updated>
+    </task>
+    <task id="LOCAL-00019" summary="reverted changes 4">
+      <option name="closed" value="true" />
+      <created>1706456112194</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1706456112194</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="made some little changes" />
+    <MESSAGE value="changed the cookie" />
+    <MESSAGE value="removed cookie for favorites, todo is to implement favorites with database" />
+    <MESSAGE value="made favorites work for wineries" />
+    <MESSAGE value="made the coloring for favorites work" />
+    <MESSAGE value="added error handling page" />
+    <MESSAGE value="refactored login and registration pages" />
+    <MESSAGE value="renamed favourites to favorites" />
+    <MESSAGE value="fixed some warnings and removed some comments" />
+    <MESSAGE value="fixed some more warnings" />
+    <MESSAGE value="removed unused imports and methods" />
+    <MESSAGE value="made some final adjustments" />
+    <MESSAGE value="final adjustments" />
+    <MESSAGE value="class files adjustments" />
+    <MESSAGE value="reverted changes" />
+    <MESSAGE value="reverted changes 2" />
+    <MESSAGE value="reverted changes 3" />
+    <MESSAGE value="reverted changes 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="reverted changes 4" />
+  </component>
+</project>

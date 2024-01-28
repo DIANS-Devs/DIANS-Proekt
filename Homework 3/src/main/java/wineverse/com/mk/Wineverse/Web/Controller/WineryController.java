@@ -28,6 +28,7 @@ public class WineryController {
     private final WineryService wineryService;
     private final UserService userService;
     private final TypeService typeService;
+    private final WinerySortingService winerySortingService;
 
     private void setCitiesAttribute(Model model){
         model.addAttribute("cities", cityService.getAllCities());
@@ -80,6 +81,7 @@ public class WineryController {
                                         @RequestParam(name = "rating", required = false) Float wineryRating,
                                         @RequestParam(name = "distance", required = false) Float wineryDistance,
                                         @RequestParam(name = "location", required = false) String wineryCityName,
+                                        @RequestParam(name = "sort", required = false) String sortingMethod,
                                         Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         //TODO SHOULD BE MODIFIED TO ID, NOT BY NAME
         setCitiesAttribute(model);
@@ -88,9 +90,11 @@ public class WineryController {
         String userLocation = (String) session.getAttribute("userGeolocation");
 
         if(retrievedQuery != null && wineryName == null && wineryCityName == null && wineryRating == null && wineryDistance == null){
+            if(sortingMethod != null) {
+                List<Winery> test = winerySortingService.sortWineries(sortingMethod, retrievedQuery, userLocation);
+            }
             setSearchAttributes(model, retrievedQuery);
             redirectAttributes.addFlashAttribute("wineries", null);
-
             return "Wineries";
         }
         // if everything is null, set to default values

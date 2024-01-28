@@ -3,16 +3,12 @@ package wineverse.com.mk.Wineverse.Service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.HelpServices.DistanceCalculator;
-import wineverse.com.mk.Wineverse.Model.Review;
 import wineverse.com.mk.Wineverse.Model.SearchQuery;
 import wineverse.com.mk.Wineverse.Model.Winery;
 import wineverse.com.mk.Wineverse.Service.WinerySortingService;
 
-import java.time.LocalTime;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +21,7 @@ public class WinerySortingServiceImpl implements WinerySortingService {
         double p = (double) positiveReviews / totalReviews;
         double z = Z_SCORE_95_PERCENT;
 
-        return (p + z * z / q(2 * totalReviews) - z * Math.sqrt((p * (1 - p) + z * z / (4 * totalReviews)) / totalReviews))
+        return (p + z * z / (2 * totalReviews) - z * Math.sqrt((p * (1 - p) + z * z / (4 * totalReviews)) / totalReviews))
                 / (1 + z * z / totalReviews);
     }
 

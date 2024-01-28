@@ -17,13 +17,13 @@
                         <label for="rating">Rating:</label>
 <!--                        TODO check it out later-->
                         <input type="number" class="form-control" id="rating" name="rating" required min="1" max="5"
-                               th:value="${userReview != 'error' && userReview != '' ? userReview.rating : ''}">
+                               th:value="${userReview != 'error' ? userReview.rating : ''}">
                     </div>
                     <input type="hidden" th:name="wineryId" th:value="${wineryId}" />
                     <div class="form-group">
                         <label for="comment">Comment:</label>
                         <textarea class="form-control" id="comment" name="comment" required
-                                  th:text="${userReview != 'error' && userReview != '' ? userReview.content : ''}"></textarea>                    </div>
+                                  th:text="${userReview != 'error' ? userReview.content : ''}"></textarea>                    </div>
 
                     <!-- Could be removed -->
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import wineverse.com.mk.Wineverse.Model.Review;
 
 import java.util.List;
+
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findAllById(Long Id);

@@ -1,5 +1,5 @@
 function openReviewForm() {
-    var modal = new bootstrap.Modal(document.getElementById('reviewModal'));
+    let modal = new bootstrap.Modal(document.getElementById('reviewModal'));
     modal.show();
 }
 

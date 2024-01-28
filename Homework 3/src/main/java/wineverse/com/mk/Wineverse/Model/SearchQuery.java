@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,5 +13,5 @@ public class SearchQuery implements Serializable {
     private Float rating ;
     private Float distance;
     private City city;
-    private List<Winery> wineries = new ArrayList<>();
+    private List<Winery> wineries;
 }

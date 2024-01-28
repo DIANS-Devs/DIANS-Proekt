@@ -26,7 +26,7 @@ public class User {
     private String userLongitude = null;
 
     @Column(name = "phone_number")
-    private String phonenumber;
+    private String phoneNumber;
 
     @ElementCollection
     private List<Long> favorites;
@@ -36,7 +36,7 @@ public class User {
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.phonenumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.favorites = favorites;
     }

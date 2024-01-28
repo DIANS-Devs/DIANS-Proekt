@@ -3,16 +3,12 @@ package wineverse.com.mk.Wineverse.Service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import wineverse.com.mk.Wineverse.HelpServices.DistanceCalculator;
-import wineverse.com.mk.Wineverse.Model.Review;
 import wineverse.com.mk.Wineverse.Model.SearchQuery;
 import wineverse.com.mk.Wineverse.Model.Winery;
 import wineverse.com.mk.Wineverse.Service.WinerySortingService;
 
-import java.time.LocalTime;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 @Service

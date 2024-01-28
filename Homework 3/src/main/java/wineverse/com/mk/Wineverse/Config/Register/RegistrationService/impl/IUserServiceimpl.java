@@ -29,10 +29,10 @@ public class IUserServiceimpl implements IUserService {
         if(usernameExists(userDto.getUsername())){
             return new User(); // return user but with all parameters null if username exists
         }
-        String phoneNumber = "+389" + userDto.getPhonenumber();
+        String phoneNumber = "+389" + userDto.getPhoneNumber();
         if(phoneNumberExists(phoneNumber)){
             User user = new User();
-            user.setPhonenumber("exists");
+            user.setPhoneNumber("exists");
             user.setUsername("notnull");
             return user;
         }
@@ -46,8 +46,8 @@ public class IUserServiceimpl implements IUserService {
     public boolean usernameExists(String username) {
         return repository.findByUsername(username).isPresent();
     }
-    public boolean phoneNumberExists(String phonenumber) {
-        return repository.findByPhonenumber(phonenumber).isPresent();
+    public boolean phoneNumberExists(String phoneNumber) {
+        return repository.findByPhoneNumber(phoneNumber).isPresent();
     }
 
     @Override

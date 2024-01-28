@@ -15,11 +15,11 @@
                 <a class="nav-link" href="/about-us">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/favorites">Favourites</a>
+                <a class="nav-link" href="/favorites">Favorites</a>
             </li>
             <li sec:authorize="isAuthenticated()" class="nav-item">
                 <form th:action="@{/logout}" method="post">
-                    <input  class="nav-link" type="submit" value="Sign Out"/>
+                    <input  class="nav-link" type="submit" value="Log Out"/>
                 </form>
             </li>
             <li sec:authorize="isAnonymous()">
@@ -28,21 +28,5 @@
         </ul>
     </div>
 </nav>
-
-<script>
-    function logout() {
-        var logoutForm = document.createElement('form');
-        logoutForm.method = 'post';
-        logoutForm.action = '/logout';
-        var csrfInput = document.createElement('input');
-        csrfInput.type = 'hidden';
-        csrfInput.name = '${_csrf.parameterName}';
-        csrfInput.value = '${_csrf.token}';
-        logoutForm.appendChild(csrfInput);
-        document.body.appendChild(logoutForm);
-        logoutForm.submit();
-    }
-</script>
 </body>
-
 </html>

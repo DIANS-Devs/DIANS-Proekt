@@ -35,7 +35,7 @@ public class UserDto {
 
     @NotNull
     @NotEmpty
-    private String phonenumber;
+    private String phoneNumber;
 
     @ValidEmail
     @NotNull

@@ -65,7 +65,7 @@ public class WineryController {
     public String getResultsMapping(Model model, HttpSession session,  @ModelAttribute("wineries") ArrayList<Winery> filtered_wineries) {
         setCitiesAttribute(model);
         //TODO filtered wineries on back click from post
-        if(filtered_wineries != null && filtered_wineries.size() != 0){
+        if(filtered_wineries != null && !filtered_wineries.isEmpty()){
             model.addAttribute("wineries", filtered_wineries);
         }
         else{
@@ -95,9 +95,7 @@ public class WineryController {
             }
             setSearchAttributes(model, retrievedQuery);
             redirectAttributes.addFlashAttribute("wineries", null);
-
             return "Wineries";
-//            return "redirect:/wineries";
         }
         // if everything is null, set to default values
         if(wineryName == null) {

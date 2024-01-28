@@ -22,7 +22,7 @@ public class City implements Serializable {
 
     public City(String name) {
         this.name = name;
-        this.wineriesInCity = new ArrayList<Winery>();
+        this.wineriesInCity = new ArrayList<>();
     }
 
     @Override

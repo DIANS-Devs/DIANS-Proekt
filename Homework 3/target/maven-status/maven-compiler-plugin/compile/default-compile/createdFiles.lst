@@ -1,7 +1,10 @@
 wineverse\com\mk\Wineverse\Web\Controller\UserPositionController.class
 wineverse\com\mk\Wineverse\Model\User.class
 wineverse\com\mk\Wineverse\Model\City.class
+wineverse\com\mk\Wineverse\Service\impl\WineryAdapter.class
 wineverse\com\mk\Wineverse\Config\Register\EmailValidation\EmailValidator.class
+wineverse\com\mk\Wineverse\HelpServices\DistanceCalculator.class
+wineverse\com\mk\Wineverse\Service\impl\WineryCacheServiceImpl.class
 wineverse\com\mk\Wineverse\Config\Register\RegistrationService\impl\IUserServiceimpl.class
 wineverse\com\mk\Wineverse\Web\Controller\FavouritesController.class
 wineverse\com\mk\Wineverse\Config\LogIn\AuthenticationFacade.class
@@ -13,6 +16,7 @@ wineverse\com\mk\Wineverse\Config\Register\RegistrationService\IUserService.clas
 wineverse\com\mk\Wineverse\Service\WineryService.class
 wineverse\com\mk\Wineverse\Service\UserService.class
 wineverse\com\mk\Wineverse\Repository\WineryRepository.class
+wineverse\com\mk\Wineverse\Service\WineryCacheService.class
 wineverse\com\mk\Wineverse\Model\Enumerations\OperationalStatus.class
 wineverse\com\mk\Wineverse\Model\Type.class
 wineverse\com\mk\Wineverse\WineverseApplication.class
@@ -25,10 +29,10 @@ wineverse\com\mk\Wineverse\Service\impl\CityServiceimpl.class
 wineverse\com\mk\Wineverse\Web\Controller\WineverseErrorController.class
 wineverse\com\mk\Wineverse\Service\WinerySortingService.class
 wineverse\com\mk\Wineverse\Repository\UserRepository.class
+wineverse\com\mk\Wineverse\Model\Exceptions\InvalidWineryIdException.class
 wineverse\com\mk\Wineverse\Config\Register\Exceptions\UserAlreadyExistException.class
 wineverse\com\mk\Wineverse\Config\Register\EmailValidation\ValidEmail.class
 wineverse\com\mk\Wineverse\Web\Controller\AuthenticationController.class
-wineverse\com\mk\Wineverse\HelpServices\StringManipulation.class
 wineverse\com\mk\Wineverse\Web\Controller\WineryController.class
 wineverse\com\mk\Wineverse\Config\LogIn\SecurityConfig.class
 wineverse\com\mk\Wineverse\Web\Controller\HomeController.class

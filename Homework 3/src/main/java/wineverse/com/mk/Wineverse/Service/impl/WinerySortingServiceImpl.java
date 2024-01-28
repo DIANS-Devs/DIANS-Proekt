@@ -25,7 +25,7 @@ public class WinerySortingServiceImpl implements WinerySortingService {
         double p = (double) positiveReviews / totalReviews;
         double z = Z_SCORE_95_PERCENT;
 
-        return (p + z * z / (2 * totalReviews) - z * Math.sqrt((p * (1 - p) + z * z / (4 * totalReviews)) / totalReviews))
+        return (p + z * z / q(2 * totalReviews) - z * Math.sqrt((p * (1 - p) + z * z / (4 * totalReviews)) / totalReviews))
                 / (1 + z * z / totalReviews);
     }
 

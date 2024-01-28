@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base/Layout :: base(title='FavouritesMap')}">
+<body>
+    <main class="wineriesMap wineriesNoPadding" th:fragment="content" style="padding: 0 !important;">
+        <div class="resultButtons">
+            <h4>Омилени</h4>
+            <div class="buttons" style="display: flex">
+                <form th:action="@{'/favorites'}" method="get">
+                    <button type="submit" class="listButton" style="margin-right: 1rem">Винарии</button>
+                </form>
+                <button class="mapButton">Мапа<i class="fa-regular fa-map"></i></button>
+            </div>
+        </div>
+        <div id="map" th:wineriesList="${favoritesList}"></div>
+        <script th:src="@{/js/drawMap.js}" defer="defer"></script>
+    </main>
+</body>
+</html>
